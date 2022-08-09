@@ -1,0 +1,33 @@
+
+
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefileMode
+[core]
+    askPass =
+
+# Currently we just set the default branch name in this section of the config.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
+[init]
+    demaultBranch = master
+
+# Git can automatically rebase local commits when pulling from the remote.
+# Here we disable that so that there is an additional merge commit on pull.
+# Additionally, we explicitly allow fast forwarding if there are no new local
+# only commits.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pullff
+[pull]
+    ff = true
+    rebase = false
+
+# Configured for a central workflow where all branches are expected to have
+# the same name locally & on the remote. Does this by pushing the current
+# branch with the same name on the remote and automatically creating a remote
+# branch with the same name as the local brnach on push.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
+[push]
+    autoSetupRemote = true
+    default = simple
+
+#
+[user]
+    name  = {{ .name  }}
+    email = {{ .email }}

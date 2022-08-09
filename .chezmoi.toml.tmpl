@@ -1,0 +1,18 @@
+{{ $name  := promptString "What is your full name" -}}
+{{ $email := promptString "What is your email" -}}
+{{ $editor := promptString "Choose an editor [vim|sublime]" -}}
+
+# Check the editor input. these dotfiles only
+# support vim and sublime currently.
+{{ if eq $editor "vim" "sublime"}}
+    # Do nothing
+{{ else }}
+    {{ writeToStdout "ERROR: invlaid editor: " $editor "\n"}}
+    {{ exit -1 }}
+{{ end }}
+
+
+[data]
+    email  = {{ $email  | quote }}
+    name   = {{ $name   | quote }}
+    editor = {{ $editor | quote }}
