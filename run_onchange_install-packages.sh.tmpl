@@ -1,0 +1,26 @@
+#!/bin/bash
+{{ if eq .chezmoi.osRelease.id "ubuntu" -}}
+
+# Install all the required packages
+sudo apt-add-repository ppa:fish-shell/release-3 # use ppa for newer versions of fish
+PACKAGES="tmux fish build-essential"
+sudo apt-get -y install $PACKAGES
+
+# Install NEO nightly
+TEMP_DEB="$(mktemp)" &&
+wget -O "$TEMP_DEB" 'https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb' &&
+sudo dpkg -i "$TEMP_DEB"
+rm -f "$TEMP_DEB"
+
+# Change shell to fish
+sudo chsh -s /usr/bin/fish $USER
+
+# Install fisher plugin manager for fish shell & fish plugins
+fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+fisher install IlanCosman/tide@v5
+
+# Install vim plugin manager
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+{{ end -}}
