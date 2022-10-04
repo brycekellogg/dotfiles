@@ -3,10 +3,10 @@
 
 # Install all the required packages
 sudo apt-add-repository ppa:fish-shell/release-3 # use ppa for newer versions of fish
-PACKAGES="tmux fish build-essential"
+PACKAGES="tmux fish ripgrep fd-find build-essential"
 sudo apt-get -y install $PACKAGES
 
-# Install NEO nightly
+# Install neovim nightly
 TEMP_DEB="$(mktemp)" &&
 wget -O "$TEMP_DEB" 'https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb' &&
 sudo dpkg -i "$TEMP_DEB"
