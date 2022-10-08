@@ -1,0 +1,130 @@
+#!/bin/bash
+
+
+# TODO: include sha of nvim, tmux, & fish configs, so this reloads if they change
+# https://www.chezmoi.io/user-guide/use-scripts-to-perform-actions/#install-packages-with-scripts
+
+
+# tmux.conf hash {{ include "private_dot_config/tmux/tmux.conf" | sha256sum }} 
+
+
+# A helper function that will run a command, capture
+# both stout & stderr to a variable. It will then check
+#the return code of the command. If there was an error,
+# it will print out the output and exit the script.
+run() {
+    cmd="$1"
+    output=$($cmd 2>&1)
+    if [ $? -ne 0 ]; then
+       echo " ERROR"
+       printf ">> $1\n"
+       printf "$output\n"
+       exit -1
+    fi
+}
+
+
+# TODO: comment
+install_packages_ubuntu() {
+    echo -n "Installing packages using apt-get..."
+
+    # PPA for fish & list of required packages
+    FISH_PPA="ppa:fish-shell/release-3"
+    PACKAGES="tmux fish ripgrep fd-find tree unzip build-essential"
+
+    run "sudo apt-add-repository -y $FISH_PPA" # Add the fish PPA to give us access to newer version.
+    run "sudo apt-get -y install $PACKAGES"    # Install the packages using apt-get
+
+    echo " done"
+}
+
+
+# TODO: comment
+install_neovim_ubuntu() {
+    echo -n "Installing neovim nightly..."
+
+    # Install source & working location
+    TEMP_DEB="$(mktemp)"
+    NVIM_URL="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb"
+
+    run "wget -q -O $TEMP_DEB $NVIM_URL" # Download the .deb
+    run "sudo dpkg -i $TEMP_DEB"         # Install the .deb
+    run "rm -f $TEMP_DEB"                # Cleanup
+
+    echo " done"
+}
+
+install_win32yank_wsl() {
+    echo -n "Installing win32yank..."
+
+    WIN32YANK_URL="https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip"
+    WIN32YANK_ZIP="/tmp/win32yank.zip"
+    WIN32YANK_INSTALL="/usr/local/bin/"
+
+    run "curl -sLo $WIN32YANK_ZIP $WIN32YANK_URL"
+    run "sudo unzip -u $WIN32YANK_ZIP win32yank.exe -d $WIN32YANK_INSTALL"
+    run "sudo chmod a+x $WIN32YANK_INSTALL/win32yank.exe"
+    run "rm -rf $WIN32YANK_ZIP"
+
+    echo " done"
+}
+
+
+
+
+
+# Installing Packages from Repos
+{{ if eq .chezmoi.osRelease.id "ubuntu" }} install_packages_ubuntu {{ end }}
+{{ if eq .chezmoi.osRelease.id "fedora" }} install_packages_fedora {{ end }}
+
+# Installing Neovim Nightly Directly
+{{ if eq .chezmoi.osRelease.id "ubuntu" }} install_neovim_ubuntu {{ end }}
+{{ if eq .chezmoi.osRelease.id "fedora" }} install_neovim_fedora {{ end }}
+
+# Installing win32yank
+{{ if eq .chezmoi.os "linux" }}
+    {{if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+        install_win32yank_wsl
+    {{ end }}
+{{ end }}
+
+# TODO: install fonts
+# If WSL, use powershell
+
+# TODO: settings for windows terminal
+
+##################################
+### Installing Plugin Managers ###
+##################################
+echo -n "Installing plugin managers..."
+
+# fisher plugin manager for fish shell & fish plugins
+FISHER_URL="https://git.io/fisher"
+output=$(fish -c "curl -sL $FISHER_URL | source && fisher install jorgebucaran/fisher")
+if [ $? -ne 0 ]; then
+   echo "ERROR"
+   echo $output
+   exit -1
+fi
+
+# Install vim plugin manager
+VIMPLUG_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+output=$(curl -sfLo "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" --create-dirs $VIMPLUG_URL)
+if [ $? -ne 0 ]; then
+   echo "ERROR"
+   echo $output
+   exit -1
+fi
+
+echo " done"
+
+# TODO: install (update) fish plugins
+# TODO: install (update) neovim plugins
+
+############################
+### Change shell to fish ###
+############################
+echo -n "Changing shell to fish..."
+sudo chsh -s $(which fish) $USER
+echo " done"
+

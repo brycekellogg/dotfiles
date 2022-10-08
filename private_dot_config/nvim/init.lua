@@ -1,55 +1,10 @@
+
+-- ???
+--
+-- ???
+-- ???
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
-
-
-
--- Vim-Plug
-local Plug = vim.fn['plug#']
-vim.call('plug#begin', '~/.config/nvim/plugged')
-
-Plug('alexghergh/nvim-tmux-navigation')
-Plug('nvim-treesitter/nvim-treesitter')
-Plug('micha/vim-colors-solarized')
-Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim', {tag = '0.1.0' })
-Plug('kyazdani42/nvim-tree.lua')
--- Plug('p00f/nvim-ts-rainbow')
-
-vim.call('plug#end')
-
-vim.cmd('colorscheme solarized')
-
--- Configure Tree Plugin
-require('nvim-tree').setup()
-
--- Configure Tmux Navigation
-local nvim_tmux_navigation = require('nvim-tmux-navigation')
-nvim_tmux_navigation.setup { disable_when_zoomed = true }
-
--- Configure treesitter
-local treesitter = require('nvim-treesitter.configs')
-treesitter.setup {
-    ensure_installed = {"c", "lua", "fish"},
-    highlight = {
-        enable = true
-    },
-
-    -- Config for nvim-ts-rainbow
-    -- Currently disable until colors
-    -- are fixed. Looks bad right now.
-    rainbow = {
-        enable = false,
-	extended_mode = true,
-	max_file_lines = nil,
-    },
-}
-
--- Configure telescope
-require('telescope').setup {
-    defaults = {
-        path_display={shorten=2},
-    },
-}
 
 
 -- Disable line wrapping
@@ -84,6 +39,122 @@ vim.o.shiftwidth = 4
 vim.o.cinoptions = l1
 
 
+-- Enable Hidden Buffers
+--
+-- Allow us to have unsaved hidden buffers which act
+-- similar to how tabs in other editors are used.
+vim.o.hidden = 1
+
+--
+--
+-- ???
+-- vim.opt.termguicolors = true
+
+-- Vim-Plug
+local Plug = vim.fn['plug#']
+vim.call('plug#begin', '~/.config/nvim/plugged')
+
+Plug('alexghergh/nvim-tmux-navigation')
+Plug('nvim-treesitter/nvim-treesitter')
+Plug('micha/vim-colors-solarized')
+Plug('nvim-lua/plenary.nvim')
+Plug('nvim-telescope/telescope.nvim', {tag = '0.1.0' })
+Plug('kyazdani42/nvim-tree.lua')
+Plug('numToStr/comment.nvim')
+-- Plug('akinsho/bufferline.nvim')
+Plug('romgrk/barbar.nvim')
+-- Plug('p00f/nvim-ts-rainbow')
+
+vim.call('plug#end')
+
+
+vim.cmd('colorscheme solarized')
+
+
+
+
+
+-- Configure Buffer Line Plugin
+require('bufferline').setup {
+    icons = false,
+
+}
+
+local nvimtree = require('nvim-tree.events')
+local bufferline = require('bufferline.api')
+
+local function get_tree_size()
+  return require'nvim-tree.view'.View.width
+end
+
+nvimtree.subscribe('TreeOpen', function()
+  bufferline.set_offset(get_tree_size())
+end)
+
+nvimtree.subscribe('Resize', function()
+  bufferline.set_offset(get_tree_size())
+end)
+
+nvimtree.subscribe('TreeClose', function()
+  bufferline.set_offset(0)
+end)
+
+
+-- Configure Tree Plugin
+require('nvim-tree').setup {
+    view = {
+        adaptive_size = true,
+    },
+}
+
+
+-- Configure Comment Plugin
+require('Comment').setup {
+    toggler = {
+        line = '<C-/>',
+    },
+}
+
+-- Configure Bufferline
+-- require("bufferline").setup {
+
+-- }
+
+
+-- Configure Tmux Navigation
+local nvim_tmux_navigation = require('nvim-tmux-navigation')
+nvim_tmux_navigation.setup {
+    disable_when_zoomed = true,
+}
+
+
+-- Configure treesitter
+local treesitter = require('nvim-treesitter.configs')
+treesitter.setup {
+    ensure_installed = {"c", "lua", "fish"},
+    highlight = {
+        enable = true
+    },
+
+    -- Config for nvim-ts-rainbow
+    -- Currently disable until colors
+    -- are fixed. Looks bad right now.
+    rainbow = {
+        enable = false,
+	extended_mode = true,
+	max_file_lines = nil,
+    },
+}
+
+-- Configure telescope
+require('telescope').setup {
+    defaults = {
+        path_display={shorten=2},
+    },
+}
+
+
+
 
 -- Key Map
 --
@@ -92,15 +163,24 @@ vim.o.cinoptions = l1
 -- Third Arg: action
 local mapkey = vim.keymap.set
 local telescope = require('telescope.builtin')
-local nvimtree = require("nvim-tree.api")
+local nvimtree = require('nvim-tree.api')
+local comment = require('Comment.api')
 mapkey({'n', 'i'}, '<C-t>', telescope.builtin, {})
 mapkey({'n', 'i'}, '<C-p>', telescope.find_files, {})
 mapkey({'n', 'i'}, '<C-f>', telescope.live_grep, {})
--- TODO: <C-c> to close buffers
+mapkey({'n'}, '<C-c>', '<CMD>BufferClose<CR>')
 -- TODO: <C-x> to close panes
--- TODO: <C-/> to toggle comment
--- TODO: | to split
--- TODO: - to split
+mapkey({'n', 'i'}, '<C-_>', comment.toggle.linewise.current) -- actually <C-/>
+-- TODO: <C-/> to comment out block in visual mode
+-- TODO: <C-PageUp> to change buffers
+-- mapkey({'n'}, '<C-PageUp>', )
+-- TODO: <C-PageDown> to change buffers
+mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferPrevious<CR>')
+mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferNext<CR>')
+
+mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
+mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
+
 mapkey({'n', 'i'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
 mapkey({'n', 'i'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
 mapkey({'n', 'i'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)

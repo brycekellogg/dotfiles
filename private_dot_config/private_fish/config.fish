@@ -6,23 +6,14 @@ set fish_greeting
 if status is-interactive
 
     # Fisher is a plugin manager for fish. Here
-    # we test to to see if it is already installed,
-    # and if not we doanload & install it.
-    # https://github.com/jorgebucaran/fisher
-    if not type -sq fisher
-        curl -sL https://git.io/fisher | source
-        fisher install jorgebucaran/fisher
-    end
-
-    # Fisher plugins
+    # we test plugins to to see if they are already
+    # installed, and if not we download & install them.
     if not fisher list ilancosman/tide@v5 &> /dev/null
         fisher install ilancosman/tide@v5
     end
 
-    # Commands to run in interactive sessions can go here
+    # Aliases
     alias vim='nvim'
-
-
 end
 
 # Config options for the tide prompt. These need to
