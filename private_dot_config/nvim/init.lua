@@ -45,6 +45,26 @@ vim.o.cinoptions = l1
 -- similar to how tabs in other editors are used.
 vim.o.hidden = 1
 
+-- Enable cursor line
+--
+-- This option creates a slightly lighter background line
+-- for the line the cursor is on. It really helps with
+-- easily visually identifying the current cursor line.
+vim.o.cursorline = true
+
+vim.o.clipboard = 'unnamed'
+vim.g.clipboard = {
+    copy = {
+        ['+'] = 'win32yank.exe -i --crlf',
+        ['*'] = 'win32yank.exe -i --crlf',
+    },
+    paste = {
+        ['+'] = 'win32yank.exe -o --lf',
+        ['*'] = 'win32yank.exe -o --lf',
+    },
+    cache_enabled=true,
+}
+
 --
 --
 -- ???
@@ -105,6 +125,12 @@ require('nvim-tree').setup {
     view = {
         adaptive_size = true,
     },
+    update_focused_file = {
+        enable = true,
+    },
+    -- open_file = {
+        -- quit_on_open = true,
+    -- },
 }
 
 
