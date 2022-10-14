@@ -81,7 +81,7 @@ Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim', {tag = '0.1.0' })
 Plug('kyazdani42/nvim-tree.lua')
 Plug('numToStr/comment.nvim')
--- Plug('akinsho/bufferline.nvim')
+Plug('nvim-lualine/lualine.nvim')
 Plug('romgrk/barbar.nvim')
 -- Plug('p00f/nvim-ts-rainbow')
 
@@ -91,6 +91,12 @@ vim.call('plug#end')
 vim.cmd('colorscheme solarized')
 
 
+-- Configure Lualine Plugin
+require('lualine').setup {
+    options = {
+        theme = 'solarized_dark',
+    },
+}
 
 
 
