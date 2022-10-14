@@ -6,6 +6,7 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.o.background = 'dark'
 
 -- Disable line wrapping
 --
