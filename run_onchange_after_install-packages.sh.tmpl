@@ -30,7 +30,7 @@ install_packages_ubuntu() {
 
     # PPA for fish & list of required packages
     FISH_PPA="ppa:fish-shell/release-3"
-    PACKAGES="tmux fish ripgrep fd-find tree unzip build-essential"
+    PACKAGES="tmux fish ripgrep fd-find tree unzip build-essential coreutils bpython"
 
     run "sudo apt-add-repository -y $FISH_PPA" # Add the fish PPA to give us access to newer version.
     run "sudo apt-get -y install $PACKAGES"    # Install the packages using apt-get
@@ -70,6 +70,37 @@ install_win32yank_wsl() {
 }
 
 
+# fisher plugin manager for fish shell & fish plugins
+install_fisher() {
+    echo -n "Installing fish plugin manager..."
+    
+    FISHER_URL="https://git.io/fisher"
+    FISHER_SCRIPT="/tmp/fisher"
+
+    run "curl -sLo $FISHER_SCRIPT $FISHER_URL"
+    run "fish -c \"source $FISHER_SCRIPT && fisher install jorgebucaran/fisher\""
+    run "rm -rf $FISHER_SCRIPT"
+
+    # TODO: install (update) fish plugins
+
+    run "fish -c \"fisher install ilancosman/tide@v5\""
+    run "fish -c \"fisher update\""
+
+    echo " done"
+}
+
+install_vimplug() {
+    echo -n "Installing vimplug..."
+
+    VIMPLUG_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    VIMPLUG_INSTALL="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim"
+
+    run "curl -sfLo $VIMPLUG_INSTALL --create-dirs $VIMPLUG_URL"
+    run "nvim +PlugInstall +PlugUpdate +qall"
+
+    echo " done"
+
+}
 
 
 
@@ -92,34 +123,12 @@ install_win32yank_wsl() {
 # If WSL, use powershell
 
 # TODO: settings for windows terminal
+# TODO: copy alacritty settings to Windows location
 
-##################################
-### Installing Plugin Managers ###
-##################################
-echo -n "Installing plugin managers..."
+# Installing Plugin Managers & Plugins
+{{ if eq .chezmoi.osRelease.id "ubuntu" }} install_fisher  {{ end }}
+{{ if eq .chezmoi.osRelease.id "ubuntu" }} install_vimplug {{ end }}
 
-# fisher plugin manager for fish shell & fish plugins
-FISHER_URL="https://git.io/fisher"
-output=$(fish -c "curl -sL $FISHER_URL | source && fisher install jorgebucaran/fisher")
-if [ $? -ne 0 ]; then
-   echo "ERROR"
-   echo $output
-   exit -1
-fi
-
-# Install vim plugin manager
-VIMPLUG_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-output=$(curl -sfLo "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" --create-dirs $VIMPLUG_URL)
-if [ $? -ne 0 ]; then
-   echo "ERROR"
-   echo $output
-   exit -1
-fi
-
-echo " done"
-
-# TODO: install (update) fish plugins
-# TODO: install (update) neovim plugins
 
 ############################
 ### Change shell to fish ###
