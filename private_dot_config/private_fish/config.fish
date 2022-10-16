@@ -14,6 +14,10 @@ if status is-interactive
     alias ll='exa -l --group-directories-first'
     alias ls='exa --group-directories-first'
     alias la='exa -la --group-directories-first'
+
+    set -g EDITOR nvim
+
+    set -x SSH_AUTH_SOCK /run/user/(id -u)/gnupg/S.gpg-agent.ssh
 end
 
 
