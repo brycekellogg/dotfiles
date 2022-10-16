@@ -11,8 +11,25 @@
     {{ exit -1 }}
 {{ end }}
 
+# Build an "osid" string to identify what platform
+# we are running on. Valid values are:
+#    - linux-fedora
+#    - linux-ubuntu
+#    - darwin
+#    - linux-fedora-wsl
+#    - linux-ubuntu-wsl
+{{ $osid := .chezmoi.os }}
+{{ if hasKey .chezmoi.osRelease "id" }}
+    {{ $osid = printf "%s-%s" $osid .chezmoi.osRelease.id }}
+{{ end }}
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+    {{ $osid = printf "%s-%s" $osid "wsl" }}
+{{ end }}
+
+
 
 [data]
     email  = {{ $email  | quote }}
     name   = {{ $name   | quote }}
     editor = {{ $editor | quote }}
+    osid   = {{ $osid   | quote }}

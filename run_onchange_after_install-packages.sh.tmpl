@@ -1,11 +1,12 @@
 #!/bin/bash
-
+# vim: syntax=bash
 
 # TODO: include sha of nvim, tmux, & fish configs, so this reloads if they change
 # https://www.chezmoi.io/user-guide/use-scripts-to-perform-actions/#install-packages-with-scripts
 
 
 # tmux.conf hash {{ include "private_dot_config/tmux/tmux.conf" | sha256sum }} 
+# tmp
 
 
 # A helper function that will run a command, capture
@@ -30,7 +31,7 @@ install_packages_ubuntu() {
 
     # PPA for fish & list of required packages
     FISH_PPA="ppa:fish-shell/release-3"
-    PACKAGES="tmux fish ripgrep exa fd-find tree unzip build-essential coreutils bpython"
+    PACKAGES="tmux fish ripgrep exa fd-find tree unzip build-essential coreutils bpython xclip"
 
     run "sudo apt-add-repository -y $FISH_PPA" # Add the fish PPA to give us access to newer version.
     run "sudo apt-get -y install $PACKAGES"    # Install the packages using apt-get
@@ -38,6 +39,14 @@ install_packages_ubuntu() {
     echo " done"
 }
 
+install_packages_fedora() {
+    echo -n "Installing packages using dnf..."
+
+    PACKAGES="tmux fish ripgrep exa fd-find unzip bpython xclip"
+    run "sudo dnf -y install $PACKAGES"
+
+    echo " done"
+}
 
 # TODO: comment
 install_neovim_ubuntu() {
@@ -50,6 +59,11 @@ install_neovim_ubuntu() {
     run "wget -q -O $TEMP_DEB $NVIM_URL" # Download the .deb
     run "sudo dpkg -i $TEMP_DEB"         # Install the .deb
     run "rm -f $TEMP_DEB"                # Cleanup
+
+    echo " done"
+}
+
+install_neovim_fedora() {
 
     echo " done"
 }
@@ -107,19 +121,17 @@ install_vimplug() {
 sudo echo "Caching Sudo Credentials"
 
 # Installing Packages from Repos
-{{ if eq .chezmoi.osRelease.id "ubuntu" }} install_packages_ubuntu {{ end }}
-{{ if eq .chezmoi.osRelease.id "fedora" }} install_packages_fedora {{ end }}
+{{ if eq .osid "linux-ubuntu" }}     install_packages_ubuntu {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} install_packages_ubuntu {{ end }}
+{{ if eq .osid "linux-fedora" }}     install_packages_fedora {{ end }}
 
 # Installing Neovim Nightly Directly
-{{ if eq .chezmoi.osRelease.id "ubuntu" }} install_neovim_ubuntu {{ end }}
-{{ if eq .chezmoi.osRelease.id "fedora" }} install_neovim_fedora {{ end }}
+{{ if eq .osid "linux-ubuntu" }}     install_neovim_ubuntu {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} install_neovim_ubuntu {{ end }}
+{{ if eq .osid "linux-fedora" }}     install_neovim_fedora {{ end }}
 
 # Installing win32yank
-{{ if eq .chezmoi.os "linux" }}
-    {{if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-        install_win32yank_wsl
-    {{ end }}
-{{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} install_win32yank_wsl {{ end }}
 
 # TODO: install fonts
 # If WSL, use powershell
@@ -128,10 +140,13 @@ sudo echo "Caching Sudo Credentials"
 # TODO: copy alacritty settings to Windows location
 
 # Installing Plugin Managers & Plugins
-{{ if eq .chezmoi.osRelease.id "ubuntu" }} install_fisher  {{ end }}
-{{ if eq .chezmoi.osRelease.id "fedora" }} install_fisher  {{ end }}
-{{ if eq .chezmoi.osRelease.id "ubuntu" }} install_vimplug {{ end }}
-{{ if eq .chezmoi.osRelease.id "fedora" }} install_vimplug {{ end }}
+{{ if eq .osid "linux-ubuntu" }}     install_fisher  {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} install_fisher  {{ end }}
+{{ if eq .osid "linux-fedora" }}     install_fisher  {{ end }}
+
+{{ if eq .osid "linux-ubuntu" }}     install_vimplug {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} install_vimplug {{ end }}
+{{ if eq .osid "linux-fedora" }}     install_vimplug {{ end }}
 
 
 ############################
