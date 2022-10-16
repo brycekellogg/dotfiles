@@ -1,3 +1,4 @@
+-- vim: syntax=lua
 
 -- ???
 --
@@ -56,12 +57,16 @@ vim.o.cursorline = true
 vim.o.clipboard = 'unnamed'
 vim.g.clipboard = {
     copy = {
-        ['+'] = 'win32yank.exe -i --crlf',
-        ['*'] = 'win32yank.exe -i --crlf',
+{{ if eq .osid "linux-ubuntu-wsl" }} ['+'] = 'win32yank.exe -i --crlf', {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} ['*'] = 'win32yank.exe -i --crlf', {{ end }}
+{{ if eq .osid "linux-fedora" }}     ['+'] = 'xclip -selection c',      {{ end }}
+{{ if eq .osid "linux-fedora" }}     ['*'] = 'xclip -selection c',      {{ end }}
     },
     paste = {
-        ['+'] = 'win32yank.exe -o --lf',
-        ['*'] = 'win32yank.exe -o --lf',
+{{ if eq .osid "linux-ubuntu-wsl" }} ['+'] = 'win32yank.exe -o --lf', {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} ['*'] = 'win32yank.exe -o --lf', {{ end }}
+{{ if eq .osid "linux-fedora" }}     ['+'] = 'xclip -selection c -o', {{ end }}
+{{ if eq .osid "linux-fedora" }}     ['*'] = 'xclip -selection c -o', {{ end }}
     },
     cache_enabled=true,
 }
