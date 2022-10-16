@@ -1,4 +1,4 @@
-
+# vim: syntax=gitconfig
 
 # https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefileMode
 [core]
@@ -32,3 +32,6 @@
 [user]
     name  = {{ .name  }}
     email = {{ .email }}
+
+[url "ssh://git@github.com/"]
+    pushInsteadOf = https://github.com/
