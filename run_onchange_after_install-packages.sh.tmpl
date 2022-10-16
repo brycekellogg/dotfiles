@@ -30,7 +30,7 @@ install_packages_ubuntu() {
 
     # PPA for fish & list of required packages
     FISH_PPA="ppa:fish-shell/release-3"
-    PACKAGES="tmux fish ripgrep fd-find tree unzip build-essential coreutils bpython"
+    PACKAGES="tmux fish ripgrep exa fd-find tree unzip build-essential coreutils bpython"
 
     run "sudo apt-add-repository -y $FISH_PPA" # Add the fish PPA to give us access to newer version.
     run "sudo apt-get -y install $PACKAGES"    # Install the packages using apt-get
@@ -104,6 +104,8 @@ install_vimplug() {
 
 
 
+sudo echo "Caching Sudo Credentials"
+
 # Installing Packages from Repos
 {{ if eq .chezmoi.osRelease.id "ubuntu" }} install_packages_ubuntu {{ end }}
 {{ if eq .chezmoi.osRelease.id "fedora" }} install_packages_fedora {{ end }}
@@ -127,13 +129,15 @@ install_vimplug() {
 
 # Installing Plugin Managers & Plugins
 {{ if eq .chezmoi.osRelease.id "ubuntu" }} install_fisher  {{ end }}
+{{ if eq .chezmoi.osRelease.id "fedora" }} install_fisher  {{ end }}
 {{ if eq .chezmoi.osRelease.id "ubuntu" }} install_vimplug {{ end }}
+{{ if eq .chezmoi.osRelease.id "fedora" }} install_vimplug {{ end }}
 
 
 ############################
 ### Change shell to fish ###
 ############################
 echo -n "Changing shell to fish..."
-sudo chsh -s $(which fish) $USER
+run "sudo chsh -s $(which fish) $USER"
 echo " done"
 
