@@ -33,6 +33,9 @@ vim.o.expandtab = 1
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 
+-- Split below and right
+vim.o.splitbelow = 1
+vim.o.splitright = 1
 
 -- Fix C indentation for switch
 --
@@ -54,6 +57,13 @@ vim.o.hidden = 1
 -- easily visually identifying the current cursor line.
 vim.o.cursorline = true
 
+
+
+
+
+-- Configure clipboard
+--
+-- ???
 vim.o.clipboard = 'unnamed'
 vim.g.clipboard = {
     copy = {
@@ -96,6 +106,16 @@ vim.call('plug#end')
 
 vim.cmd('colorscheme solarized')
 
+
+-- Dimming inactive vim windows
+--
+-- When a windows is not active, it should become the same
+-- background color as an inactive tmux pane. We do this via
+-- the highlight and winghighlight functionality. This needs
+-- to happen after we set the colorscheme
+vim.cmd('highlight Normal ctermbg=none')
+vim.cmd('highlight InactiveWindow ctermbg=black')
+vim.cmd('set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow')
 
 -- Configure Lualine Plugin
 require('lualine').setup {
@@ -140,9 +160,12 @@ require('nvim-tree').setup {
     update_focused_file = {
         enable = true,
     },
-    -- open_file = {
-        -- quit_on_open = true,
-    -- },
+    actions = {
+        open_file = {
+            quit_on_open = true,
+            window_picker = {enable=false},
+        },
+    },
 }
 
 
