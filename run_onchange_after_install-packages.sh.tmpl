@@ -39,6 +39,7 @@ install_packages_ubuntu() {
     echo " done"
 }
 
+# TODO: commend
 install_packages_fedora() {
     echo -n "Installing packages using dnf..."
 
@@ -63,11 +64,13 @@ install_neovim_ubuntu() {
     echo " done"
 }
 
+# TODO: comment
 install_neovim_fedora() {
 
     echo " done"
 }
 
+# TODO: comment
 install_win32yank_wsl() {
     echo -n "Installing win32yank..."
 
@@ -82,6 +85,23 @@ install_win32yank_wsl() {
 
     echo " done"
 }
+
+install_nerdfonts_fedora() {
+    echo -n "Installing NerdFonts..."
+
+    DEJAVU_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/DejaVuSansMono.zip"
+    DEJAVU_ZIP="/tmp/DejaVuSansMono.zip"
+    FONTS_DIR="$HOME/.local/share/fonts/"
+
+    run "mkdir -p $FONTS_DIR"
+    run "curl -sLo $DEJAVU_ZIP $DEJAVU_URL"
+    run "unzip -u $DEJAVU_ZIP -d $FONTS_DIR"
+    run "rm -rf $DEJAVU_ZIP"
+    run "fc-cache -fv"
+
+    echo " done"
+}
+
 
 
 # fisher plugin manager for fish shell & fish plugins
@@ -134,6 +154,7 @@ sudo echo "Caching Sudo Credentials"
 {{ if eq .osid "linux-ubuntu-wsl" }} install_win32yank_wsl {{ end }}
 
 # TODO: install fonts
+{{ if eq .osid "linux-fedora" }}     install_nerdfonts_fedora {{ end }}
 # If WSL, use powershell
 
 # TODO: settings for windows terminal
