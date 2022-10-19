@@ -129,7 +129,7 @@ require('lualine').setup {
 -- Configure Buffer Line Plugin
 require('bufferline').setup {
     icons = false,
-
+    animation = false,
 }
 
 local nvimtree = require('nvim-tree.events')
@@ -156,6 +156,9 @@ end)
 require('nvim-tree').setup {
     view = {
         adaptive_size = true,
+    },
+    renderer = {
+        group_empty = true,
     },
     update_focused_file = {
         enable = true,
@@ -247,4 +250,4 @@ mapkey({'n', 'i'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
 mapkey({'n', 'i'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
 mapkey({'n', 'i'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
 mapkey({'n', 'i'}, '<C-b>',     nvimtree.tree.toggle)
-
+mapkey({'n'}, '?', telescope.grep_string, {})
