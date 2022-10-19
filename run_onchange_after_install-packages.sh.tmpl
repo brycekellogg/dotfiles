@@ -51,11 +51,11 @@ install_packages_fedora() {
 
 # TODO: comment
 install_neovim_ubuntu() {
-    echo -n "Installing neovim nightly..."
+    echo -n "Installing neovim..."
 
     # Install source & working location
     TEMP_DEB="$(mktemp)"
-    NVIM_URL="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb"
+    NVIM_URL="https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb"
 
     run "wget -q -O $TEMP_DEB $NVIM_URL" # Download the .deb
     run "sudo dpkg -i $TEMP_DEB"         # Install the .deb
@@ -133,7 +133,6 @@ install_vimplug() {
     run "nvim +PlugInstall +PlugUpdate +qall"
 
     echo " done"
-
 }
 
 
