@@ -122,6 +122,9 @@ require('lualine').setup {
     options = {
         theme = 'solarized_dark',
     },
+    sections = {
+        lualine_x = {},
+    },
 }
 
 
@@ -132,6 +135,7 @@ require('bufferline').setup {
     animation = false,
 }
 
+-- Configure Tree Plugin
 local nvimtree = require('nvim-tree.events')
 local bufferline = require('bufferline.api')
 
@@ -151,8 +155,6 @@ nvimtree.subscribe('TreeClose', function()
   bufferline.set_offset(0)
 end)
 
-
--- Configure Tree Plugin
 require('nvim-tree').setup {
     view = {
         adaptive_size = true,
@@ -195,7 +197,7 @@ nvim_tmux_navigation.setup {
 -- Configure treesitter
 local treesitter = require('nvim-treesitter.configs')
 treesitter.setup {
-    ensure_installed = {"c", "lua", "fish"},
+    ensure_installed = {"c", "cpp", "lua", "fish"},
     highlight = {
         enable = true
     },
