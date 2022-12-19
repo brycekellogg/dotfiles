@@ -58,7 +58,8 @@ vim.o.hidden = 1
 vim.o.cursorline = true
 
 
-
+-- Auto resize windows
+vim.api.nvim_create_autocmd({"BufEnter"}, {pattern = '*', command = "wincmd ="})
 
 
 -- Configure clipboard
@@ -81,18 +82,14 @@ vim.g.clipboard = {
     cache_enabled=true,
 }
 
---
---
--- ???
--- vim.opt.termguicolors = true
-
 -- Vim-Plug
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
 Plug('alexghergh/nvim-tmux-navigation')
 Plug('nvim-treesitter/nvim-treesitter')
-Plug('micha/vim-colors-solarized')
+-- Plug('micha/vim-colors-solarized')
+Plug('lifepillar/vim-solarized8')
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim', {tag = '0.1.0' })
 Plug('kyazdani42/nvim-tree.lua')
@@ -138,7 +135,16 @@ require('bufferline').setup {
     animation = false,
 }
 
-vim.cmd('colorscheme solarized')
+
+--
+--
+-- ???
+--vim.cmd('let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"')
+--vim.cmd('let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"')
+vim.opt.termguicolors = true
+
+-- vim.cmd('colorscheme solarized')
+vim.cmd('autocmd vimenter * ++nested colorscheme solarized8')
 
 -- Configure Tree Plugin
 local nvimtree = require('nvim-tree.events')
@@ -167,9 +173,9 @@ require('nvim-tree').setup {
     renderer = {
         group_empty = true,
     },
-    update_focused_file = {
-        enable = true,
-    },
+--    update_focused_file = {
+--        enable = true,
+--    },
     actions = {
         open_file = {
             quit_on_open = true,
@@ -224,6 +230,10 @@ require('telescope').setup {
     },
 }
 
+-- Killing Windows
+function killWindow()
+    vim.api.nvim_win_close(0, false)
+end
 
 
 
@@ -240,6 +250,7 @@ mapkey({'n', 'i'}, '<C-t>', telescope.builtin, {})
 mapkey({'n', 'i'}, '<C-p>', telescope.find_files, {})
 mapkey({'n', 'i'}, '<C-f>', telescope.live_grep, {})
 mapkey({'n'}, '<C-c>', '<CMD>BufferClose<CR>')
+mapkey({'n'}, '<C-x>', killWindow)
 -- TODO: <C-x> to close panes
 mapkey({'n', 'i'}, '<C-_>', comment.toggle.linewise.current) -- actually <C-/>
 -- TODO: <C-/> to comment out block in visual mode
