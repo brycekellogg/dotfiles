@@ -3,14 +3,16 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: xterm-256color
+  #
+  # This is needed to get color to work with TMUX & Vim
+  TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -89,14 +91,14 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   # Normal (roman) font face
-  #normal:
+  normal:
     # Font family
     #
     # Default:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    #family: DejaVuSansMono Nerd Font Mono
+    family: DejaVuSansMono
 
     # The `style` can be specified to pick a specific face.
     #style: Book
@@ -303,8 +305,8 @@ live_config_reload: true
 #   - (macOS) /bin/bash --login
 #   - (Linux) user login shell
 #   - (Windows) powershell
-shell:
-  program: /usr/bin/tmux 
+# shell:
+  # program: /usr/bin/tmux 
 #  args:
 #    - -f.dotfiles/.tmux.conf
 
