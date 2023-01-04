@@ -138,12 +138,7 @@ require('bufferline').setup {
 
 --
 --
--- ???
---vim.cmd('let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"')
---vim.cmd('let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"')
 vim.opt.termguicolors = true
-
--- vim.cmd('colorscheme solarized')
 vim.cmd('autocmd vimenter * ++nested colorscheme solarized8')
 
 -- Configure Tree Plugin
@@ -235,6 +230,14 @@ function killWindow()
     vim.api.nvim_win_close(0, false)
 end
 
+-- A function for using comment.nvim
+-- in visual block mode.
+function visualComment()
+    local comment = require('Comment.api')
+    local esc = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
+    vim.api.nvim_feedkeys(esc, 'nx', false)
+    comment.toggle.linewise(vim.fn.visualmode())
+end
 
 
 -- Key Map
@@ -249,20 +252,14 @@ local comment = require('Comment.api')
 mapkey({'n', 'i'}, '<C-t>', telescope.builtin, {})
 mapkey({'n', 'i'}, '<C-p>', telescope.find_files, {})
 mapkey({'n', 'i'}, '<C-f>', telescope.live_grep, {})
-mapkey({'n'}, '<C-c>', '<CMD>BufferClose<CR>')
-mapkey({'n'}, '<C-x>', killWindow)
--- TODO: <C-x> to close panes
+mapkey({'n'},      '<C-c>', '<CMD>BufferClose<CR>')
+mapkey({'n'},      '<C-x>', killWindow)
 mapkey({'n', 'i'}, '<C-_>', comment.toggle.linewise.current) -- actually <C-/>
--- TODO: <C-/> to comment out block in visual mode
--- TODO: <C-PageUp> to change buffers
--- mapkey({'n'}, '<C-PageUp>', )
--- TODO: <C-PageDown> to change buffers
+mapkey({'x'},      '<C-_>', visualComment)                   -- actually <C-/>
 mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferPrevious<CR>')
 mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferNext<CR>')
-
 mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
 mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
-
 mapkey({'n', 'i'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
 mapkey({'n', 'i'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
 mapkey({'n', 'i'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
