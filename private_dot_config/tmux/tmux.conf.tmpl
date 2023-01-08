@@ -138,10 +138,16 @@ bind -n M-z resize-pane -Z
 ### Misc Keybindings ###
 ########################
 
+# TODO: make a template and copy/paste based on osid
+{{ if eq .osid "linux-ubuntu-wsl" }} copyBinary='win32yank.exe -i --crlf' {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} pasteBinary='win32yank.exe -o --lf'  {{ end }}
+{{ if eq .osid "linux-fedora" }}     copyBinary='xclip -selection c'      {{ end }}
+{{ if eq .osid "linux-fedora" }}     pasteBinary='xclip -selection c -o'  {{ end }}
+
 bind-key -n M-Space copy-mode
-bind-key -n M-v run "win32yank.exe -o | tmux load-buffer - ; tmux paste-buffer"
+bind-key -n M-v run "$pasteBinary | tmux load-buffer - ; tmux paste-buffer"
 bind-key -Tcopy-mode-vi 'v' send -X begin-selection
-bind-key -Tcopy-mode-vi 'y' send -X copy-pipe "win32yank.exe -i"
+bind-key -Tcopy-mode-vi 'y' send -X copy-pipe "$copyBinary"
 
 # Home and End Keys in copy-mode should act as they
 # do in a text editor. Home sends you to the start
@@ -186,8 +192,6 @@ bind-key -T copy-mode-vi Escape  copy-mode -q
 # Note: the copy option is set to only
 #       be available if there is currently
 #       a selection to copy from.
-copyBinary="win32yank.exe -i"
-pasteBinary="win32yank.exe -o"
 copyAction='send-keys -X copy-pipe "$copyBinary"'
 bind-key -n M-MouseDown3Pane \
     display-menu -O \
