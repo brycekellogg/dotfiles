@@ -68,14 +68,14 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {pattern = '*', command = "wincmd ="})
 vim.o.clipboard = 'unnamed'
 vim.g.clipboard = {
     copy = {
-{{ if eq .osid "linux-ubuntu-wsl" }} ['+'] = 'win32yank.exe -i --crlf', {{ end }}
-{{ if eq .osid "linux-ubuntu-wsl" }} ['*'] = 'win32yank.exe -i --crlf', {{ end }}
-{{ if eq .osid "linux-fedora" }}     ['+'] = 'xclip -selection c',      {{ end }}
-{{ if eq .osid "linux-fedora" }}     ['*'] = 'xclip -selection c',      {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} ['+'] = 'clip.exe', {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} ['*'] = 'clip.exe', {{ end }}
+{{ if eq .osid "linux-fedora" }}     ['+'] = 'xclip -selection c', {{ end }}
+{{ if eq .osid "linux-fedora" }}     ['*'] = 'xclip -selection c', {{ end }}
     },
     paste = {
-{{ if eq .osid "linux-ubuntu-wsl" }} ['+'] = 'win32yank.exe -o --lf', {{ end }}
-{{ if eq .osid "linux-ubuntu-wsl" }} ['*'] = 'win32yank.exe -o --lf', {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} ['+'] = 'powershell.exe -c Get-Clipboard', {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} ['*'] = 'powershell.exe -c Get-Clipboard', {{ end }}
 {{ if eq .osid "linux-fedora" }}     ['+'] = 'xclip -selection c -o', {{ end }}
 {{ if eq .osid "linux-fedora" }}     ['*'] = 'xclip -selection c -o', {{ end }}
     },
