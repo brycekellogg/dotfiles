@@ -1,17 +1,20 @@
 #!/bin/bash
 # vim: syntax=bash
 
-# TODO: include sha of nvim, tmux, & fish configs, so this reloads if they change
+# To trigger a re-run of this script when one of the config files changes, we
+# use the template system to include a checksum of the config file. If the config
+# file changes, the checksum changes, so this files changes, so it re-runs. Details
+# of this technique can be found below in the link:
 # https://www.chezmoi.io/user-guide/use-scripts-to-perform-actions/#install-packages-with-scripts
-
-
-# tmux.conf hash {{ include "private_dot_config/tmux/tmux.conf.tmpl" | sha256sum }} 
-# tmp
+#
+# tmux config hash {{ include "private_dot_config/tmux/tmux.conf.tmpl" | sha256sum }} 
+# nvim config hash {{ include "private_dot_config/nvim/init.lua.tmpl" | sha256sum }}
+# fish config hash {{ include "private_dot_config/fish/config.fish" | sha256sum }}
 
 
 # A helper function that will run a command, capture
 # both stout & stderr to a variable. It will then check
-#the return code of the command. If there was an error,
+# the return code of the command. If there was an error,
 # it will print out the output and exit the script.
 run() {
     cmd="$1"
@@ -25,7 +28,8 @@ run() {
 }
 
 
-# TODO: comment
+# A helper function for installing all packages we want from the
+# Ubuntu repositories. Requires only standard apt-get utilities.
 install_packages_ubuntu() {
     echo -n "Installing packages using apt-get..."
 
@@ -39,6 +43,7 @@ install_packages_ubuntu() {
     echo " done"
 }
 
+
 # TODO: commend
 install_packages_fedora() {
     echo -n "Installing packages using dnf..."
@@ -49,7 +54,12 @@ install_packages_fedora() {
     echo " done"
 }
 
-# TODO: comment
+
+# A helper function for installing neovim on Ubuntu.
+# The version of neovim in the official Ubuntu repos
+# is old, so we install a newer version directly from
+# githum. Requires mktemp, wget, dpkg. Should work on
+# any debian based distro.
 install_neovim_ubuntu() {
     echo -n "Installing neovim..."
 
@@ -64,20 +74,25 @@ install_neovim_ubuntu() {
     echo " done"
 }
 
+
 # TODO: comment
 install_neovim_fedora() {
 
     echo " done"
 }
 
-# TODO: comment
+
+# A helper function for installing the win32yank tool.
+# Requires curl & unzip; should work on all WSL distros.
 install_win32yank_wsl() {
     echo -n "Installing win32yank..."
 
+    WINUSER=$(cmd.exe /c "echo %USERNAME%" 2>>/dev/null | tr -d '\r')
     WIN32YANK_URL="https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip"
     WIN32YANK_ZIP="/tmp/win32yank.zip"
-    WIN32YANK_INSTALL="/usr/local/bin/"
-
+    WIN32YANK_INSTALL="/mnt/c/Users/$WINUSER/wsl-bin/"
+    
+    run "mkdir -p $WIN32YANK_INSTALL"
     run "curl -sLo $WIN32YANK_ZIP $WIN32YANK_URL"
     run "sudo unzip -u $WIN32YANK_ZIP win32yank.exe -d $WIN32YANK_INSTALL"
     run "sudo chmod a+x $WIN32YANK_INSTALL/win32yank.exe"
@@ -85,6 +100,7 @@ install_win32yank_wsl() {
 
     echo " done"
 }
+
 
 install_nerdfonts_fedora() {
     echo -n "Installing NerdFonts..."
