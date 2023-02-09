@@ -208,12 +208,13 @@ sudo echo "Caching Sudo Credentials"
 {{ if eq .osid "linux-ubuntu" }}     install_vimplug {{ end }}
 {{ if eq .osid "linux-ubuntu-wsl" }} install_vimplug {{ end }}
 {{ if eq .osid "linux-fedora" }}     install_vimplug {{ end }}
+{{ if eq .osid "darwin" }}           install_vimplug {{ end }}
 
 
 ############################
 ### Change shell to fish ###
 ############################
-echo -n "Changing shell to fish..."
-run "sudo chsh -s $(which fish) $USER"
-echo " done"
+# echo -n "Changing shell to fish..."
+# run "sudo chsh -s $(which fish) $USER"
+# echo " done"
 
