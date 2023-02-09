@@ -57,22 +57,10 @@ install_packages_fedora() {
 
 # TODO: comment
 install_packages_macos() {
+    echo -n "Installing packages using brew..."
 
-    echo " done"
-}
-
-install_neovim_macos() {
-    echo -n "Installing neovim..."
-
-    # Install source & working location
-    TEMP_DIR="$(mktemp -d)"
-    NVIM_URL="https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-macos.tar.gz"
-
-    run "curl -sLo $TEMP_DIR/nvim-macos.tar.gz $NVIM_URL" # Download the file
-    run "xattr -c $TEMP_DIR/nvim-macos.tar.gz" # Avoid "unknown developer" warning
-    run "tar xzvf $TEMP_DIR/nvim-macos.tar.gz -C $TEMP_DIR" # Extract
-    run "sudo mv $TEMP_DIR/nvim-macos/bin/nvim /usr/local/bin" # Move to install location
-    run "rm -rf $TEMP_DIR"  # Cleanup
+    PACKAGES="neovim"
+    run "brew install $PACKAGES"
 
     echo " done"
 }
@@ -183,12 +171,12 @@ sudo echo "Caching Sudo Credentials"
 {{ if eq .osid "linux-ubuntu" }}     install_packages_ubuntu {{ end }}
 {{ if eq .osid "linux-ubuntu-wsl" }} install_packages_ubuntu {{ end }}
 {{ if eq .osid "linux-fedora" }}     install_packages_fedora {{ end }}
+{{ if eq .osid "darwin" }}           install_packages_macos  {{ end }}
 
 # Installing Neovim Nightly Directly
 {{ if eq .osid "linux-ubuntu" }}     install_neovim_ubuntu {{ end }}
 {{ if eq .osid "linux-ubuntu-wsl" }} install_neovim_ubuntu {{ end }}
 {{ if eq .osid "linux-fedora" }}     install_neovim_fedora {{ end }}
-{{ if eq .osid "darwin" }}           install_neovim_macos  {{ end }}
 
 # Installing win32yank
 {{ if eq .osid "linux-ubuntu-wsl" }} install_win32yank_wsl {{ end }}
