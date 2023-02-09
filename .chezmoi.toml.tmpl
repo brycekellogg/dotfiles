@@ -23,8 +23,10 @@
 {{ if hasKey .chezmoi.osRelease "id" }}
     {{ $osid = printf "%s-%s" $osid .chezmoi.osRelease.id }}
 {{ end }}
-{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-    {{ $osid = printf "%s-%s" $osid "wsl" }}
+{{ if hasKey .chezmoi.kernel "osrelease" }}
+    {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+        {{ $osid = printf "%s-%s" $osid "wsl" }}
+    {{ end }}
 {{ end }}
 
 
