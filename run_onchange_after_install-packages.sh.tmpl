@@ -68,9 +68,9 @@ install_neovim_macos() {
     TEMP_DIR="$(mktemp -d)"
     NVIM_URL="https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-macos.tar.gz"
 
-    run "curl -sLo $TEMPDIR/nvim-macos.tar.gz $NVIM_URL" # Download the file
+    run "curl -sLo $TEMP_DIR/nvim-macos.tar.gz $NVIM_URL" # Download the file
     run "xattr -c $TEMP_DIR/nvim-macos.tar.gz" # Avoid "unknown developer" warning
-    run "tar xzvf $TEMP_DIR/nvim-macos.tar.gz" # Extract
+    run "tar xzvf $TEMP_DIR/nvim-macos.tar.gz -C $TEMP_DIR" # Extract
     run "sudo mv $TEMP_DIR/nvim-macos/bin/nvim /usr/local/bin" # Move to install location
     run "rm -rf $TEMP_DIR"  # Cleanup
 
