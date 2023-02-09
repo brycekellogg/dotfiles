@@ -5,6 +5,13 @@ set fish_greeting
 
 if status is-interactive
 
+    # In interactive mode, we set the
+    # default shell to be fish. This allows
+    # us to have tmux default to the shell
+    # that launched it independent of the
+    # true default shell.
+    set -x SHELL (which fish)
+
     set -l DIRCOLORS_FILE "$HOME/.config/dircolors/solarized-dircolors.256dark"
     set -q XDG_CONFIG_HOME && set -l DIRCOLORS_FILE "$XDG_CONFIG_HOME/dircolors/solarized-dircolors.256dark"
     eval (dircolors -c $DIRCOLORS_FILE)
