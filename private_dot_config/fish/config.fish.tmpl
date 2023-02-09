@@ -14,11 +14,23 @@ if status is-interactive
     alias ll='exa -l --group-directories-first'
     alias ls='exa --group-directories-first'
     alias la='exa -la --group-directories-first'
+    alias fd='fdfind'  # might not work in fedora?
 
     set -gx EDITOR nvim
     set -gx VISUAL nvim
 
     set -x SSH_AUTH_SOCK /run/user/(id -u)/gnupg/S.gpg-agent.ssh
+
+    # When using WSL, some binaries (notably win32yank) need
+    # to be stored in a Windows path for speed issues. This
+    # adds that directory to the path if it exists.
+{{ if .osid | contains "wsl" }}
+    set --local winuser (cmd.exe /c "echo %USERNAME%" 2>>/dev/null | tr -d '\r')
+    set --local wslbin /mnt/c/Users/$winuser/wsl-bin/
+    if test -d $wslbin
+        fish_add_path --path $wslbin
+    end
+{{ end }}
 end
 
 
