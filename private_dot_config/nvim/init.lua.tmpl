@@ -59,7 +59,11 @@ vim.o.cursorline = true
 
 
 -- Auto resize windows
-vim.api.nvim_create_autocmd({"BufEnter"}, {pattern = '*', command = "wincmd ="})
+--
+-- The VimResized event occurs "After the Vim window was resized". We use
+-- that to run the command to redestribute all the window borders. This
+-- allows zooming when using tmux to play nice with vim.
+vim.api.nvim_create_autocmd({"VimResized"}, {pattern = '*', command = "wincmd ="})
 
 
 -- Configure clipboard
