@@ -17,8 +17,8 @@
 # the return code of the command. If there was an error,
 # it will print out the output and exit the script.
 run() {
-    cmd="$1"
-    output=$($cmd 2>&1)
+    cmd=$1
+    output=$(eval $cmd 2>&1)
     if [ $? -ne 0 ]; then
        echo " ERROR"
        printf ">> $1\n"
