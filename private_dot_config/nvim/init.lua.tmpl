@@ -118,9 +118,29 @@ vim.call('plug#end')
 -- background color as an inactive tmux pane. We do this via
 -- the highlight and winghighlight functionality. This needs
 -- to happen after we set the colorscheme
-vim.cmd('highlight Normal ctermbg=none')
-vim.cmd('highlight InactiveWindow ctermbg=black')
-vim.cmd('set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow')
+--
+-- TODO: not working. Probably because color scheme
+--       is set via an autocmd
+
+function setDimInactiveWindows()
+    vim.cmd('highlight Normal guibg=none')
+    vim.cmd('highlight InactiveWindow guibg=none')
+    vim.cmd('set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow')
+end
+
+vim.api.nvim_create_autocmd({"ColorScheme"}, {pattern='*', callback=setDimInactiveWindows})
+
+--
+--
+vim.opt.termguicolors = true
+
+-- Set the colorscheme using a autocmd
+--
+-- We want to always set the colorscheme after loading plugins and
+-- starting vim. Nested is needed for the status line at the
+-- bottom to work correctly.
+vim.api.nvim_create_autocmd({"VimEnter"}, {nested=true, pattern='*', command="colorscheme solarized8"})
+
 
 -- Configure Lualine Plugin
 require('lualine').setup {
@@ -133,6 +153,7 @@ require('lualine').setup {
     },
 }
 
+
 -- Configure gitsigns Plugin
 require('gitsigns').setup()
 
@@ -143,11 +164,6 @@ require('bufferline').setup {
     animation = false,
 }
 
-
---
---
-vim.opt.termguicolors = true
-vim.cmd('autocmd vimenter * ++nested colorscheme solarized8')
 
 -- Configure Tree Plugin
 local nvimtree = require('nvim-tree.events')
