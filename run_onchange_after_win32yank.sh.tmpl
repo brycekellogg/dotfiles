@@ -17,7 +17,7 @@ sudo echo "Win32yank: cache sudo credentials..."
 
 # Check that the required packages are installed
 echo "Win32yank: check for required tools..."
-command -v wget
+command -v curl
 command -v unzip
 
 WINUSER=$(cmd.exe /c "echo %USERNAME%" 2>>/dev/null | tr -d '\r')

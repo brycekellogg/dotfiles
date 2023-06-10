@@ -87,28 +87,6 @@ install_nerdfonts_fedora() {
     echo " done"
 }
 
-
-
-# fisher plugin manager for fish shell & fish plugins
-install_fisher() {
-    echo -n "Installing fish plugin manager..."
-    
-    FISHER_URL="https://git.io/fisher"
-    FISHER_SCRIPT="/tmp/fisher"
-
-    run "curl -sLo $FISHER_SCRIPT $FISHER_URL"
-    run "fish -c \"source $FISHER_SCRIPT && fisher install jorgebucaran/fisher\""
-    run "rm -rf $FISHER_SCRIPT"
-
-    # TODO: install (update) fish plugins
-
-    run "fish -c \"fisher install ilancosman/tide@v5\""
-    run "fish -c \"fisher install edc/bass\""
-    run "fish -c \"fisher update\""
-
-    echo " done"
-}
-
 sudo echo "Caching Sudo Credentials"
 
 # Installing Packages from Repos
@@ -124,17 +102,4 @@ sudo echo "Caching Sudo Credentials"
 
 # TODO: settings for windows terminal
 # TODO: copy alacritty settings to Windows location
-
-# Installing Plugin Managers & Plugins
-{{ if eq .osid "linux-ubuntu" }}     install_fisher  {{ end }}
-{{ if eq .osid "linux-ubuntu-wsl" }} install_fisher  {{ end }}
-{{ if eq .osid "linux-fedora" }}     install_fisher  {{ end }}
-
-
-############################
-### Change shell to fish ###
-############################
-# echo -n "Changing shell to fish..."
-# run "sudo chsh -s $(which fish) $USER"
-# echo " done"
 
