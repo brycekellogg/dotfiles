@@ -1,0 +1,75 @@
+#!/bin/bash
+# vim: syntax=bash
+
+
+# To trigger a re-run of this script when one of the config files changes, we
+# use the template system to include a checksum of the relevant config file.
+# If the config file changes, the checksum changes, so this files changes, so
+# it re-runs. Details of this technique can be found below in the link:
+# https://www.chezmoi.io/user-guide/use-scripts-to-perform-actions/#install-packages-with-scripts
+#
+# nvim config hash {{ include "private_dot_config/nvim/init.lua.tmpl" | sha256sum }}
+
+
+# Set bash to exit on the first error & print an error
+# message detailing which command produced the error.
+set -e
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
+
+
+# Various operations in this script require root priviliges.
+# We cache them here so that we don't need to ask later.
+sudo echo "Neovim: cache sudo credentials..."
+
+
+# Check that the required packages are installed
+echo "Neovim: check for required tools..."
+command -v wget
+command -v tar
+command -v make
+
+
+# This is the section that manages installing
+# nvim if we are in a linux based environment.
+{{ if eq .osid "linux-ubuntu"
+               "linux-ubuntu-wsl"
+               "linux-fedora" }}
+
+# Neovim version & various helper variables
+NVIM_VERSION="0.9.1"
+NVIM_TARFILE="v$NVIM_VERSION.tar.gz"
+NVIM_DIR="$(mktemp -d)"
+NVIM_URL="https://github.com/neovim/neovim/archive/refs/tags/$NVIM_TARFILE"
+
+# Check if the version of Neovim that is
+# already installed is the same as the
+# version that is requesting to be installed.
+# If they match, we don't install unless the
+# "--force" flag has been used.
+{{ if has "--force" .chezmoi.args }}
+   # TODO
+{{ end }}
+
+# Compule & install neovim from source.
+# We are installing from source because
+# many distros (especially Ubuntu) lag
+# behind the most recent stable version.
+echo "Neovim: download, compile, & install..."
+wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
+tar -C $NVIM_DIR -xzf $NVIM_TARFILE                              # Unpack the tarfile
+make -C $NVIM_DIR/neovim-$NVIM_VERSION CMAKE_BUILD_TYPE=Release  # Build Neovim from source
+sudo make -C $NVIM_DIR/neovim-$NVIM_VERSION install              # Install Neovim
+sudo rm -rf $NVIM_DIR                                            # Cleanup
+
+{{ end }}
+
+
+# Clean, install, & update all Neovim plugins. We do this
+# by running a command on startup (display the UI for progress),
+# save the output to a log, & then cat the logfile.
+echo "Neovim: install & update plugins..."
+nvim -c "autocmd User VeryLazy Lazy! sync | w! lazy.log | qall"
+cat lazy.log
+rm -f lazy.log
+
