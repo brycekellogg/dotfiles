@@ -71,26 +71,6 @@ install_packages_macos() {
 }
 
 
-# A helper function for installing the win32yank tool.
-# Requires curl & unzip; should work on all WSL distros.
-install_win32yank_wsl() {
-    echo -n "Installing win32yank..."
-
-    WINUSER=$(cmd.exe /c "echo %USERNAME%" 2>>/dev/null | tr -d '\r')
-    WIN32YANK_URL="https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip"
-    WIN32YANK_ZIP="/tmp/win32yank.zip"
-    WIN32YANK_INSTALL="/mnt/c/Users/$WINUSER/wsl-bin/"
-    
-    run "mkdir -p $WIN32YANK_INSTALL"
-    run "curl -sLo $WIN32YANK_ZIP $WIN32YANK_URL"
-    run "sudo unzip -u $WIN32YANK_ZIP win32yank.exe -d $WIN32YANK_INSTALL"
-    run "sudo chmod a+x $WIN32YANK_INSTALL/win32yank.exe"
-    run "rm -rf $WIN32YANK_ZIP"
-
-    echo " done"
-}
-
-
 install_nerdfonts_fedora() {
     echo -n "Installing NerdFonts..."
 
@@ -137,9 +117,6 @@ sudo echo "Caching Sudo Credentials"
 {{ if eq .osid "linux-fedora" }}     install_packages_fedora {{ end }}
 {{ if eq .osid "darwin" }}           install_packages_macos  {{ end }}
 
-
-# Installing win32yank
-{{ if eq .osid "linux-ubuntu-wsl" }} install_win32yank_wsl {{ end }}
 
 # TODO: install fonts
 {{ if eq .osid "linux-fedora" }}     install_nerdfonts_fedora {{ end }}
