@@ -8,8 +8,13 @@
 # https://www.chezmoi.io/user-guide/use-scripts-to-perform-actions/#install-packages-with-scripts
 #
 # tmux config hash {{ include "private_dot_config/tmux/tmux.conf.tmpl" | sha256sum }} 
-# nvim config hash {{ include "private_dot_config/nvim/init.lua.tmpl" | sha256sum }}
 # fish config hash {{ include "private_dot_config/fish/config.fish.tmpl" | sha256sum }}
+
+
+# Set bash to exit on the first error. This
+# way we will immediately exit if something
+# fails while we are installing.
+set -e
 
 
 # A helper function that will run a command, capture
@@ -61,33 +66,6 @@ install_packages_macos() {
 
     PACKAGES="neovim"
     run "brew install $PACKAGES"
-
-    echo " done"
-}
-
-
-# A helper function for installing neovim on Ubuntu.
-# The version of neovim in the official Ubuntu repos
-# is old, so we install a newer version directly from
-# githum. Requires mktemp, wget, dpkg. Should work on
-# any debian based distro.
-install_neovim_ubuntu() {
-    echo -n "Installing neovim..."
-
-    # Install source & working location
-    TEMP_DEB="$(mktemp)"
-    NVIM_URL="https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-linux64.deb"
-
-    run "wget -q -O $TEMP_DEB $NVIM_URL" # Download the .deb
-    run "sudo dpkg -i $TEMP_DEB"         # Install the .deb
-    run "rm -f $TEMP_DEB"                # Cleanup
-
-    echo " done"
-}
-
-
-# TODO: comment
-install_neovim_fedora() {
 
     echo " done"
 }
@@ -151,21 +129,6 @@ install_fisher() {
     echo " done"
 }
 
-install_vimplug() {
-    echo -n "Installing vimplug..."
-
-    VIMPLUG_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    VIMPLUG_INSTALL="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim"
-
-    run "curl -sfLo $VIMPLUG_INSTALL --create-dirs $VIMPLUG_URL"
-    run "nvim +PlugInstall +PlugUpdate +qall"
-    run "nvim +TSUpdate +qall"
-
-    echo " done"
-}
-
-
-
 sudo echo "Caching Sudo Credentials"
 
 # Installing Packages from Repos
@@ -174,10 +137,6 @@ sudo echo "Caching Sudo Credentials"
 {{ if eq .osid "linux-fedora" }}     install_packages_fedora {{ end }}
 {{ if eq .osid "darwin" }}           install_packages_macos  {{ end }}
 
-# Installing Neovim Nightly Directly
-{{ if eq .osid "linux-ubuntu" }}     install_neovim_ubuntu {{ end }}
-{{ if eq .osid "linux-ubuntu-wsl" }} install_neovim_ubuntu {{ end }}
-{{ if eq .osid "linux-fedora" }}     install_neovim_fedora {{ end }}
 
 # Installing win32yank
 {{ if eq .osid "linux-ubuntu-wsl" }} install_win32yank_wsl {{ end }}
@@ -193,11 +152,6 @@ sudo echo "Caching Sudo Credentials"
 {{ if eq .osid "linux-ubuntu" }}     install_fisher  {{ end }}
 {{ if eq .osid "linux-ubuntu-wsl" }} install_fisher  {{ end }}
 {{ if eq .osid "linux-fedora" }}     install_fisher  {{ end }}
-
-{{ if eq .osid "linux-ubuntu" }}     install_vimplug {{ end }}
-{{ if eq .osid "linux-ubuntu-wsl" }} install_vimplug {{ end }}
-{{ if eq .osid "linux-fedora" }}     install_vimplug {{ end }}
-{{ if eq .osid "darwin" }}           install_vimplug {{ end }}
 
 
 ############################
