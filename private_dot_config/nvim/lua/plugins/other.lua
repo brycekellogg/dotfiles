@@ -1,0 +1,16 @@
+return {
+    'alexghergh/nvim-tmux-navigation',
+    'nvim-treesitter/nvim-treesitter',
+-- 'micha/vim-colors-solarized'
+    'lifepillar/vim-solarized8',
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
+-- Plug('kyazdani42/nvim-tree.lua')
+    'MunifTanjim/nui.nvim',
+    'numToStr/comment.nvim',
+    'nvim-lualine/lualine.nvim',
+-- Plug('romgrk/barbar.nvim')
+    'akinsho/bufferline.nvim',
+    'lewis6991/gitsigns.nvim',
+-- Plug('p00f/nvim-ts-rainbow')
+}

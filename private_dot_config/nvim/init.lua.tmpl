@@ -106,23 +106,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
-require('lazy').setup({
-    'alexghergh/nvim-tmux-navigation',
-    'nvim-treesitter/nvim-treesitter',
--- 'micha/vim-colors-solarized'
-    'lifepillar/vim-solarized8',
-    'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim',
--- Plug('kyazdani42/nvim-tree.lua')
-    'MunifTanjim/nui.nvim',
-    'nvim-neo-tree/neo-tree.nvim',
-    'numToStr/comment.nvim',
-    'nvim-lualine/lualine.nvim',
--- Plug('romgrk/barbar.nvim')
-    'akinsho/bufferline.nvim',
-    'lewis6991/gitsigns.nvim',
--- Plug('p00f/nvim-ts-rainbow')
-})
+require('lazy').setup('plugins')
 
 
 
@@ -309,5 +293,4 @@ mapkey({'n', 'i'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
 mapkey({'n', 'i'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
 mapkey({'n', 'i'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
 mapkey({'n', 'i'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
-mapkey({'n', 'i'}, '<C-b>',     '<Cmd>Neotree toggle<CR>')
 mapkey({'n'}, '?', telescope.grep_string, {})
