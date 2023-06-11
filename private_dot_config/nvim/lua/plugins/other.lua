@@ -3,7 +3,7 @@ return {
 -- 'micha/vim-colors-solarized'
     'lifepillar/vim-solarized8',
     'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim',
+    
 -- Plug('kyazdani42/nvim-tree.lua')
     'MunifTanjim/nui.nvim',
     'nvim-lualine/lualine.nvim',

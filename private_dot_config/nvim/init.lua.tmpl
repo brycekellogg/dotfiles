@@ -169,32 +169,6 @@ nvim_tmux_navigation.setup {
 }
 
 
--- Configure treesitter
-local treesitter = require('nvim-treesitter.configs')
-treesitter.setup {
-    ensure_installed = {"c", "cpp", "lua", "fish", "vim"},
-    ignore_installed = {"help"},
-    highlight = {
-        enable = true
-    },
-
-    -- Config for nvim-ts-rainbow
-    -- Currently disable until colors
-    -- are fixed. Looks bad right now.
-    rainbow = {
-        enable = false,
-	extended_mode = true,
-	max_file_lines = nil,
-    },
-}
-
--- Configure telescope
-require('telescope').setup {
-    defaults = {
-        path_display={smart},
-    },
-}
-
 -- Killing Windows
 function killWindow()
     vim.api.nvim_win_close(0, false)
@@ -207,10 +181,6 @@ end
 -- Second Arg: keycode
 -- Third Arg: action
 local mapkey = vim.keymap.set
-local telescope = require('telescope.builtin')
-mapkey({'n', 'i'}, '<C-t>', telescope.builtin, {})
-mapkey({'n', 'i'}, '<C-p>', telescope.find_files, {})
-mapkey({'n', 'i'}, '<C-f>', telescope.live_grep, {})
 mapkey({'n'},      '<C-c>', '<CMD>BufferClose<CR>')
 mapkey({'n'},      '<C-x>', killWindow)
 mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferLineCyclePrev<CR>')
@@ -221,4 +191,3 @@ mapkey({'n', 'i'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
 mapkey({'n', 'i'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
 mapkey({'n', 'i'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
 mapkey({'n', 'i'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
-mapkey({'n'}, '?', telescope.grep_string, {})
