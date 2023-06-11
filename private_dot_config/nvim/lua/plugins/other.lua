@@ -6,7 +6,6 @@ return {
     'nvim-telescope/telescope.nvim',
 -- Plug('kyazdani42/nvim-tree.lua')
     'MunifTanjim/nui.nvim',
-    'numToStr/comment.nvim',
     'nvim-lualine/lualine.nvim',
 -- Plug('romgrk/barbar.nvim')
     'akinsho/bufferline.nvim',

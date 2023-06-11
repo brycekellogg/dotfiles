@@ -1,6 +1,6 @@
 --
 --
 return {{   
-    'nvim-treesitter/nvim-treesitter',       -- git URL of plugin
-    event = {"BufReadPost", "BufNewFile"},  -- lazy load on these vim events
+    'nvim-treesitter/nvim-treesitter',      -- git URL of plugin
+    event = {"BufReadPost", "BufNewFile"},  -- lazy load plugin on these vim events
 }}
