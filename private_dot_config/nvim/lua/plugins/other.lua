@@ -1,6 +1,5 @@
 return {
     'alexghergh/nvim-tmux-navigation',
-    'nvim-treesitter/nvim-treesitter',
 -- 'micha/vim-colors-solarized'
     'lifepillar/vim-solarized8',
     'nvim-lua/plenary.nvim',
