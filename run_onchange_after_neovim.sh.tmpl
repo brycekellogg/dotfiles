@@ -47,20 +47,34 @@ NVIM_URL="https://github.com/neovim/neovim/archive/refs/tags/$NVIM_TARFILE"
 # version that is requesting to be installed.
 # If they match, we don't install unless the
 # "--force" flag has been used.
+INSTALL_NVIM=true
+
+# This should get us the currently installed
+# version in the format: "NVIM v0.0.0".
+NVIM_INSTALLED_VERSION="$(nvim --version 2> /dev/null | head -1)"
+if [ "$NVIM_INSTALLED_VERSION" = "NVIM v$NVIM_VERSION" ]; then
+    INSTALL_NVIM=false
+fi
+
+# Always install if we use the "--force" flag
 {{ if has "--force" .chezmoi.args }}
-   # TODO
+   INSTALL_NVIM=true
 {{ end }}
 
 # Compule & install neovim from source.
 # We are installing from source because
 # many distros (especially Ubuntu) lag
 # behind the most recent stable version.
-echo "Neovim: download, compile, & install..."
-wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
-tar -C $NVIM_DIR -xzf $NVIM_TARFILE                              # Unpack the tarfile
-make -C $NVIM_DIR/neovim-$NVIM_VERSION CMAKE_BUILD_TYPE=Release  # Build Neovim from source
-sudo make -C $NVIM_DIR/neovim-$NVIM_VERSION install              # Install Neovim
-sudo rm -rf $NVIM_DIR                                            # Cleanup
+if [ $INSTALL_NVIM = true ]; then
+    echo "Neovim: download, compile, & install..."
+    wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
+    tar -C $NVIM_DIR -xzf $NVIM_TARFILE                              # Unpack the tarfile
+    make -C $NVIM_DIR/neovim-$NVIM_VERSION CMAKE_BUILD_TYPE=Release  # Build Neovim from source
+    sudo make -C $NVIM_DIR/neovim-$NVIM_VERSION install              # Install Neovim
+    sudo rm -rf $NVIM_DIR                                            # Cleanup
+else
+    echo "Neovim: skipping download, compile, & install..."
+fi
 
 {{ end }}
 
