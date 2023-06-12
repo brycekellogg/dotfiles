@@ -7,6 +7,7 @@ return {{
             path_display={smart},
         },
     },
+    cmd = "Telescope",
     keys = {
         {
             '<C-t>',
