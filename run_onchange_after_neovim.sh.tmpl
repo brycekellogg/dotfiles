@@ -8,7 +8,13 @@
 # it re-runs. Details of this technique can be found below in the link:
 # https://www.chezmoi.io/user-guide/use-scripts-to-perform-actions/#install-packages-with-scripts
 #
-# nvim config hash {{ include "private_dot_config/nvim/init.lua.tmpl" | sha256sum }}
+# {{ include "private_dot_config/nvim/init.lua.tmpl" | sha256sum }}
+# {{ include "private_dot_config/nvim/lua/plugins/comment.lua" | sha256sum }}
+# {{ include "private_dot_config/nvim/lua/plugins/directory-tree-explorer.lua" | sha256sum }}
+# {{ include "private_dot_config/nvim/lua/plugins/treesitter.lua" | sha256sum }}
+# {{ include "private_dot_config/nvim/lua/plugins/telescope.lua" | sha256sum }}
+# {{ include "private_dot_config/nvim/lua/plugins/greeter.lua" | sha256sum }}
+# {{ include "private_dot_config/nvim/lua/plugins/other.lua" | sha256sum }}
 
 
 # Set bash to exit on the first error & print an error
@@ -27,7 +33,6 @@ sudo echo "Neovim: cache sudo credentials..."
 echo "Neovim: check for required tools..."
 command -v wget
 command -v tar
-command -v make
 
 
 # This is the section that manages installing
@@ -38,43 +43,18 @@ command -v make
 
 # Neovim version & various helper variables
 NVIM_VERSION="0.9.1"
-NVIM_TARFILE="v$NVIM_VERSION.tar.gz"
+NVIM_TARFILE="nvim-linux64.tar.gz"
 NVIM_DIR="$(mktemp -d)"
-NVIM_URL="https://github.com/neovim/neovim/archive/refs/tags/$NVIM_TARFILE"
+NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
 
-# Check if the version of Neovim that is
-# already installed is the same as the
-# version that is requesting to be installed.
-# If they match, we don't install unless the
-# "--force" flag has been used.
-INSTALL_NVIM=true
-
-# This should get us the currently installed
-# version in the format: "NVIM v0.0.0".
-NVIM_INSTALLED_VERSION="$(nvim --version 2> /dev/null | head -1)"
-if [ "$NVIM_INSTALLED_VERSION" = "NVIM v$NVIM_VERSION" ]; then
-    INSTALL_NVIM=false
-fi
-
-# Always install if we use the "--force" flag
-{{ if has "--force" .chezmoi.args }}
-   INSTALL_NVIM=true
-{{ end }}
-
-# Compule & install neovim from source.
-# We are installing from source because
-# many distros (especially Ubuntu) lag
-# behind the most recent stable version.
-if [ $INSTALL_NVIM = true ]; then
-    echo "Neovim: download, compile, & install..."
-    wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
-    tar -C $NVIM_DIR -xzf $NVIM_TARFILE                              # Unpack the tarfile
-    make -C $NVIM_DIR/neovim-$NVIM_VERSION CMAKE_BUILD_TYPE=Release  # Build Neovim from source
-    sudo make -C $NVIM_DIR/neovim-$NVIM_VERSION install              # Install Neovim
-    sudo rm -rf $NVIM_DIR                                            # Cleanup
-else
-    echo "Neovim: skipping download, compile, & install..."
-fi
+# Download & install neovim
+echo "Neovim: download & install..."
+wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
+tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE                    # Unpack the tarfile
+sudo cp -rf $NVIM_DIR/nvim-linux64/bin/*   /usr/bin/             # Copy files to install dir
+sudo cp -rf $NVIM_DIR/nvim-linux64/lib/*   /usr/lib/
+sudo cp -rf $NVIM_DIR/nvim-linux64/share/* /usr/share/
+sudo rm -rf $NVIM_DIR                                            # Cleanup
 
 {{ end }}
 
