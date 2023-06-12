@@ -6,6 +6,9 @@ return {{
         defaults = {
             path_display={smart},
         },
+        pickers = {
+            oldfiles = {cwd_only = true},  -- when listing recent files, only show ones in the CWD tree
+        },
     },
     cmd = "Telescope",
     keys = {
