@@ -51,9 +51,9 @@ NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVI
 echo "Neovim: download & install..."
 wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
 tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE                    # Unpack the tarfile
-sudo cp -rf $NVIM_DIR/nvim-linux64/bin/*   /usr/bin/             # Copy files to install dir
-sudo cp -rf $NVIM_DIR/nvim-linux64/lib/*   /usr/lib/
-sudo cp -rf $NVIM_DIR/nvim-linux64/share/* /usr/share/
+sudo cp -rf $NVIM_DIR/nvim-linux64/bin/*   /usr/local/bin/       # Copy files to install dir
+sudo cp -rf $NVIM_DIR/nvim-linux64/lib/*   /usr/local/lib/
+sudo cp -rf $NVIM_DIR/nvim-linux64/share/* /usr/local/share/
 sudo rm -rf $NVIM_DIR                                            # Cleanup
 
 {{ end }}
