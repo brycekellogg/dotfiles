@@ -90,27 +90,23 @@ vim.g.clipboard = {
     cache_enabled=true,
 }
 
--- Vim-Plug
-local Plug = vim.fn['plug#']
-vim.call('plug#begin', '~/.config/nvim/plugged')
+-- Bootstrap lasy.nvim plugin manager. This should install
+-- it when vim is first run if it's not already installed.
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-Plug('alexghergh/nvim-tmux-navigation')
-Plug('nvim-treesitter/nvim-treesitter')
--- Plug('micha/vim-colors-solarized')
-Plug('lifepillar/vim-solarized8')
-Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim', {tag = '0.1.0' })
-Plug('kyazdani42/nvim-tree.lua')
-Plug('numToStr/comment.nvim')
-Plug('nvim-lualine/lualine.nvim')
-Plug('romgrk/barbar.nvim')
-Plug('lewis6991/gitsigns.nvim')
--- Plug('p00f/nvim-ts-rainbow')
-
-vim.call('plug#end')
-
-
-
+-- Plugins
+require('lazy').setup('plugins')
 
 -- Dimming inactive vim windows
 --
@@ -160,61 +156,10 @@ require('gitsigns').setup()
 
 -- Configure Buffer Line Plugin
 require('bufferline').setup {
-    icons = {filetype = {enabled = false}},
-    animation = false,
+    options = {
+        separator_style = "slant"
+    }
 }
-
-
--- Configure Tree Plugin
-local nvimtree = require('nvim-tree.events')
-local bufferline = require('bufferline.api')
-
-local function get_tree_size()
-  return require'nvim-tree.view'.View.width
-end
-
-nvimtree.subscribe('TreeOpen', function()
-  bufferline.set_offset(get_tree_size())
-end)
-
-nvimtree.subscribe('Resize', function()
-  bufferline.set_offset(get_tree_size())
-end)
-
-nvimtree.subscribe('TreeClose', function()
-  bufferline.set_offset(0)
-end)
-
-require('nvim-tree').setup {
-    view = {
-        adaptive_size = true,
-    },
-    renderer = {
-        group_empty = true,
-    },
-   update_focused_file = {
-       enable = true,
-   },
-    actions = {
-        open_file = {
-            quit_on_open = true,
-            window_picker = {enable=false},
-        },
-    },
-}
-
-
--- Configure Comment Plugin
-require('Comment').setup {
-    toggler = {
-        line = '<C-/>',
-    },
-}
-
--- Configure Bufferline
--- require("bufferline").setup {
-
--- }
 
 
 -- Configure Tmux Navigation
@@ -224,43 +169,9 @@ nvim_tmux_navigation.setup {
 }
 
 
--- Configure treesitter
-local treesitter = require('nvim-treesitter.configs')
-treesitter.setup {
-    ensure_installed = {"c", "cpp", "lua", "fish", "vim", "help"},
-    highlight = {
-        enable = true
-    },
-
-    -- Config for nvim-ts-rainbow
-    -- Currently disable until colors
-    -- are fixed. Looks bad right now.
-    rainbow = {
-        enable = false,
-	extended_mode = true,
-	max_file_lines = nil,
-    },
-}
-
--- Configure telescope
-require('telescope').setup {
-    defaults = {
-        path_display={smart},
-    },
-}
-
 -- Killing Windows
 function killWindow()
     vim.api.nvim_win_close(0, false)
-end
-
--- A function for using comment.nvim
--- in visual block mode.
-function visualComment()
-    local comment = require('Comment.api')
-    local esc = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
-    vim.api.nvim_feedkeys(esc, 'nx', false)
-    comment.toggle.linewise(vim.fn.visualmode())
 end
 
 
@@ -270,23 +181,13 @@ end
 -- Second Arg: keycode
 -- Third Arg: action
 local mapkey = vim.keymap.set
-local telescope = require('telescope.builtin')
-local nvimtree = require('nvim-tree.api')
-local comment = require('Comment.api')
-mapkey({'n', 'i'}, '<C-t>', telescope.builtin, {})
-mapkey({'n', 'i'}, '<C-p>', telescope.find_files, {})
-mapkey({'n', 'i'}, '<C-f>', telescope.live_grep, {})
 mapkey({'n'},      '<C-c>', '<CMD>BufferClose<CR>')
 mapkey({'n'},      '<C-x>', killWindow)
-mapkey({'n', 'i'}, '<C-_>', comment.toggle.linewise.current) -- actually <C-/>
-mapkey({'x'},      '<C-_>', visualComment)                   -- actually <C-/>
-mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferPrevious<CR>')
-mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferNext<CR>')
+mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferLineCyclePrev<CR>')
+mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferLineCycleNext<CR>')
 mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
 mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
 mapkey({'n', 'i'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
 mapkey({'n', 'i'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
 mapkey({'n', 'i'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
 mapkey({'n', 'i'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
-mapkey({'n', 'i'}, '<C-b>',     nvimtree.tree.toggle)
-mapkey({'n'}, '?', telescope.grep_string, {})

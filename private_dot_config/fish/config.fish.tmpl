@@ -1,3 +1,4 @@
+# vim: ft=fish
 
 # The default greeting when you start fish
 # needs to be set to blank to disable.
@@ -10,7 +11,7 @@ if status is-interactive
     # us to have tmux default to the shell
     # that launched it independent of the
     # true default shell.
-    set -x SHELL (which fish)
+    set -x SHELL (status fish-path)
 
     set -l DIRCOLORS_FILE "$HOME/.config/dircolors/solarized-dircolors.256dark"
     set -q XDG_CONFIG_HOME && set -l DIRCOLORS_FILE "$XDG_CONFIG_HOME/dircolors/solarized-dircolors.256dark"
@@ -34,12 +35,11 @@ if status is-interactive
     # When using WSL, some binaries (notably win32yank) need
     # to be stored in a Windows path for speed issues. This
     # adds that directory to the path if it exists.
+    #
+    # Note: we assume that the windows username is the same
+    # as the Linux username for speed pursposes.
 {{ if .osid | contains "wsl" }}
-    set --local winuser (cmd.exe /c "echo %USERNAME%" 2>>/dev/null | tr -d '\r')
-    set --local wslbin /mnt/c/Users/$winuser/wsl-bin/
-    if test -d $wslbin
-        fish_add_path --path $wslbin
-    end
+    fish_add_path --path /mnt/c/Users/$USER/wsl-bin/
 {{ end }}
 end
 
@@ -49,6 +49,7 @@ end
 # the async nature of the prompt means that they
 # are evaluated outside of an interactive session.
 set -g tide_left_prompt_items pwd git character
+set -g tide_right_prompt_items status cmd_duration context jobs virtual_env
 set -g tide_character_color green
 set -g tide_character_color_failure red
 set -g tide_git_color_branch yellow
