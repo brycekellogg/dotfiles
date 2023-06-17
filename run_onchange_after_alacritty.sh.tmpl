@@ -1,0 +1,17 @@
+#!/bin/bash
+# vim: syntax=bash
+
+
+{{ if eq .osid "linux-fedora" }}
+
+sudo dnf install alacritty
+
+{{ end }}
+
+
+
+{{ if eq .osid "darwin" }}
+
+brew install --cask alacritty
+
+{{ end }}
