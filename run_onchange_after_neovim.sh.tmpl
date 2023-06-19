@@ -82,9 +82,9 @@ if [ "$CHEZMOI_OSID" == "darwin" ]; then
     mkdir -p $NVIM_DEST/bin/                                  # Create destination directory
     mkdir -p $NVIM_DEST/lib/
     mkdir -p $NVIM_DEST/share/
-    cp -rf $NVIM_DIR/nvim-macos/bin/*   $NVIM_DEST/bin/       # Copy files to install dir
-    cp -rf $NVIM_DIR/nvim-macos/lib/*   $NVIM_DEST/lib/
-    cp -rf $NVIM_DIR/nvim-macosshare/*  $NVIM_DEST/share/
+    cp -rf $NVIM_DIR/nvim-macos/bin/*    $NVIM_DEST/bin/      # Copy files to install dir
+    cp -rf $NVIM_DIR/nvim-macos/lib/*    $NVIM_DEST/lib/
+    cp -rf $NVIM_DIR/nvim-macos/share/*  $NVIM_DEST/share/
     rm -rf $NVIM_DIR                                          # Cleanup
 fi
 
