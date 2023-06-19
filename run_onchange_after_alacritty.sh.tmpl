@@ -4,22 +4,33 @@
 
 {{ if eq .osid "linux-fedora" }}
 
-sudo dnf install alacritty
+    sudo dnf install alacritty
 
 {{ end }}
 
 
-
+# Section for installing on macOS
 {{ if eq .osid "darwin" }}
 
-command -v curl     # required to download
-command -v hdiutil  # required to mount DMG
+    command -v curl     # required to download
+    command -v hdiutil  # required to mount DMG
+    command -v mkdir    # required to create dest dir
+    command -v cp       # required to install files
+    command -v rm       # required to clean up
 
-ALACRITTY_URL='https://github.com/alacritty/alacritty/releases/download/v0.12.1/Alacritty-v0.12.1.dmg'
-ALACRITTY_DMG='Alacritty.dmg'
+    # Helper variables
+    ALACRITTY_URL="https://github.com/alacritty/alacritty/releases/download/v0.12.1/Alacritty-v0.12.1.dmg"
+    ALACRITTY_DMG="Alacritty.dmg"
+    ALACRITTY_VOLUME="/Volumes/Alacritty"
+    ALACRITTY_APP="$ALACRITTY_VOLUME/Alacritty.app"
+    ALACRITTY_DEST="$HOME/Applications"
 
-curl -sLo $ALACRITTY_DMG  $ALACRITTY_URL
-
-brew install --cask alacritty
+    # Download & install
+    curl -sLo $ALACRITTY_DMG $ALACRITTY_URL  # download DMG file
+    hdiutil attach $ALACRITTY_DMG            # mount disk image
+    mkdir -p $ALACRITTY_DEST                 # create user specific app directory
+    cp -R  $ALACRITTY_APP $ALACRITTY_DEST    # do the install (via cp)
+    hdiutil detach $ALACRITTY_VOLUME         # unmount disk image
+    rm -rf $ALACRITTY_DMG                    # clean up downloaded files
 
 {{ end }}
