@@ -12,6 +12,14 @@ sudo dnf install alacritty
 
 {{ if eq .osid "darwin" }}
 
+command -v curl     # required to download
+command -v hdiutil  # required to mount DMG
+
+ALACRITTY_URL='https://github.com/alacritty/alacritty/releases/download/v0.12.1/Alacritty-v0.12.1.dmg'
+ALACRITTY_DMG='Alacritty.dmg'
+
+curl -sLo $ALACRITTY_DMG  $ALACRITTY_URL
+
 brew install --cask alacritty
 
 {{ end }}
