@@ -47,15 +47,20 @@ if [ "$CHEZMOI_OSID" == "linux-ubuntu" ]     || \
     NVIM_TARFILE="nvim-linux64.tar.gz"
     NVIM_DIR="$(mktemp -d)"
     NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
+    NVIM_DEST="$HOME/.local/"
 
     # Download & install neovim
-    wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
-    tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE                    # Unpack the tarfile
-    sudo cp -rf $NVIM_DIR/nvim-linux64/bin/*   /usr/local/bin/       # Copy files to install dir
-    sudo cp -rf $NVIM_DIR/nvim-linux64/lib/*   /usr/local/lib/
-    sudo cp -rf $NVIM_DIR/nvim-linux64/share/* /usr/local/share/
-    sudo rm -rf $NVIM_DIR                                            # Cleanup
+    wget -P $NVIM_DIR $NVIM_URL                              # Download nvim source
+    tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE            # Unpack the tarfile
+    mkdir -p $NVIM_DEST/bin/                                 # Create destination directory
+    mkdir -p $NVIM_DEST/lib/
+    mkdir -p $NVIM_DEST/share/
+    cp -rf $NVIM_DIR/nvim-linux64/bin/*   $NVIM_DEST/bin/    # Copy files to install dir
+    cp -rf $NVIM_DIR/nvim-linux64/lib/*   $NVIM_DEST/lib/
+    cp -rf $NVIM_DIR/nvim-linux64/share/* $NVIM_DEST/share/
+    rm -rf $NVIM_DIR                                         # Cleanup
 
+    export PATH="$NVIM_DEST/bin $PATH"
 fi
 
 
@@ -86,6 +91,8 @@ if [ "$CHEZMOI_OSID" == "darwin" ]; then
     cp -rf $NVIM_DIR/nvim-macos/lib/*    $NVIM_DEST/lib/
     cp -rf $NVIM_DIR/nvim-macos/share/*  $NVIM_DEST/share/
     rm -rf $NVIM_DIR                                          # Cleanup
+
+    export PATH="$NVIM_DEST/bin $PATH"
 fi
 
 
