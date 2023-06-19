@@ -31,55 +31,62 @@ sudo echo "Neovim: cache sudo credentials..."
 
 # Check that the required packages are installed
 echo "Neovim: check for required tools..."
-command -v wget
-command -v tar
 
 
 # This is the section that manages installing
 # nvim if we are in a linux based environment.
-{{ if eq .osid "linux-ubuntu"
-               "linux-ubuntu-wsl"
-               "linux-fedora" }}
+if [ "$CHEZMOI_OSID" == "linux-ubuntu" ||
+     "$CHEZMOI_OSID" == "linux-ubuntu-wsl" ||
+     "$CHEZMOI_OSID" == "linux-fedora" ]; then
 
-# Neovim version & various helper variables
-NVIM_VERSION="0.9.1"
-NVIM_TARFILE="nvim-linux64.tar.gz"
-NVIM_DIR="$(mktemp -d)"
-NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
+    command -v wget
+    command -v tar
 
-# Download & install neovim
-echo "Neovim: download & install..."
-wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
-tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE                    # Unpack the tarfile
-sudo cp -rf $NVIM_DIR/nvim-linux64/bin/*   /usr/local/bin/       # Copy files to install dir
-sudo cp -rf $NVIM_DIR/nvim-linux64/lib/*   /usr/local/lib/
-sudo cp -rf $NVIM_DIR/nvim-linux64/share/* /usr/local/share/
-sudo rm -rf $NVIM_DIR                                            # Cleanup
+    # Neovim version & various helper variables
+    NVIM_VERSION="0.9.1"
+    NVIM_TARFILE="nvim-linux64.tar.gz"
+    NVIM_DIR="$(mktemp -d)"
+    NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
 
-{{ end }}
+    # Download & install neovim
+    wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
+    tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE                    # Unpack the tarfile
+    sudo cp -rf $NVIM_DIR/nvim-linux64/bin/*   /usr/local/bin/       # Copy files to install dir
+    sudo cp -rf $NVIM_DIR/nvim-linux64/lib/*   /usr/local/lib/
+    sudo cp -rf $NVIM_DIR/nvim-linux64/share/* /usr/local/share/
+    sudo rm -rf $NVIM_DIR                                            # Cleanup
+
+fi
 
 
 # This is the section that manages
 # installing nvim if we are in macos.
-{{ if eq .osid "darwin" }}
+if [ "$CHEZMOI_OSID" == "darwin" ]; then
 
-# Neovim version & various helper variables
-NVIM_VERSION="0.9.1"
-NVIM_TARFILE="nvim-macos.tar.gz"
-NVIM_DIR="$(mktemp -d)"
-NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
+    # Check required tools
+    command -v curl   # required to download
+    command -v xattr  # required to change tar attrtibutes
+    command -v tar    # required to untar
 
-# Download & install neovim
-echo "Neovim: download & install..."
-wget -P $NVIM_DIR $NVIM_URL                                      # Download nvim source
-xattr -c $NVIM_DIR/$NVIM_TARFILE                                 # Avoid "unknown developer" warning
-tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE                    # Unpack the tarfile
-sudo cp -rf $NVIM_DIR/nvim-macos/bin/*   /usr/local/bin/       # Copy files to install dir
-sudo cp -rf $NVIM_DIR/nvim-macos/lib/*   /usr/local/lib/
-sudo cp -rf $NVIM_DIR/nvim-macosshare/* /usr/local/share/
-sudo rm -rf $NVIM_DIR                                            # Cleanup
+    # Neovim version & various helper variables
+    NVIM_VERSION="0.9.1"
+    NVIM_TARFILE="nvim-macos.tar.gz"
+    NVIM_DIR="$(mktemp -d)"
+    NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
+    NVIM_DEST="$HOME/.local/"
 
-{{ end }}
+    # Download & install neovim
+    curl -sLo $NVIM_DIR/$NVIM_TARFILE $NVIM_URL               # Download nvim source
+    xattr -c $NVIM_DIR/$NVIM_TARFILE                          # Avoid "unknown developer" warning
+    tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE             # Unpack the tarfile
+    mkdir -p $NVIM_DEST/bin/                                  # Create destination directory
+    mkdir -p $NVIM_DEST/lib/
+    mkdir -p $NVIM_DEST/share/
+    cp -rf $NVIM_DIR/nvim-macos/bin/*   $NVIM_DEST/bin/       # Copy files to install dir
+    cp -rf $NVIM_DIR/nvim-macos/lib/*   $NVIM_DEST/lib/
+    cp -rf $NVIM_DIR/nvim-macosshare/*  $NVIM_DEST/share/
+    rm -rf $NVIM_DIR                                          # Cleanup
+fi
 
 
 
