@@ -26,3 +26,5 @@
     name   = {{ $name   | quote }}
     osid   = {{ $osid   | quote }}
 
+[scriptEnv]
+    CHEZMOI_OSID = {{ $osid | quote }}

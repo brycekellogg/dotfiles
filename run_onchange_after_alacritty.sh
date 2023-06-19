@@ -1,17 +1,23 @@
 #!/bin/bash
-# vim: syntax=bash
+# vim: ft=bash
+
+# Set bash to exit on the first error & print an error
+# message detailing which command produced the error.
+set -e
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 
-{{ if eq .osid "linux-fedora" }}
-
-    sudo dnf install alacritty
-
-{{ end }}
+# Section for installing on Fedora
+if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
+    sudo dnf install alacritty  # Use distro version
+fi
 
 
 # Section for installing on macOS
-{{ if eq .osid "darwin" }}
+if [ "$CHEZMOI_OSID" == "darwin" ]; then
 
+    # Check required tools
     command -v curl     # required to download
     command -v hdiutil  # required to mount DMG
     command -v mkdir    # required to create dest dir
@@ -32,5 +38,4 @@
     cp -R  $ALACRITTY_APP $ALACRITTY_DEST    # do the install (via cp)
     hdiutil detach $ALACRITTY_VOLUME         # unmount disk image
     rm -rf $ALACRITTY_DMG                    # clean up downloaded files
-
-{{ end }}
+fi
