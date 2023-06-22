@@ -1,22 +1,6 @@
 #!/bin/bash
 # vim: syntax=bash
 
-
-# To trigger a re-run of this script when one of the config files changes, we
-# use the template system to include a checksum of the relevant config file.
-# If the config file changes, the checksum changes, so this files changes, so
-# it re-runs. Details of this technique can be found below in the link:
-# https://www.chezmoi.io/user-guide/use-scripts-to-perform-actions/#install-packages-with-scripts
-#
-# {{ include "private_dot_config/nvim/init.lua.tmpl" | sha256sum }}
-# {{ include "private_dot_config/nvim/lua/plugins/comment.lua" | sha256sum }}
-# {{ include "private_dot_config/nvim/lua/plugins/directory-tree-explorer.lua" | sha256sum }}
-# {{ include "private_dot_config/nvim/lua/plugins/treesitter.lua" | sha256sum }}
-# {{ include "private_dot_config/nvim/lua/plugins/telescope.lua" | sha256sum }}
-# {{ include "private_dot_config/nvim/lua/plugins/greeter.lua" | sha256sum }}
-# {{ include "private_dot_config/nvim/lua/plugins/other.lua" | sha256sum }}
-
-
 # Set bash to exit on the first error & print an error
 # message detailing which command produced the error.
 set -e
@@ -101,6 +85,10 @@ fi
 # by running a command on startup (display the UI for progress),
 # save the output to a log, & then cat the logfile.
 echo "Neovim: install & update plugins..."
+
+# TODO: use full path to nvim instead of exporting PATH
+
+
 nvim -c "autocmd User VeryLazy Lazy! sync | w! lazy.log | qall"
 cat lazy.log
 rm -f lazy.log
