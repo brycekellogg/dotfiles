@@ -15,6 +15,6 @@ fi
 
 
 # Section for installing on macOS
-if [ "$CHEZMOI_OSID" == "darwin" ]; then
+# if [ "$CHEZMOI_OSID" == "darwin" ]; then
     # do nothing
-fi
+# fi
