@@ -8,15 +8,6 @@ trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 
-# Various operations in this script require root priviliges.
-# We cache them here so that we don't need to ask later.
-sudo echo "Neovim: cache sudo credentials..."
-
-
-# Check that the required packages are installed
-echo "Neovim: check for required tools..."
-
-
 # This is the section that manages installing
 # nvim if we are in a linux based environment.
 if [ "$CHEZMOI_OSID" == "linux-ubuntu" ]     || \
@@ -43,8 +34,6 @@ if [ "$CHEZMOI_OSID" == "linux-ubuntu" ]     || \
     cp -rf $NVIM_DIR/nvim-linux64/lib/*   $NVIM_DEST/lib/
     cp -rf $NVIM_DIR/nvim-linux64/share/* $NVIM_DEST/share/
     rm -rf $NVIM_DIR                                         # Cleanup
-
-    export PATH="$NVIM_DEST/bin $PATH"
 fi
 
 
@@ -75,8 +64,6 @@ if [ "$CHEZMOI_OSID" == "darwin" ]; then
     cp -rf $NVIM_DIR/nvim-macos/lib/*    $NVIM_DEST/lib/
     cp -rf $NVIM_DIR/nvim-macos/share/*  $NVIM_DEST/share/
     rm -rf $NVIM_DIR                                          # Cleanup
-
-    export PATH="$NVIM_DEST/bin $PATH"
 fi
 
 
@@ -84,12 +71,7 @@ fi
 # Clean, install, & update all Neovim plugins. We do this
 # by running a command on startup (display the UI for progress),
 # save the output to a log, & then cat the logfile.
-echo "Neovim: install & update plugins..."
-
-# TODO: use full path to nvim instead of exporting PATH
-
-
-nvim -c "autocmd User VeryLazy Lazy! sync | w! lazy.log | qall"
+$NVIM_DEST/bin/nvim -c "autocmd User VeryLazy Lazy! sync | w! lazy.log | qall"
 cat lazy.log
 rm -f lazy.log
 
