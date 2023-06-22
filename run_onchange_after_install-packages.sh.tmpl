@@ -60,45 +60,12 @@ install_packages_fedora() {
 }
 
 
-# TODO: comment
-install_packages_macos() {
-    echo -n "Installing packages using brew..."
-
-    ## PACKAGES="exa"
-    ## run "brew install $PACKAGES"
-
-    echo " done"
-}
-
-
-install_nerdfonts_fedora() {
-    echo -n "Installing NerdFonts..."
-
-    DEJAVU_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/DejaVuSansMono.zip"
-    DEJAVU_ZIP="/tmp/DejaVuSansMono.zip"
-    FONTS_DIR="$HOME/.local/share/fonts/"
-
-    run "mkdir -p $FONTS_DIR"
-    run "curl -sLo $DEJAVU_ZIP $DEJAVU_URL"
-    run "unzip -u $DEJAVU_ZIP -d $FONTS_DIR"
-    run "rm -rf $DEJAVU_ZIP"
-    run "fc-cache -fv"
-
-    echo " done"
-}
-
 sudo echo "Caching Sudo Credentials"
 
 # Installing Packages from Repos
 {{ if eq .osid "linux-ubuntu" }}     install_packages_ubuntu {{ end }}
 {{ if eq .osid "linux-ubuntu-wsl" }} install_packages_ubuntu {{ end }}
 {{ if eq .osid "linux-fedora" }}     install_packages_fedora {{ end }}
-{{ if eq .osid "darwin" }}           install_packages_macos  {{ end }}
-
-
-# TODO: install fonts
-{{ if eq .osid "linux-fedora" }}     install_nerdfonts_fedora {{ end }}
-# If WSL, use powershell
 
 # TODO: settings for windows terminal
 # TODO: copy alacritty settings to Windows location
