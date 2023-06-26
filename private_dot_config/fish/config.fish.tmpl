@@ -14,9 +14,11 @@ if status is-interactive
     set -x SHELL (status fish-path)
 
     # Set the LS_COLORS environment variable
-    set -l DIRCOLORS_JSON "$HOME/.config/dircolors/dircolors.jsonc"
+    set -l LSCOLORS_JSON  "$HOME/.config/dircolors/lscolors.jsonc"
+    set -l EXACOLORS_JSON "$HOME/.config/dircolors/exacolors.jsonc"
     set -l DIRCOLORS_JQ   "$HOME/.config/dircolors/dircolors.jq"
-    set -x LS_COLORS (sed 's/^ *\/\/.*//' | jq -r -f dircolors.jq)
+    set -x LS_COLORS  (sed 's/^ *\/\/.*//' $LSCOLORS_JSON  | jq -r -f $DIRCOLORS_JQ)
+    set -x EXA_COLORS (sed 's/^ *\/\/.*//' $EXACOLORS_JSON | jq -r -f $DIRCOLORS_JQ)
 
     # Aliases
     alias vim='nvim'
