@@ -13,9 +13,10 @@ if status is-interactive
     # true default shell.
     set -x SHELL (status fish-path)
 
-    # set -l DIRCOLORS_FILE "$HOME/.config/dircolors/solarized-dircolors.256dark"
-    # set -q XDG_CONFIG_HOME && set -l DIRCOLORS_FILE "$XDG_CONFIG_HOME/dircolors/solarized-dircolors.256dark"
-    # eval (dircolors -c $DIRCOLORS_FILE)
+    # Set the LS_COLORS environment variable
+    set -l DIRCOLORS_JSON "$HOME/.config/dircolors/dircolors.jsonc"
+    set -l DIRCOLORS_JQ   "$HOME/.config/dircolors/dircolors.jq"
+    set -x LS_COLORS (sed 's/^ *\/\/.*//' | jq -r -f dircolors.jq)
 
     # Aliases
     alias vim='nvim'
