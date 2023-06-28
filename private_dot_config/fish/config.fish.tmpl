@@ -1,4 +1,3 @@
-# vim: ft=fish
 
 # The default greeting when you start fish
 # needs to be set to blank to disable.
@@ -29,22 +28,24 @@ if status is-interactive
     alias ll='exa -l --group-directories-first'
     alias ls='exa --group-directories-first'
     alias la='exa -la --group-directories-first'
-    alias fd='fdfind'  # might not work in fedora?
+
+    # Ubuntu calls fd "fdfind"
+    if type -q fdfind
+        alias fd='fdfind'
+    end
 
     set -gx EDITOR nvim
     set -gx VISUAL nvim
 
     set -x SSH_AUTH_SOCK /run/user/(id -u)/gnupg/S.gpg-agent.ssh
 
-    # When using WSL, some binaries (notably win32yank) need
-    # to be stored in a Windows path for speed issues. This
+    # When using WSL, some binaries need to be stored
+    # in a Windows path for speed issues. This
     # adds that directory to the path if it exists.
     #
     # Note: we assume that the windows username is the same
     # as the Linux username for speed pursposes.
-{{ if .osid | contains "wsl" }}
     fish_add_path --path /mnt/c/Users/$USER/wsl-bin/
-{{ end }}
 end
 
 
