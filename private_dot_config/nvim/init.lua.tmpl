@@ -1,5 +1,3 @@
--- vim: ft=lua
-
 -- ???
 --
 -- ???
@@ -107,6 +105,22 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require('lazy').setup('plugins')
+
+
+-- Custom Filetypes (see :help vim.filetype.add)
+vim.filetype.add({
+    pattern = {
+        ['.*%.lua%.tmpl'] = 'lua',
+        ['.*%.fish%.tmpl'] = 'fish',
+        ['.*%.sh%.tmpl'] = 'bash',
+        ['.*/git/config%.tmpl'] = 'gitconfig',
+    },
+    filename = {
+        ['tmux.conf.tmpl'] = 'tmux',
+    },
+})
+
+
 
 -- Dimming inactive vim windows
 --
