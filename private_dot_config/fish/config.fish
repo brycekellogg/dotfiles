@@ -31,6 +31,7 @@ if status is-interactive
         alias ll='exa -l --group-directories-first'
         alias ls='exa --group-directories-first'
         alias la='exa -la --group-directories-first'
+        alias tree='exa -T'
     end
 
     # Ubuntu calls fd "fdfind"
