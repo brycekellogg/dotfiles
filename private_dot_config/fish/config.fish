@@ -37,8 +37,6 @@ if status is-interactive
     set -gx EDITOR nvim
     set -gx VISUAL nvim
 
-    set -x SSH_AUTH_SOCK /run/user/(id -u)/gnupg/S.gpg-agent.ssh
-
     # When using WSL, some binaries need to be stored
     # in a Windows path for speed issues. This
     # adds that directory to the path if it exists.
