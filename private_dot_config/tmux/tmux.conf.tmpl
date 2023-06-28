@@ -147,10 +147,10 @@ bind -n M-z resize-pane -Z
 ########################
 
 # The system copy/paste tool depends on what OS we are using.
-{{ if eq .osid "linux-ubuntu-wsl" }} copyBinary='win32yank.exe -i --crlf' {{ end }}
-{{ if eq .osid "linux-ubuntu-wsl" }} pasteBinary='win32yank.exe -o --lf'  {{ end }}
-{{ if eq .osid "linux-fedora" }}     copyBinary='xclip -selection c'      {{ end }}
-{{ if eq .osid "linux-fedora" }}     pasteBinary='xclip -selection c -o'  {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} copyBinary='xsel -b' {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} pasteBinary='xsel -bo'  {{ end }}
+{{ if eq .osid "linux-fedora" }}     copyBinary='xsel -b'      {{ end }}
+{{ if eq .osid "linux-fedora" }}     pasteBinary='xsel -bo'  {{ end }}
 {{ if eq .osid "darwin" }}           copyBinary='pbcopy'                  {{ end }}
 {{ if eq .osid "darwin" }}           pasteBinary='pbpaste'                {{ end }}
 
