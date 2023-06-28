@@ -66,27 +66,9 @@ vim.api.nvim_create_autocmd({"VimResized"}, {pattern = '*', command = "wincmd ="
 
 -- Configure clipboard
 --
--- ???
-vim.o.clipboard = 'unnamed'
-vim.g.clipboard = {
-    copy = {
-{{ if eq .osid "linux-ubuntu-wsl" }} ['+'] = 'win32yank.exe -i', {{ end }}
-{{ if eq .osid "linux-ubuntu-wsl" }} ['*'] = 'win32yank.exe -i', {{ end }}
-{{ if eq .osid "linux-fedora" }}     ['+'] = 'xclip -selection c', {{ end }}
-{{ if eq .osid "linux-fedora" }}     ['*'] = 'xclip -selection c', {{ end }}
-{{ if eq .osid "darwin" }}           ['+'] = 'pbcopy', {{ end }}
-{{ if eq .osid "darwin" }}           ['*'] = 'pbcopy', {{ end }}
-    },
-    paste = {
-{{ if eq .osid "linux-ubuntu-wsl" }} ['+'] = 'win32yank.exe -o', {{ end }}
-{{ if eq .osid "linux-ubuntu-wsl" }} ['*'] = 'win32yank.exe -o', {{ end }}
-{{ if eq .osid "linux-fedora" }}     ['+'] = 'xclip -selection c -o', {{ end }}
-{{ if eq .osid "linux-fedora" }}     ['*'] = 'xclip -selection c -o', {{ end }}
-{{ if eq .osid "darwin" }}           ['+'] = 'pbpaste', {{ end }}
-{{ if eq .osid "darwin" }}           ['*'] = 'pbpaste', {{ end }}
-    },
-    cache_enabled=true,
-}
+-- Because WSL now supports xsel & xclip,
+-- we only need to set the clipboard register
+vim.o.clipboard = 'unnamedplus'
 
 -- Bootstrap lasy.nvim plugin manager. This should install
 -- it when vim is first run if it's not already installed.
