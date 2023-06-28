@@ -16,18 +16,22 @@ if status is-interactive
     # needing root access by using this path.
     fish_add_path --path $HOME/.local/bin
 
-    # Set the LS_COLORS environment variable
+    # Set the LS_COLORS & EXA_COLORS environment variables
     set -l LSCOLORS_JSON  "$HOME/.config/dircolors/lscolors.jsonc"
     set -l EXACOLORS_JSON "$HOME/.config/dircolors/exacolors.jsonc"
     set -l DIRCOLORS_JQ   "$HOME/.config/dircolors/dircolors.jq"
     set -x LS_COLORS  (sed 's/^ *\/\/.*//' $LSCOLORS_JSON  | jq -r -f $DIRCOLORS_JQ)
     set -x EXA_COLORS (sed 's/^ *\/\/.*//' $EXACOLORS_JSON | jq -r -f $DIRCOLORS_JQ)
 
-    # Aliases
+    # Always use neovim
     alias vim='nvim'
-    alias ll='exa -l --group-directories-first'
-    alias ls='exa --group-directories-first'
-    alias la='exa -la --group-directories-first'
+
+    # Use exa as ls if it's installed
+    if type -q exa
+        alias ll='exa -l --group-directories-first'
+        alias ls='exa --group-directories-first'
+        alias la='exa -la --group-directories-first'
+    end
 
     # Ubuntu calls fd "fdfind"
     if type -q fdfind
