@@ -1,16 +1,6 @@
 #!/bin/bash
 # vim: syntax=bash
 
-# To trigger a re-run of this script when one of the config files changes, we
-# use the template system to include a checksum of the config file. If the config
-# file changes, the checksum changes, so this files changes, so it re-runs. Details
-# of this technique can be found below in the link:
-# https://www.chezmoi.io/user-guide/use-scripts-to-perform-actions/#install-packages-with-scripts
-#
-# tmux config hash {{ include "private_dot_config/tmux/tmux.conf.tmpl" | sha256sum }} 
-# fish config hash {{ include "private_dot_config/fish/config.fish.tmpl" | sha256sum }}
-
-
 # Set bash to exit on the first error. This
 # way we will immediately exit if something
 # fails while we are installing.
