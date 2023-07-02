@@ -5,11 +5,14 @@
         "u": "04"
     },
     {
+        "directories": "38;139;210",
         "archive":    "207;0;255",
         "image":      "255;207;0",
-        "audiovideo": "255;207;0"
+        "audiovideo": "211;54;130"
     },
     [
+        {"glob": "di", "effect": "n", "color": "directories"},
+
         // {"glob": "*.tex", "effect": "b", "color": "38;5;245"},
         // {"glob": "*.rdf", "effect": "b", "color": "38;5;245"},
         // {"glob": "*.owl", "effect": "b", "color": "38;5;245"},
@@ -45,6 +48,8 @@
         // {"glob": "*.go", "effect": "b", "color": "38;5;245"},
         // {"glob": "*.sql", "effect": "b", "color": "38;5;245"},
         // {"glob": "*.csv", "effect": "b", "color": "38;5;245"},
+
+
 
         // "unimportant files (logs, backups, etc)
         {"glob": "*.log",   "effect": "00", "color": "38;5;240"},
