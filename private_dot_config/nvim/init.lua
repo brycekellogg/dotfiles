@@ -157,9 +157,10 @@ require('bufferline').setup {
         offsets = {
             {
                 filetype = 'neo-tree',
-                text = "File Explorer",
-                text_align = "left",
-                separator = true,
+                text = "EXPLORER",
+                text_align = "center",
+                separator = false,
+                highlight = "BufferLineFill",
             },
         },
     }
