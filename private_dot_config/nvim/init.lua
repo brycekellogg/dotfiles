@@ -154,6 +154,7 @@ require('gitsigns').setup()
 require('bufferline').setup {
     options = {
         separator_style = "slant",
+        show_buffer_icons = false,
         offsets = {
             {
                 filetype = 'neo-tree',
