@@ -19,11 +19,23 @@ local cyan    = '#2aa198'
 local green   = '#859900'
 
 -- Color definitions
-local bgDark    = '#00171d'
+local bgDark90  = '#000405'  -- base03 with 90% tint TODO: use tint function
+local bgDark80  = '#00090b'  -- base03 with 80% tint
+local bgDark70  = '#000d10'  -- base03 with 70% tint
+local bgDark60  = '#001116'  -- base03 with 60% tint
+local bgDark50  = '#00161b'  -- base03 with 50% tint
+local bgDark40  = '#001a20'  -- base03 with 40% tint
+local bgDark30  = '#001e26'  -- base03 with 30% tint
+local bgDark20  = '#00222b'  -- base03 with 20% tint
+local bgDark10  = '#002731'  -- base03 with 10% tint
 local bgDefault = base03
 local bgLight   = base02
+
+
+
 local bgSearch  = yellow
 
+local fgEmphasize  = base1
 local fgDefault    = base0
 local fgUnderstate = base01
 local fgSearch     = base02
@@ -118,28 +130,119 @@ vim.api.nvim_set_hl(0, 'Search',  {fg=fgSearch, bg=bgSearch})
 
 
 -- Standard Syntax Groups (:help group-name)
-vim.api.nvim_set_hl(0, 'Comment',     {fg=fgUnderstate})
-vim.api.nvim_set_hl(0, 'Constant',    {fg=cyan})
--- String
--- Character
--- Number
--- Boolean
--- Float
-vim.api.nvim_set_hl(0, 'Identifier',  {fg=blue})
-vim.api.nvim_set_hl(0, 'Function',    {fg=blue})
--- Statement
--- Conditional
--- Repeat
--- Label
--- Operator
-vim.api.nvim_set_hl(0, 'Keyword',     {fg=green})
--- 
+vim.api.nvim_set_hl(0, 'Comment',        {fg=fgUnderstate})
+vim.api.nvim_set_hl(0, 'Constant',       {fg=cyan})
+vim.api.nvim_set_hl(0, 'String',         {fg=cyan})
+vim.api.nvim_set_hl(0, 'Character',      {fg=cyan})
+vim.api.nvim_set_hl(0, 'Number',         {fg=cyan})
+vim.api.nvim_set_hl(0, 'Boolean',        {fg=cyan})
+vim.api.nvim_set_hl(0, 'Float',          {fg=cyan})
+vim.api.nvim_set_hl(0, 'Identifier',     {fg=blue})
+vim.api.nvim_set_hl(0, 'Function',       {fg=blue})
+vim.api.nvim_set_hl(0, 'Statement',      {fg=green})
+vim.api.nvim_set_hl(0, 'Conditional',    {fg=green})
+vim.api.nvim_set_hl(0, 'Repeat',         {fg=green})
+vim.api.nvim_set_hl(0, 'Label',          {fg=green})
+vim.api.nvim_set_hl(0, 'Operator',       {fg=green})
+vim.api.nvim_set_hl(0, 'Keyword',        {fg=green})
+vim.api.nvim_set_hl(0, 'PreProc',        {fg=orange})
+vim.api.nvim_set_hl(0, 'Include',        {fg=orange})
+vim.api.nvim_set_hl(0, 'Define',         {fg=orange})
+vim.api.nvim_set_hl(0, 'Macro',          {fg=orange})
+vim.api.nvim_set_hl(0, 'PreCondit',      {fg=orange})
+vim.api.nvim_set_hl(0, 'Type',           {fg=yellow})
+vim.api.nvim_set_hl(0, 'StorageClass',   {fg=yellow})
+vim.api.nvim_set_hl(0, 'Structure',      {fg=yellow})
+vim.api.nvim_set_hl(0, 'Typedef',        {fg=yellow})
+vim.api.nvim_set_hl(0, 'Special',        {fg=orange})
+vim.api.nvim_set_hl(0, 'SpecialChar',    {fg=orange})
+vim.api.nvim_set_hl(0, 'Tag',            {fg=orange})
+vim.api.nvim_set_hl(0, 'Delimiter',      {fg=orange})
+vim.api.nvim_set_hl(0, 'SpecialComment', {fg=orange})
+vim.api.nvim_set_hl(0, 'Debug',          {fg=orange})
+vim.api.nvim_set_hl(0, 'Underlined',     {fg=violet})
+vim.api.nvim_set_hl(0, 'Ignore',         {fg='NONE', bg='NONE'})
+-- Error
+-- Todo
 
--- Bufferline Specific Groups
--- vim.api.nvim_set_hl(0, 'BufferLineBackground', {bg=red})
--- BufferLineFill - uses tint(Normal bg)
--- BufferLineOffsetSeparator - uses same as Fill
+-- Bufferline Specific Groups --
+--------------------------------
+vim.api.nvim_set_hl(0, 'BufferLineFill', {bg=bgDark20})
 
+vim.api.nvim_set_hl(0, 'BufferLineCloseButton',         {link='BufferLineBackground'})
+vim.api.nvim_set_hl(0, 'BufferLineCloseButtonVisible',  {link='BufferLineBufferVisible'})
+vim.api.nvim_set_hl(0, 'BufferLineCloseButtonSelected', {link='BufferLineBufferSelected'})
+
+vim.api.nvim_set_hl(0, 'BufferLineBackground',     {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineBufferVisible',  {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineBufferSelected', {fg=fgEmphasize, bg=bgDefault, bold=true})
+
+vim.api.nvim_set_hl(0, 'BufferLineSeparator',         {fg=bgDark20, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible',  {fg=bgDark20, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', {fg=bgDark20, bg=bgDefault})
+vim.api.nvim_set_hl(0, 'BufferLineOffsetSeparator',   {fg=bgDark20, bg=bgDefault})
+
+-- BufferLineModified
+-- BufferLineModifiedVisible          
+-- BufferLineModifiedSelected
+
+-- BufferLineBuffer  -- ???
+
+-- BufferLineError
+-- BufferLineErrorVisible             
+-- BufferLineErrorSelected            
+-- BufferLineErrorDiagnostic          
+-- BufferLineErrorDiagnosticVisible   
+-- BufferLineErrorDiagnosticSelected  
+
+-- BufferLineWarning
+-- BufferLineWarningVisible
+-- BufferLineWarningSelected
+-- BufferLineWarningDiagnostic
+-- BufferLineWarningDiagnosticVisible
+-- BufferLineWarningDiagnosticSelected
+
+-- BufferLineInfo
+-- BufferLineInfoVisible
+-- BufferLineInfoSelected
+-- BufferLineInfoDiagnostic
+-- BufferLineInfoDiagnosticVisible
+-- BufferLineInfoDiagnosticSelected
+
+-- BufferLineHint
+-- BufferLineHintVisible
+-- BufferLineHintSelected
+-- BufferLineHintDiagnostic
+-- BufferLineHintDiagnosticVisible
+-- BufferLineHintDiagnosticSelected
+
+-- BufferLineDiagnostic
+-- BufferLineDiagnosticVisible        
+-- BufferLineDiagnosticSelected
+
+-- BufferLineIndicatorVisible
+-- BufferLineIndicatorSelected        
+
+-- BufferLineTab
+-- BufferLineTabSelected              
+-- BufferLineTabClose
+-- BufferLineTabSeparator             
+-- BufferLineTabSeparatorSelected
+
+-- BufferLinePick
+-- BufferLinePickVisible              
+-- BufferLinePickSelected             
+
+-- BufferLineNumbers
+-- BufferLineNumbersVisible           
+-- BufferLineNumbersSelected          
+
+-- BufferLineGroupSeparator           
+-- BufferLineGroupLabel               
+
+-- BufferLineDuplicate                
+-- BufferLineDuplicateVisible         
+-- BufferLineDuplicateSelected        
 
 
 -- NeoTree Specific Groups (:help neo-tree-highlights) --
@@ -168,14 +271,14 @@ vim.api.nvim_set_hl(0, 'NeoTreeGitModified', {fg=orange, bg="NONE"})
 -- NeoTreeHiddenByName
 -- NeoTreeIndentMarker
 -- NeoTreeExpander
-vim.api.nvim_set_hl(0, 'NeoTreeNormal',    {bg=bgDark})
-vim.api.nvim_set_hl(0, 'NeoTreeNormalNC',  {bg=bgDark})
+vim.api.nvim_set_hl(0, 'NeoTreeNormal',    {bg=bgDark20})
+vim.api.nvim_set_hl(0, 'NeoTreeNormalNC',  {bg=bgDark20})
 -- NeoTreeSignColumn   
 -- NeoTreeStatusLine   
 -- NeoTreeStatusLineNC 
 -- NeoTreeVertSplit    
 vim.api.nvim_set_hl(0, 'NeoTreeWinSeparator', {fg=bgDefault, bg=bgDefault})
-vim.api.nvim_set_hl(0, 'NeoTreeEndOfBuffer', {fg=bgDark, bg=bgDark})
-vim.api.nvim_set_hl(0, 'NeoTreeRootName',    {bg=bgDark})
+vim.api.nvim_set_hl(0, 'NeoTreeEndOfBuffer', {fg=bgDark20, bg=bgDark20})
+vim.api.nvim_set_hl(0, 'NeoTreeRootName',    {bg=bgDark20})
 -- NeoTreeSymbolicLinkT
 -- NeoTreeWindowsHidden
