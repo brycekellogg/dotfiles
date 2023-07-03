@@ -166,7 +166,7 @@ colorSchemes:
     solarizedDark: &dark
         # Default colors
         primary:
-            background: '0x002b36' # base03
+            background: '0x00222b' # base03 with 20% tint
             foreground: '0x839496' # base0
 
         # Cursor colors
