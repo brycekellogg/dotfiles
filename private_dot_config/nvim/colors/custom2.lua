@@ -31,49 +31,46 @@ local bgDark10  = '#002731'  -- base03 with 10% tint
 local bgDefault = base03
 local bgLight   = base02
 
-
-
-local bgSearch  = yellow
-
 local fgEmphasize  = base1
 local fgDefault    = base0
 local fgUnderstate = base01
-local fgSearch     = base02
 
 
 -- Clear existing highlights
 vim.cmd("hi clear")
 
--- Builtin Highlight Groups (:help highlight-groups)
-vim.api.nvim_set_hl(0, 'ColorColumn',  {bg=bgLight})
--- Conceal
-vim.api.nvim_set_hl(0, 'CurSearch',  {fg=fgSearch, bg=orange})
--- Cursor
--- lCursor
+-- Builtin Highlight Groups (:help highlight-groups) --
+-------------------------------------------------------
+vim.api.nvim_set_hl(0, 'ColorColumn', {bg=bgLight})
+vim.api.nvim_set_hl(0, 'Conceal',     {fg='#268bd2'})
+vim.api.nvim_set_hl(0, 'Search',      {fg=base02, bg=yellow})
+vim.api.nvim_set_hl(0, 'IncSearch',   {fg=base02, bg=yellow})
+vim.api.nvim_set_hl(0, 'CurSearch',   {fg=base02, bg=orange})
+vim.api.nvim_set_hl(0, 'Cursor',      {fg='#fdf6e3', bg='#268bd2'})
+vim.api.nvim_set_hl(0, 'lCursor',     {fg='#fdf6e3', bg='#268bd2'})
+vim.api.nvim_set_hl(0, 'TermCursor',  {fg='#fdf6e3', bg='#268bd2'})
+-- TermCursorNC
 -- CursorIM
 -- CursorColumn
 vim.api.nvim_set_hl(0, 'CursorLine',   {bg=bgLight})
+vim.api.nvim_set_hl(0, 'CursorLineNr', {fg=fgDefault, bg=bgLight})
+-- CursorLineFold
+-- CursorLineSign
 -- Directory
 vim.api.nvim_set_hl(0, 'DiffAdd',      {fg=green,  bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffChange',   {fg=yellow, bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffDelete',   {fg=red,    bg=bgLight})
 -- DiffText
 vim.api.nvim_set_hl(0, 'EndOfBuffer',  {fg=bgDefault, bg=bgDefault})
--- TermCursor
--- TermCursorNC
 -- ErrorMsg
-vim.api.nvim_set_hl(0, 'WinSeparator',   {bg=bgLight})
+vim.api.nvim_set_hl(0, 'WinSeparator',   {fg=bgDark20, bg=bgDark20})
 -- Folded
 vim.api.nvim_set_hl(0, 'FoldColumn',   {bg=bgLight})
 vim.api.nvim_set_hl(0, 'SignColumn',   {bg=bgLight})
-vim.api.nvim_set_hl(0, 'IncSearch',  {fg=fgSearch, bg=bgSearch})
 -- Substitute
 vim.api.nvim_set_hl(0, 'LineNr',       {fg=fgUnderstate, bg=bgLight})
 -- LineNrAbove
 -- LineNrBelow
-vim.api.nvim_set_hl(0, 'CursorLineNr', {fg=fgDefault, bg=bgLight})
--- CursorLineFold
--- CursorLineSign
 -- MatchParen
 -- ModeMsg
 -- MsgArea
@@ -95,7 +92,6 @@ vim.api.nvim_set_hl(0, 'Normal',       {fg=fgDefault, bg=bgDefault})
 -- PmenuThumb
 -- Question
 -- QuickFixLine
-vim.api.nvim_set_hl(0, 'Search',  {fg=fgSearch, bg=bgSearch})
 -- SpecialKey
 -- SpellBad
 -- SpellCap
@@ -129,7 +125,8 @@ vim.api.nvim_set_hl(0, 'Search',  {fg=fgSearch, bg=bgSearch})
 
 
 
--- Standard Syntax Groups (:help group-name)
+-- Standard Syntax Groups (:help group-name) --
+-----------------------------------------------
 vim.api.nvim_set_hl(0, 'Comment',        {fg=fgUnderstate})
 vim.api.nvim_set_hl(0, 'Constant',       {fg=cyan})
 vim.api.nvim_set_hl(0, 'String',         {fg=cyan})
@@ -182,9 +179,9 @@ vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible',  {fg=bgDark20, bg=bgDark10}
 vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', {fg=bgDark20, bg=bgDefault})
 vim.api.nvim_set_hl(0, 'BufferLineOffsetSeparator',   {fg=bgDark20, bg=bgDefault})
 
--- BufferLineModified
--- BufferLineModifiedVisible          
--- BufferLineModifiedSelected
+vim.api.nvim_set_hl(0, 'BufferLineModified',         {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineModifiedVisible',  {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineModifiedSelected', {fg=fgDefault,    bg=bgDefault})
 
 -- BufferLineBuffer  -- ???
 
