@@ -115,7 +115,7 @@ local function unhide()
     vim.opt.cursorline  = true
 end
 vim.api.nvim_create_autocmd({'WinLeave', 'FocusLost'},   {callback=hide})
-vim.api.nvim_create_autocmd({'WinEnter', 'FocusGained'}, {callback=unhide})
+vim.api.nvim_create_autocmd({'WinEnter', 'FocusGained', 'BufEnter'}, {callback=unhide})
 
 
 
