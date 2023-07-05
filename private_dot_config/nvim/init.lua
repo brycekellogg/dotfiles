@@ -53,7 +53,6 @@ vim.o.hidden = 1
 -- This option creates a slightly lighter background line
 -- for the line the cursor is on. It really helps with
 -- easily visually identifying the current cursor line.
-vim.o.cursorline = true
 
 
 -- Auto resize windows
@@ -101,6 +100,24 @@ vim.filetype.add({
         ['tmux.conf.tmpl'] = 'tmux',
     },
 })
+
+
+
+-- Hiding UI elements when focus lost
+local function hide()
+    vim.opt.colorcolumn = ''
+    vim.opt.cursorline  = false
+end
+local function unhide()
+    if vim.bo.filetype ~= 'alpha' then  -- no colorcolumn on starting screen
+        vim.opt.colorcolumn = '80,120'
+    end
+    vim.opt.cursorline  = true
+end
+vim.api.nvim_create_autocmd({'WinLeave', 'FocusLost'},   {callback=hide})
+vim.api.nvim_create_autocmd({'WinEnter', 'FocusGained'}, {callback=unhide})
+
+
 
 
 
