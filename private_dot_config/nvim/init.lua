@@ -171,24 +171,6 @@ vim.api.nvim_create_autocmd({"VimEnter"}, {nested=true, pattern='*', command="co
 require('gitsigns').setup()
 
 
--- Configure Buffer Line Plugin
-require('bufferline').setup {
-    options = {
-        separator_style = "slant",
-        show_buffer_icons = false,
-        offsets = {
-            {
-                filetype = 'neo-tree',
-                text = "EXPLORER",
-                text_align = "center",
-                separator = false,
-                highlight = "BufferLineFill",
-            },
-        },
-    }
-}
-
-
 -- Configure Tmux Navigation
 local nvim_tmux_navigation = require('nvim-tmux-navigation')
 nvim_tmux_navigation.setup {
@@ -208,7 +190,6 @@ end
 -- Second Arg: keycode
 -- Third Arg: action
 local mapkey = vim.keymap.set
-mapkey({'n'},      '<C-c>', '<CMD>BufferClose<CR>')
 mapkey({'n'},      '<C-x>', killWindow)
 mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferLineCyclePrev<CR>')
 mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferLineCycleNext<CR>')
