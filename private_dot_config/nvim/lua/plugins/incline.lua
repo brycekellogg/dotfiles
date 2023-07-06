@@ -15,7 +15,7 @@ return {{
             -- change highlight if overlapping cursorline
             local hlCursor  = vim.api.nvim_get_hl(0, {name='CursorLine'}).bg
             local row = vim.api.nvim_win_get_cursor(props.win)[1]
-            if row == 1 then
+            if row == 1 and props.focused then
                 return {{res, guibg='#' .. string.format('%06x', hlCursor)}}
             end
 
