@@ -48,12 +48,12 @@ vim.o.cinoptions = l1
 -- similar to how tabs in other editors are used.
 vim.o.hidden = 1
 
--- Enable cursor line
---
--- This option creates a slightly lighter background line
--- for the line the cursor is on. It really helps with
--- easily visually identifying the current cursor line.
-
+-- Cursor ccrolling offset
+-- Vim uses this setting to decide when to scroll
+-- a window as the cursor approaches the top or
+-- bottom of the screen. This is the number of
+-- lines away from the edge at which vim will scroll.
+vim.o.scrolloff=5
 
 -- Auto resize windows
 --
@@ -104,6 +104,11 @@ vim.filetype.add({
 
 
 -- Hiding UI elements when focus lost
+--
+-- This option creates a slightly lighter background line
+-- for the line the cursor is on and a similarly lighter
+-- column at 80 & 120 characters. These should only show
+-- up in the currently active window.
 local function hide()
     vim.opt.colorcolumn = ''
     vim.opt.cursorline  = false
@@ -148,19 +153,7 @@ vim.opt.termguicolors = true
 -- We want to always set the colorscheme after loading plugins and
 -- starting vim. Nested is needed for the status line at the
 -- bottom to work correctly.
-vim.api.nvim_create_autocmd({"VimEnter"}, {nested=true, pattern='*', command="colorscheme custom"})
-
-
--- Configure Lualine Plugin
-require('lualine').setup {
-    options = {
-        theme = 'solarized_dark',
-    },
-    sections = {
-        lualine_b = {},
-        lualine_x = {},
-    },
-}
+vim.api.nvim_create_autocmd({"VimEnter"}, {nested=true, pattern='*', command="colorscheme custom2"})
 
 
 -- Configure gitsigns Plugin
