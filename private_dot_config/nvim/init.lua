@@ -124,6 +124,17 @@ vim.api.nvim_create_autocmd({'WinEnter', 'FocusGained', 'BufEnter'}, {callback=u
 
 
 
+-- Place Cursor on line 5 be default
+-- TODO: shouldn't happen on git commit
+local function setCursor()
+    if vim.bo.filetype ~= 'gitcommit' then
+        vim.api.nvim_win_set_cursor(0, {5,0})
+    end
+end
+vim.api.nvim_create_autocmd({'BufReadPost'},   {callback=setCursor})
+
+
+
 
 
 -- Dimming inactive vim windows
