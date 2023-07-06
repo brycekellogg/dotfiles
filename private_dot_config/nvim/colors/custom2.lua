@@ -19,17 +19,27 @@ local cyan    = '#2aa198'
 local green   = '#859900'
 
 -- Color definitions
-local bgDark90  = '#000405'  -- base03 with 90% tint TODO: use tint function
-local bgDark80  = '#00090b'  -- base03 with 80% tint
-local bgDark70  = '#000d10'  -- base03 with 70% tint
-local bgDark60  = '#001116'  -- base03 with 60% tint
-local bgDark50  = '#00161b'  -- base03 with 50% tint
-local bgDark40  = '#001a20'  -- base03 with 40% tint
-local bgDark30  = '#001e26'  -- base03 with 30% tint
-local bgDark20  = '#00222b'  -- base03 with 20% tint
-local bgDark10  = '#002731'  -- base03 with 10% tint
+local bgDark90  = '#000405'  -- base03 with 90% darker tint TODO: use tint function
+local bgDark80  = '#00090b'  -- base03 with 80% darker tint
+local bgDark70  = '#000d10'  -- base03 with 70% darker tint
+local bgDark60  = '#001116'  -- base03 with 60% darker tint
+local bgDark50  = '#00161b'  -- base03 with 50% darker tint
+local bgDark40  = '#001a20'  -- base03 with 40% darker tint
+local bgDark30  = '#001e26'  -- base03 with 30% darker tint
+local bgDark20  = '#00222b'  -- base03 with 20% darker tint
+local bgDark10  = '#002731'  -- base03 with 10% darker tint
 local bgDefault = base03
 local bgLight   = base02
+local bgLight10 = '#1a404a'  -- base03 with 10% lighter tint
+local bgLight20 = '#33555e'  -- base03 with 20% lighter tint
+local bgLight30 = '#4d6b72'  -- base03 with 30% lighter tint
+local bgLight40 = '#668086'  -- base03 with 40% lighter tint
+local bgLight50 = '#80959b'  -- base03 with 50% lighter tint
+local bgLight60 = '#99aaaf'  -- base03 with 60% lighter tint
+local bgLight70 = '#b3bfc3'  -- base03 with 70% lighter tint
+local bgLight80 = '#ccd5d7'  -- base03 with 80% lighter tint
+local bgLight90 = '#e6eaeb'  -- base03 with 90% lighter tint
+
 
 local fgEmphasize  = base1
 local fgDefault    = base0
@@ -46,6 +56,7 @@ vim.api.nvim_set_hl(0, 'Conceal',     {fg='#268bd2'})
 vim.api.nvim_set_hl(0, 'Search',      {fg=base02, bg=yellow})
 vim.api.nvim_set_hl(0, 'IncSearch',   {fg=base02, bg=yellow})
 vim.api.nvim_set_hl(0, 'CurSearch',   {fg=base02, bg=orange})
+
 vim.api.nvim_set_hl(0, 'Cursor',      {fg='#fdf6e3', bg='#268bd2'})
 vim.api.nvim_set_hl(0, 'lCursor',     {fg='#fdf6e3', bg='#268bd2'})
 vim.api.nvim_set_hl(0, 'TermCursor',  {fg='#fdf6e3', bg='#268bd2'})
@@ -56,6 +67,7 @@ vim.api.nvim_set_hl(0, 'CursorLine',   {bg=bgLight})
 vim.api.nvim_set_hl(0, 'CursorLineNr', {fg=fgDefault, bg=bgLight})
 -- CursorLineFold
 -- CursorLineSign
+--
 -- Directory
 vim.api.nvim_set_hl(0, 'DiffAdd',      {fg=green,  bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffChange',   {fg=yellow, bg=bgLight})
@@ -183,6 +195,10 @@ vim.api.nvim_set_hl(0, 'BufferLineModified',         {fg=fgUnderstate, bg=bgDark
 vim.api.nvim_set_hl(0, 'BufferLineModifiedVisible',  {fg=fgUnderstate, bg=bgDark10})
 vim.api.nvim_set_hl(0, 'BufferLineModifiedSelected', {fg=fgDefault,    bg=bgDefault})
 
+vim.api.nvim_set_hl(0, 'BufferLineDuplicate',         {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineDuplicateVisible',  {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineDuplicateSelected', {fg=fgUnderstate, bg=bgDefault})
+
 -- BufferLineBuffer  -- ???
 
 -- BufferLineError
@@ -237,10 +253,6 @@ vim.api.nvim_set_hl(0, 'BufferLineModifiedSelected', {fg=fgDefault,    bg=bgDefa
 -- BufferLineGroupSeparator           
 -- BufferLineGroupLabel               
 
--- BufferLineDuplicate                
--- BufferLineDuplicateVisible         
--- BufferLineDuplicateSelected        
-
 
 -- NeoTree Specific Groups (:help neo-tree-highlights) --
 ---------------------------------------------------------
@@ -279,3 +291,17 @@ vim.api.nvim_set_hl(0, 'NeoTreeEndOfBuffer', {fg=bgDark20, bg=bgDark20})
 vim.api.nvim_set_hl(0, 'NeoTreeRootName',    {bg=bgDark20})
 -- NeoTreeSymbolicLinkT
 -- NeoTreeWindowsHidden
+
+-- LuaLine Specific Groups --
+-----------------------------
+vim.api.nvim_set_hl(0, 'LualineWinbarActive_b',   {fg=bgLight,   bg=bgLight})
+vim.api.nvim_set_hl(0, 'LualineWinbarActive_c',   {fg=fgDefault, bg=bgDefault})
+vim.api.nvim_set_hl(0, 'LualineWinbarActive_x',   {fg=fgDefault, bg=bgDefault})
+vim.api.nvim_set_hl(0, 'LualineWinbarInactive_c', {fg=fgDefault, bg=bgDefault})
+vim.api.nvim_set_hl(0, 'LualineWinbarInactive_x', {fg=fgDefault, bg=bgDefault})
+
+
+-- IndentBlankline Specific Groups (:help indent-blankline-highlights) --
+-------------------------------------------------------------------------
+vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {fg=bgLight})
+
