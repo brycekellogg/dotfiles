@@ -4,7 +4,8 @@ return {{
     'nvim-telescope/telescope.nvim',
     opts = {
         defaults = {
-            path_display={smart},
+            path_display = {smart},
+            scroll_strategy = "limit",
         },
         pickers = {
             oldfiles = {cwd_only = true},  -- when listing recent files, only show ones in the CWD tree
