@@ -15,7 +15,7 @@ return {{
             -- change highlight if overlapping cursorline
             local hlCursor  = vim.api.nvim_get_hl(0, {name='CursorLine'}).bg
             local row = vim.api.nvim_win_get_cursor(props.win)[1]
-            if row == 1 and props.focused then
+            if row == 1 and props.focused and vim.o.cursorline then
                 return {{res, guibg='#' .. string.format('%06x', hlCursor)}}
             end
 
@@ -24,6 +24,15 @@ return {{
         end,
     },
     config = function(_, opts)
+
+        -- currently, incline doesn't refresh on these events,
+        -- apply hack to refresh anyway
+        vim.api.nvim_create_autocmd({'FocusLost', 'FocusGained'}, {
+            callback = function()
+                require('incline').enable()
+            end,
+        })
+
         require('incline').setup(opts)
     end,
 }}
