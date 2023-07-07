@@ -3,7 +3,7 @@
 --
 return {{
     'akinsho/bufferline.nvim',
-    event = 'VeryLazy',
+    event = 'BufAdd',
     opts = {
         options = {
             separator_style = "slant",
