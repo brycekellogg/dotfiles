@@ -3,6 +3,11 @@
 return {{   
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'main', -- NerdFont fix not released yet
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        'nvim-tree/nvim-web-devicons',
+        "MunifTanjim/nui.nvim",
+    },
     opts = {
         add_blank_line_at_top = true,
         close_if_last_window = true,
