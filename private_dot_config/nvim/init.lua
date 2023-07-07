@@ -127,9 +127,19 @@ vim.api.nvim_create_autocmd({'WinEnter', 'FocusGained', 'BufEnter'}, {callback=u
 -- Place Cursor on line 5 be default
 -- TODO: shouldn't happen on git commit
 local function setCursor()
-    if vim.bo.filetype ~= 'gitcommit' then
-        vim.api.nvim_win_set_cursor(0, {5,0})
+    local target = 5
+    local bufferLen = vim.api.nvim_buf_line_count(0)
+
+    -- skip vertain filetypes
+    if vim.bo.filetype == 'gitcommit' then return end
+
+    -- change target if buffer too small
+    if bufferLen < target then
+        target = bufferLen
     end
+
+    -- set cursor position
+    vim.api.nvim_win_set_cursor(0, {target,0})
 end
 vim.api.nvim_create_autocmd({'BufReadPost'},   {callback=setCursor})
 
