@@ -143,28 +143,6 @@ local function setCursor()
 end
 vim.api.nvim_create_autocmd({'BufReadPost'},   {callback=setCursor})
 
-
-
-
-
--- Dimming inactive vim windows
---
--- When a windows is not active, it should become the same
--- background color as an inactive tmux pane. We do this via
--- the highlight and winghighlight functionality. This needs
--- to happen after we set the colorscheme
---
--- TODO: not working. Probably because color scheme
---       is set via an autocmd
-
--- function setDimInactiveWindows()
---     vim.cmd('highlight Normal guibg=none')
---     vim.cmd('highlight InactiveWindow guibg=none')
---     vim.cmd('set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow')
--- end
-
--- vim.api.nvim_create_autocmd({"ColorScheme"}, {pattern='*', callback=setDimInactiveWindows})
-
 --
 --
 vim.opt.termguicolors = true
