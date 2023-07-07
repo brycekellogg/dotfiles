@@ -73,7 +73,7 @@ vim.api.nvim_set_hl(0, 'DiffAdd',      {fg=green,  bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffChange',   {fg=yellow, bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffDelete',   {fg=red,    bg=bgLight})
 -- DiffText
-vim.api.nvim_set_hl(0, 'EndOfBuffer',  {fg=bgDefault, bg=bgDefault})
+vim.api.nvim_set_hl(0, 'EndOfBuffer',  {fg=bgDefault, bg='NONE'})
 -- ErrorMsg
 vim.api.nvim_set_hl(0, 'WinSeparator',   {fg=bgDark20, bg=bgDark20})
 -- Folded
@@ -90,7 +90,7 @@ vim.api.nvim_set_hl(0, 'LineNr',       {fg=fgUnderstate, bg=bgLight})
 -- MoreMsg
 -- NonText
 vim.api.nvim_set_hl(0, 'Normal',       {fg=fgDefault, bg=bgDefault})
--- NormalFloat
+vim.api.nvim_set_hl(0, 'NormalFloat',  {fg=fgDefault, bg=bgLight})
 -- FloatBorder
 -- FloatTitle
 -- NormalNC
@@ -285,6 +285,11 @@ vim.api.nvim_set_hl(0, 'NeoTreeNormalNC',  {bg=bgDark20})
 -- NeoTreeSignColumn   
 -- NeoTreeStatusLine   
 -- NeoTreeStatusLineNC 
+vim.api.nvim_set_hl(0, 'NeoTreeTabActive',   {link='BufferLineBufferSelected'})
+vim.api.nvim_set_hl(0, 'NeoTreeTabInactive', {link='BufferLineBufferVisible'})
+vim.api.nvim_set_hl(0, 'NeoTreeTabSeparatorActive',   {link='BufferLineSeparatorSelected'})
+vim.api.nvim_set_hl(0, 'NeoTreeTabSeparatorInactive', {link='BufferLineSeparatorVisible'})
+
 -- NeoTreeVertSplit    
 vim.api.nvim_set_hl(0, 'NeoTreeWinSeparator', {fg=bgDefault, bg=bgDefault})
 vim.api.nvim_set_hl(0, 'NeoTreeEndOfBuffer', {fg=bgDark20, bg=bgDark20})
