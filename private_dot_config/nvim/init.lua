@@ -21,6 +21,12 @@ vim.o.wrap = 0
 -- the far left column in each pane.
 vim.o.number = 1
 
+-- Hide Status Line
+--
+-- We hide the status line initially, then
+-- configure it to be shown when we load the
+-- actual status line is loaded
+vim.o.laststatus = 0
 
 -- Tab settings
 --
