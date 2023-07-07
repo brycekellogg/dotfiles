@@ -3,7 +3,7 @@
 --
 return {{
     'echasnovski/mini.bufremove',
-    event = 'VeryLazy',
+    event = 'BufAdd',
     config = function(_, opts)
         require('mini.bufremove').setup(opts)
     end,

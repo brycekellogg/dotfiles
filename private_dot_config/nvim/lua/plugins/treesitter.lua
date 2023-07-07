@@ -2,9 +2,9 @@
 --
 return {
     {   
-        'nvim-treesitter/nvim-treesitter',      -- git URL of plugin
-        event = {"BufReadPost", "BufNewFile"},  -- lazy load plugin on these vim events
-        opts = {                                -- options to be passed to setup
+        'nvim-treesitter/nvim-treesitter',
+        event = {"BufReadPost", "BufNewFile"},
+        opts = {
             ensure_installed = {"c", "cpp", "lua", "fish", "vim"},
             ignore_installed = {"help"},
             highlight = {
@@ -26,5 +26,6 @@ return {
     },
     {
         'nvim-treesitter/playground',
+        cmd = 'TSPlaygroundToggle',
     },
 }

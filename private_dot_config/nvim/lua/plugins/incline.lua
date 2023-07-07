@@ -2,7 +2,7 @@
 --
 return {{
     'b0o/incline.nvim',
-    event = 'VeryLazy',
+    event = 'BufAdd',
     opts = {
         window = {
             padding = 0,

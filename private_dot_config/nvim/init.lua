@@ -161,10 +161,6 @@ vim.opt.termguicolors = true
 vim.api.nvim_create_autocmd({"VimEnter"}, {nested=true, pattern='*', command="colorscheme custom2"})
 
 
--- Configure gitsigns Plugin
-require('gitsigns').setup()
-
-
 -- Configure Tmux Navigation
 local nvim_tmux_navigation = require('nvim-tmux-navigation')
 nvim_tmux_navigation.setup {
