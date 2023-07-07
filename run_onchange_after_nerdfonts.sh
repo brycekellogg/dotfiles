@@ -1,5 +1,4 @@
 #!/bin/bash
-# vim: syntax=bash
 
 # Set bash to exit on the first error & print an error
 # message detailing which command produced the error.
@@ -11,6 +10,17 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 DEJAVU_URL_REGULAR="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DejaVuSansMono/Regular/DejaVuSansMNerdFontMono-Regular.ttf"
 DEJAVU_URL_BOLD="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DejaVuSansMono/Bold/DejaVuSansMNerdFontMono-Bold.ttf"
 DEJAVU_URL_ITALIC="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DejaVuSansMono/Italic/DejaVuSansMNerdFontMono-Oblique.ttf"
+
+# Section for installing on WSL
+if [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl"  ]; then
+
+    DEJAVU_DEST="/mnt/c/Users/$USER/AppData/Local/Microsoft/Windows/Fonts/"
+    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_REGULAR
+    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_BOLD
+    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_ITALIC
+
+    # Note: restart Windows Terminal to find font
+fi
 
 # Section for installing on Fedora
 if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
