@@ -267,8 +267,8 @@ vim.api.nvim_set_hl(0, 'NeoTreeDirectoryName', {fg=blue})  -- TODO: use LS_COLOR
 -- NeoTreeFileNameOpene
 -- NeoTreeFilterTerm
 -- NeoTreeFloatBorder
--- NeoTreeFloatTitle
--- NeoTreeTitleBar
+vim.api.nvim_set_hl(0, 'NeoTreeFloatTitle', {fg=blue, bg=bgDark20})
+vim.api.nvim_set_hl(0, 'NeoTreeTitleBar', {fg=blue, bg=bgDark20})
 -- NeoTreeGitAdded
 -- NeoTreeGitConflict  
 -- NeoTreeGitDeleted   
