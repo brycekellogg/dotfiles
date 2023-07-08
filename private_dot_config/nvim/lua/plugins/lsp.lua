@@ -1,9 +1,19 @@
 --
---
+-- Dependencies are used to ensure the correct order of:
+--    1) mason.nvim
+--    2) mason-lspconfig.nvim
+--    3) nvim-lspconfig
 --
 return {
     {
         'neovim/nvim-lspconfig',
+        dependencies = {
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+        },
+        ft = {
+            'lua',
+        },
         opts = {
             settings = {
                 Lua = {
@@ -30,7 +40,17 @@ return {
         end,
     },
     {
+        'williamboman/mason.nvim',
+        build = ':MasonUpdate', -- :MasonUpdate updates registry contents
+        lazy = true,
+        opts = {},
+    },
+    {
         'williamboman/mason-lspconfig.nvim',
+        dependencies = {
+            'williamboman/mason.nvim',
+        },
+        lazy = true,
         opts = {
             ensure_installed = {'lua_ls'},
         },
