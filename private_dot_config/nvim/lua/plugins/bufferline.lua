@@ -9,7 +9,10 @@ return {{
         options = {
             separator_style = "slant",
             show_buffer_icons = false,
-            close_command = function() MiniBufremove.delete() end,  -- TODO: incorrectly closes current buffer, not clicked buffer
+            close_command = function(bufnum)
+                MiniBufremove.delete(bufnum)
+                vim.cmd('redraw!')
+            end,
             offsets = {
                 {
                     filetype = 'neo-tree',
