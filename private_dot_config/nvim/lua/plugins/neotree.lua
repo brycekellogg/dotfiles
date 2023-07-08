@@ -10,22 +10,30 @@ return {{
     },
     opts = {
         add_blank_line_at_top = true,
+        popup_border_style = "rounded",
         close_if_last_window = true,
+        use_popups_for_input = false,  -- uses noice via vim.ui.input()
         window = {
             mappings = {
                 ['<C-PageUp>']   = 'prev_source',
                 ['<C-PageDown>'] = 'next_source',
                 ['|'] = 'open_vsplit',
                 ['-'] = 'open_split',
+                ['='] = 'toggle_auto_expand_width',
                 ['<'] = 'none',
                 ['>'] = 'none',
                 ['S'] = 'none',
                 ['s'] = 'none',
+                ['q'] = 'none',
+                ['e'] = 'none',
             },
         },
         default_component_configs = {
             name = {
                 use_git_status_colors = false,
+            },
+            container = {
+                enable_character_fade = false,
             },
         },
         filesystem = {
