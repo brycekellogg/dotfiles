@@ -11,6 +11,18 @@ return {{
     opts = {
         add_blank_line_at_top = true,
         close_if_last_window = true,
+        window = {
+            mappings = {
+                ['<C-PageUp>']   = 'prev_source',
+                ['<C-PageDown>'] = 'next_source',
+                ['|'] = 'open_vsplit',
+                ['-'] = 'open_split',
+                ['<'] = 'none',
+                ['>'] = 'none',
+                ['S'] = 'none',
+                ['s'] = 'none',
+            },
+        },
         default_component_configs = {
             name = {
                 use_git_status_colors = false,
