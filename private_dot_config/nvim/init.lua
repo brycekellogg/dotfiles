@@ -45,7 +45,7 @@ vim.o.splitright = 1
 --
 -- The default indent action for switch statements
 -- in C makes me want to gouge out my eyeballs.
-vim.o.cinoptions = l1
+vim.o.cinoptions = 'l1'
 
 
 -- Enable Hidden Buffers
