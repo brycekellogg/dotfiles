@@ -146,17 +146,19 @@ bind -n M-z resize-pane -Z
 ########################
 
 # The system copy/paste tool depends on what OS we are using.
-{{ if eq .osid "linux-ubuntu-wsl" }} copyBinary='xsel -b' {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} copyBinary='xsel -bi'   {{ end }}
 {{ if eq .osid "linux-ubuntu-wsl" }} pasteBinary='xsel -bo'  {{ end }}
-{{ if eq .osid "linux-fedora" }}     copyBinary='xsel -b'      {{ end }}
+{{ if eq .osid "linux-fedora" }}     copyBinary='xsel -bi'   {{ end }}
 {{ if eq .osid "linux-fedora" }}     pasteBinary='xsel -bo'  {{ end }}
-{{ if eq .osid "darwin" }}           copyBinary='pbcopy'                  {{ end }}
-{{ if eq .osid "darwin" }}           pasteBinary='pbpaste'                {{ end }}
+{{ if eq .osid "darwin" }}           copyBinary='pbcopy'     {{ end }}
+{{ if eq .osid "darwin" }}           pasteBinary='pbpaste'   {{ end }}
+
+set -s copy-command "$copyBinary"
 
 bind-key -n M-Space copy-mode
 bind-key -n M-v run "$pasteBinary | tmux load-buffer - ; tmux paste-buffer"
 bind-key -Tcopy-mode-vi 'v' send -X begin-selection
-bind-key -Tcopy-mode-vi 'y' send -X copy-pipe "$copyBinary"
+bind-key -Tcopy-mode-vi 'y' send-keys -X copy-pipe-and-cancel
 
 # Home and End Keys in copy-mode should act as they
 # do in a text editor. Home sends you to the start
