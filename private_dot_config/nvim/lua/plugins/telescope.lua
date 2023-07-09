@@ -11,6 +11,11 @@ return {{
         defaults = {
             -- path_display = {'smart'},
             scroll_strategy = 'limit',
+            mappings = {
+                i = {
+                    ['<esc>'] = function(_) require('telescope.actions').close(_) end,  -- close on first escape
+                },
+            },
         },
         pickers = {
             oldfiles = {cwd_only = true},  -- when listing recent files, only show ones in the CWD tree
