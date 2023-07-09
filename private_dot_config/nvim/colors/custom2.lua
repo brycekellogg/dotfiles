@@ -67,7 +67,6 @@ vim.api.nvim_set_hl(0, 'CursorLine',   {bg=bgLight})
 vim.api.nvim_set_hl(0, 'CursorLineNr', {fg=fgDefault, bg=bgLight})
 -- CursorLineFold
 -- CursorLineSign
---
 -- Directory
 vim.api.nvim_set_hl(0, 'DiffAdd',      {fg=green,  bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffChange',   {fg=yellow, bg=bgLight})
@@ -94,8 +93,8 @@ vim.api.nvim_set_hl(0, 'NormalFloat',  {fg=fgDefault, bg=bgLight})
 -- FloatBorder
 -- FloatTitle
 -- NormalNC
--- Pmenu
--- PmenuSel
+vim.api.nvim_set_hl(0, 'Pmenu',    {fg=fgDefault, bg=bgLight})
+vim.api.nvim_set_hl(0, 'PmenuSel', {fg=fgDefault, bg=bgLight10})
 -- PmenuKind
 -- PmenuKindSel
 -- PmenuExtra
