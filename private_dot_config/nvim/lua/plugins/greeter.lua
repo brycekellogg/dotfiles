@@ -7,7 +7,7 @@ return {{
     'goolord/alpha-nvim',
     event = 'VimEnter',
     dependencies = {'nvim-tree/nvim-web-devicons'},
-
+    cond = function() return 0 == vim.fn.argc() end,  -- only launch alpha when no file opened
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
 
