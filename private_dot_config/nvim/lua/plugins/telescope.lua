@@ -1,5 +1,7 @@
 --
 --
+-- 'silent = true' is used in the key map to prevent a command popup in the background
+--
 return {{
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -27,24 +29,28 @@ return {{
             '<C-t>',
             function() require('telescope.builtin').builtin() end,
             mode = {'n', 'i'},
+            silent = true,
             desc = "Telescope"
         },
         {
             '<C-p>',
             function() require('telescope.builtin').find_files() end,
             mode = {'n', 'i'},
+            silent = true,
             desc = "Telescope: Find Files"
         },
         {
             '<C-f>',
             function() require('telescope.builtin').live_grep() end,
             mode = {'n', 'i'},
+            silent = true,
             desc = "Telescope: Live Grep"
         },
         {
             '?',
             function() require('telescope.builtin').grep_string() end,
             mode = {'n'},
+            silent = true,
             desc = "Telescope: Grep String"
         },
     }
