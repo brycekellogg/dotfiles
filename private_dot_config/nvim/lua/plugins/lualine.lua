@@ -4,7 +4,10 @@
 return {{
     'nvim-lualine/lualine.nvim',
     event = 'BufAdd',
-    dependencies = {'nvim-tree/nvim-web-devicons'},
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        'SmiteshP/nvim-navic',
+    },
     opts = {
         options = {
             theme = 'solarized_dark',
@@ -15,6 +18,9 @@ return {{
         },
         sections = {
             lualine_b = {},
+            lualine_c = {
+                'navic',
+            },
             lualine_x = {},
         },
     },
