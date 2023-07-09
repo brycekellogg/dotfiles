@@ -1,16 +1,16 @@
 --
 --
-return {{   
+return {{
     'nvim-telescope/telescope.nvim',
     dependencies = {
-        "nvim-lua/plenary.nvim",
+        'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons',
         -- TODO: telescope-fzf-native.nvim
     },
     opts = {
         defaults = {
-            path_display = {smart},
-            scroll_strategy = "limit",
+            -- path_display = {'smart'},
+            scroll_strategy = 'limit',
         },
         pickers = {
             oldfiles = {cwd_only = true},  -- when listing recent files, only show ones in the CWD tree
