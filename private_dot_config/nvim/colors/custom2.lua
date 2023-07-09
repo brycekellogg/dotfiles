@@ -173,6 +173,39 @@ vim.api.nvim_set_hl(0, 'Ignore',         {fg='NONE', bg='NONE'})
 -- Error
 -- Todo
 
+-- LSP Diagnostics Groups (:help diagnostic-highlights) --
+----------------------------------------------------------
+
+vim.api.nvim_set_hl(0, 'DiagnosticError', {fg=red})
+-- DiagnosticWarn
+-- DiagnosticInfo
+-- DiagnosticHint
+-- DiagnosticOk
+-- DiagnosticVirtualTextError
+-- DiagnosticVirtualTextWarn
+-- DiagnosticVirtualTextInfo
+-- DiagnosticVirtualTextHint
+-- DiagnosticVirtualTextOk
+-- DiagnosticUnderlineError
+-- DiagnosticUnderlineWarn
+-- DiagnosticUnderlineInfo
+-- DiagnosticUnderlineHint
+-- DiagnosticUnderlineOk
+-- DiagnosticFloatingError
+-- DiagnosticFloatingWarn
+-- DiagnosticFloatingInfo
+-- DiagnosticFloatingHint
+-- DiagnosticFloatingOk
+vim.api.nvim_set_hl(0, 'DiagnosticSignError', {link='DiagnosticError'})
+-- DiagnosticSignWarn
+-- DiagnosticSignInfo
+-- DiagnosticSignHint
+-- DiagnosticSignOk
+-- DiagnosticDeprecated
+-- DiagnosticUnnecessary
+
+
+
 -- Bufferline Specific Groups --
 --------------------------------
 vim.api.nvim_set_hl(0, 'BufferLineFill', {bg=bgDark20})
