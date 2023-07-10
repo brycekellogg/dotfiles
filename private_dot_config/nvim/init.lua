@@ -169,7 +169,7 @@ nvim_tmux_navigation.setup {
 
 
 -- Killing Windows
-function killWindow()
+local function killWindow()
     vim.api.nvim_win_close(0, false)
 end
 
@@ -180,7 +180,7 @@ end
 -- Second Arg: keycode
 -- Third Arg: action
 local mapkey = vim.keymap.set
-mapkey({'n'},      '<C-x>', killWindow)
+mapkey({'n'},      '<C-Del>', killWindow)
 mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferLineCyclePrev<CR>')
 mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferLineCycleNext<CR>')
 mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work

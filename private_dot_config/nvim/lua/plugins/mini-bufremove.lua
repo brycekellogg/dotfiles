@@ -9,7 +9,7 @@ return {{
     end,
     keys = {
         {
-            "<C-c>",
+            "<C-H>",  -- actually <C-BS>
             function()
                 MiniBufremove.delete()
             end,
