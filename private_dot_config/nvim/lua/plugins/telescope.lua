@@ -26,13 +26,6 @@ return {{
     cmd = "Telescope",
     keys = {
         {
-            '<C-t>',
-            function() require('telescope.builtin').builtin() end,
-            mode = {'n', 'i'},
-            silent = true,
-            desc = "Telescope"
-        },
-        {
             '<C-p>',
             function() require('telescope.builtin').find_files() end,
             mode = {'n', 'i'},
