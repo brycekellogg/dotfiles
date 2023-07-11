@@ -17,11 +17,9 @@ if status is-interactive
     fish_add_path --path $HOME/.local/bin
 
     # Set the LS_COLORS & EXA_COLORS environment variables
-    set -l LSCOLORS_JSON  "$HOME/.config/dircolors/lscolors.jsonc"
-    set -l EXACOLORS_JSON "$HOME/.config/dircolors/exacolors.jsonc"
-    set -l DIRCOLORS_JQ   "$HOME/.config/dircolors/dircolors.jq"
-    set -x LS_COLORS  (sed 's/^ *\/\/.*//' $LSCOLORS_JSON  | jq -r -f $DIRCOLORS_JQ)
-    set -x EXA_COLORS (sed 's/^ *\/\/.*//' $EXACOLORS_JSON | jq -r -f $DIRCOLORS_JQ)
+    set -l DIRCOLORS_SCRIPT  "$HOME/.config/dircolors/dircolors.lua"
+    set -x LS_COLORS  (lua $DIRCOLORS_SCRIPT ls)
+    set -x EXA_COLORS (lua $DIRCOLORS_SCRIPT exa)
 
     # Always use neovim
     alias vim='nvim'
