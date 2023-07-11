@@ -114,7 +114,7 @@ vim.api.nvim_set_hl(0, 'PmenuSel', {fg=fgDefault, bg=bgLight10})
 -- TabLineFill
 -- TabLineSel
 -- Title
--- Visual
+vim.api.nvim_set_hl(0, 'Visual', {fg=base02, bg=bgLight30})
 -- VisualNOS
 -- WarningMsg
 -- Whitespace
