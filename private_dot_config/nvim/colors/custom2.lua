@@ -73,7 +73,7 @@ vim.api.nvim_set_hl(0, 'DiffChange',   {fg=yellow, bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffDelete',   {fg=red,    bg=bgLight})
 -- DiffText
 vim.api.nvim_set_hl(0, 'EndOfBuffer',  {fg=bgDefault, bg='NONE'})
--- ErrorMsg
+vim.api.nvim_set_hl(0, 'ErrorMsg',     {fg=red, bg='None'})
 vim.api.nvim_set_hl(0, 'WinSeparator',   {fg=bgDark20, bg=bgDark20})
 -- Folded
 vim.api.nvim_set_hl(0, 'FoldColumn',   {bg=bgLight})
