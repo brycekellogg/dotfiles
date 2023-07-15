@@ -19,8 +19,7 @@ return {{
             sources = require('cmp').config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'vsnip' },
-                { name = 'buffer' },
-                })
+            })
         })
     end
 }}
