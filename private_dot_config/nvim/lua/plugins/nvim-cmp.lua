@@ -10,16 +10,24 @@ return {{
         'hrsh7th/vim-vsnip',
     },
     config = function()
-        require('cmp').setup({
+        local cmp = require('cmp')
+
+        cmp.setup({
             snippet = {
                 expand = function(args)
                     vim.fn["vsnip#anonymous"](args.body)
                 end,
             },
-            sources = require('cmp').config.sources({
+            sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'vsnip' },
-            })
+            }),
+            mapping = cmp.mapping.preset.insert({
+                ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                ['<Tab>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Select}),
+                ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Select}),
+                ['<Esc>'] = cmp.mapping.close(),
+            }),
         })
     end
 }}
