@@ -157,8 +157,9 @@ set -s copy-command "$copyBinary"
 
 bind-key -n M-Space copy-mode
 bind-key -n M-v run "$pasteBinary | tmux load-buffer - ; tmux paste-buffer"
-bind-key -Tcopy-mode-vi 'v' send -X begin-selection
-bind-key -Tcopy-mode-vi 'y' send-keys -X copy-pipe-and-cancel
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle \; send -X begin-selection
+bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel
 
 # Home and End Keys in copy-mode should act as they
 # do in a text editor. Home sends you to the start
