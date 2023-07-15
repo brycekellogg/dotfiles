@@ -10,6 +10,7 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 command -v curl  # required for all OSIDs
 
+env # debug macos issue
 
 # Section for installing on Fedora
 if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
@@ -23,6 +24,7 @@ if [ "$CHEZMOI_OSID" == "darwin" ]; then
     brew install fish  # use homebrew version
 fi
 
+command -v fish # make sure fish installed correctly
 
 # Install Fisher plugin manager
 FISHER_URL="https://git.io/fisher"
