@@ -13,6 +13,7 @@ return {
         },
         ft = {
             'lua',
+            'python',
         },
         opts = {
             settings = {
@@ -31,12 +32,15 @@ return {
         },
         config = function(_, opts)
 
+            -- This disables the signs in the sign column
             vim.diagnostic.config({
                 virtual_text = true,
                 signs = false,
             })
 
+            -- Setup each individual server
             require('lspconfig').lua_ls.setup(opts)
+            require('lspconfig').pylsp.setup(opts)
         end,
     },
     {
@@ -52,7 +56,10 @@ return {
         },
         lazy = true,
         opts = {
-            ensure_installed = {'lua_ls'},
+            ensure_installed = {
+                'lua_ls',
+                'pylsp',
+            },
         },
     },
 }
