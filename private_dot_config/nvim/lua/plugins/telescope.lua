@@ -1,7 +1,22 @@
 --
 --
--- 'silent = true' is used in the key map to prevent a command popup in the background
 --
+
+
+
+-- live_grep config (:h telescope.builtin.live_grep()) --
+---------------------------------------------------------
+local live_grep = {
+    disable_coordinates = true,  -- don't show the line & row numbers
+}
+
+-- oldfiles config (:h telescope.builtin.oldfiles) --
+-----------------------------------------------------
+local oldfiles = {
+    cwd_only = true  -- show only files in the cwd
+}
+
+
 return {{
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -20,10 +35,13 @@ return {{
             },
         },
         pickers = {
-            oldfiles = {cwd_only = true},  -- when listing recent files, only show ones in the CWD tree
+            live_grep = live_grep,
+            oldfiles = oldfiles,
         },
     },
     cmd = "Telescope",
+
+    -- 'silent = true' is used in the key map to prevent a command popup in the background
     keys = {
         {
             '<C-p>',
