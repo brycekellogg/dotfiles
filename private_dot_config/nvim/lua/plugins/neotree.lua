@@ -38,6 +38,7 @@ return {{
         },
         filesystem = {
             use_libuv_file_watcher = true,
+            group_empty_dirs = true,
             filtered_items = {
                 hide_dotfiles = false,
             },
