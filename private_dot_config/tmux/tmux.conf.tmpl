@@ -187,8 +187,10 @@ bind-key -T copy-mode-vi Escape  copy-mode -q
 # | Copy               |
 # | Paste              |
 # +--------------------+
-# | Split (Horizontal) |
-# | Split (Vertical)   |
+# | New Pane (Right)   |
+# | New Pane (Left)    |
+# | New Pane (Up)      |
+# | New Pane (Down)    |
 # +--------------------+
 # | Tab (Right)        |
 # | Tab (Left)         |
@@ -204,7 +206,7 @@ bind-key -T copy-mode-vi Escape  copy-mode -q
 #       be available if there is currently
 #       a selection to copy from.
 copyAction='send-keys -X copy-pipe "$copyBinary"'
-bind-key -n M-MouseDown3Pane \
+bind-key -n MouseDown3Pane \
     display-menu -O \
                  -T "TMUX Menu"   \
                  -x M -y M \
@@ -212,8 +214,10 @@ bind-key -n M-MouseDown3Pane \
                  '#{?selection_active,Copy,-Copy}'  '' $copyAction     \
                  'Paste' '' 'run "$pasteBinary | tmux load-buffer - ; tmux paste-buffer"'    \
                  ''               \
-                 'Split (Horizontal)' '' 'split-window -v' \
-                 'Split (Vertical)'   '' 'split-window -h' \
+                 'New Pane (Right)'  '' 'split-window -h'  \
+                 'New Pane (Left)'   '' 'split-window -hb' \
+                 'New Pane (Up)'     '' 'split-window -vb' \
+                 'New Pane (Down)'   '' 'split-window -v'  \
                  ""               \
                  'Tab (Right)'  '' 'next-window' \
                  'Tab (Left)'   '' 'previous-window' \
