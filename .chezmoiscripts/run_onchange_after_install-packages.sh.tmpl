@@ -30,7 +30,7 @@ install_packages_ubuntu() {
 
     # PPA for fish & list of required packages
     FISH_PPA="ppa:fish-shell/release-3"
-    PACKAGES="tmux fish ripgrep exa fd-find tree unzip build-essential coreutils bpython xclip"
+    PACKAGES="ripgrep fd-find bpython"
 
     run "sudo apt-add-repository -y $FISH_PPA" # Add the fish PPA to give us access to newer version.
     run "sudo apt-get -y install $PACKAGES"    # Install the packages using apt-get
@@ -43,7 +43,7 @@ install_packages_ubuntu() {
 install_packages_fedora() {
     echo -n "Installing packages using dnf..."
 
-    PACKAGES="tmux fish ripgrep exa fd-find unzip bpython xclip"
+    PACKAGES="ripgrep fd-find bpython"
     run "sudo dnf -y install $PACKAGES"
 
     echo " done"
