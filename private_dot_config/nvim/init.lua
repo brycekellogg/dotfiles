@@ -185,7 +185,7 @@ mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferLineCyclePrev<CR>')
 mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferLineCycleNext<CR>')
 mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
 mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
-mapkey({'n', 'i'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
-mapkey({'n', 'i'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
-mapkey({'n', 'i'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
-mapkey({'n', 'i'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
+mapkey({'n', 'i', 'v'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
+mapkey({'n', 'i', 'v'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
+mapkey({'n', 'i', 'v'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
+mapkey({'n', 'i', 'v'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
