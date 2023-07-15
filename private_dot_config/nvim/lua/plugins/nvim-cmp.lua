@@ -28,8 +28,10 @@ return {{
                 ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Select}),
                 ['<Esc>'] = cmp.mapping.close(),
             }),
+            completion = {
+                completeopt = 'menu,menuone,noinsert',
+            },
         })
     end
 }}
-
 
