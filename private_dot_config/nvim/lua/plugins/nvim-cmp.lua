@@ -22,12 +22,12 @@ return {{
                 { name = 'nvim_lsp' },
                 { name = 'vsnip' },
             }),
-            mapping = cmp.mapping.preset.insert({
+            mapping = {
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 ['<Tab>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Select}),
                 ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Select}),
                 ['<Esc>'] = cmp.mapping.close(),
-            }),
+            },
             completion = {
                 completeopt = 'menu,menuone,noinsert',
             },
