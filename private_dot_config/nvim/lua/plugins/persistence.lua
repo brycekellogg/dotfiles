@@ -4,5 +4,7 @@
 return {{
   "folke/persistence.nvim",
   lazy = true,
-  opts = {},
+  opts = {
+      options = {"buffers", "winsize"},
+  },
 }}
