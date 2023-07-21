@@ -208,27 +208,27 @@ vim.api.nvim_set_hl(0, 'DiagnosticSignError', {link='DiagnosticError'})
 
 -- Bufferline Specific Groups --
 --------------------------------
-vim.api.nvim_set_hl(0, 'BufferLineFill', {bg=bgDark20})
+vim.api.nvim_set_hl(0, 'BufferLineFill', {bg=bgDark30})
 
 vim.api.nvim_set_hl(0, 'BufferLineCloseButton',         {link='BufferLineBackground'})
 vim.api.nvim_set_hl(0, 'BufferLineCloseButtonVisible',  {link='BufferLineBufferVisible'})
 vim.api.nvim_set_hl(0, 'BufferLineCloseButtonSelected', {link='BufferLineBufferSelected'})
 
-vim.api.nvim_set_hl(0, 'BufferLineBackground',     {fg=fgUnderstate, bg=bgDark10})
-vim.api.nvim_set_hl(0, 'BufferLineBufferVisible',  {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineBackground',     {fg=fgUnderstate, bg=bgDark20})
+vim.api.nvim_set_hl(0, 'BufferLineBufferVisible',  {fg=fgUnderstate, bg=bgDark20})
 vim.api.nvim_set_hl(0, 'BufferLineBufferSelected', {fg=fgEmphasize, bg=bgDefault, bold=true})
 
-vim.api.nvim_set_hl(0, 'BufferLineSeparator',         {fg=bgDark20, bg=bgDark10})
-vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible',  {fg=bgDark20, bg=bgDark10})
-vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', {fg=bgDark20, bg=bgDefault})
-vim.api.nvim_set_hl(0, 'BufferLineOffsetSeparator',   {fg=bgDark20, bg=bgDefault})
+vim.api.nvim_set_hl(0, 'BufferLineSeparator',         {fg=bgDark30, bg=bgDark20})
+vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible',  {fg=bgDark30, bg=bgDark20})
+vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', {fg=bgDark30, bg=bgDefault})
+vim.api.nvim_set_hl(0, 'BufferLineOffsetSeparator',   {fg=bgDark30, bg=bgDefault})
 
-vim.api.nvim_set_hl(0, 'BufferLineModified',         {fg=fgUnderstate, bg=bgDark10})
-vim.api.nvim_set_hl(0, 'BufferLineModifiedVisible',  {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineModified',         {fg=fgUnderstate, bg=bgDark20})
+vim.api.nvim_set_hl(0, 'BufferLineModifiedVisible',  {fg=fgUnderstate, bg=bgDark20})
 vim.api.nvim_set_hl(0, 'BufferLineModifiedSelected', {fg=fgDefault,    bg=bgDefault})
 
-vim.api.nvim_set_hl(0, 'BufferLineDuplicate',         {fg=fgUnderstate, bg=bgDark10})
-vim.api.nvim_set_hl(0, 'BufferLineDuplicateVisible',  {fg=fgUnderstate, bg=bgDark10})
+vim.api.nvim_set_hl(0, 'BufferLineDuplicate',         {fg=fgUnderstate, bg=bgDark20})
+vim.api.nvim_set_hl(0, 'BufferLineDuplicateVisible',  {fg=fgUnderstate, bg=bgDark20})
 vim.api.nvim_set_hl(0, 'BufferLineDuplicateSelected', {fg=fgUnderstate, bg=bgDefault})
 
 -- BufferLineBuffer  -- ???
