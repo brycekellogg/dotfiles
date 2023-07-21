@@ -158,7 +158,7 @@ vim.opt.termguicolors = true
 -- We want to always set the colorscheme after loading plugins and
 -- starting vim. Nested is needed for the status line at the
 -- bottom to work correctly.
-vim.api.nvim_create_autocmd({"VimEnter"}, {nested=true, pattern='*', command="colorscheme custom2"})
+vim.api.nvim_create_autocmd({"VimEnter"}, {nested=true, pattern='*', command="colorscheme custom"})
 
 
 -- Configure Tmux Navigation
