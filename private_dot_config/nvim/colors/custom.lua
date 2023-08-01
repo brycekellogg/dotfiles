@@ -325,7 +325,7 @@ vim.api.nvim_set_hl(0, 'NeoTreeTabSeparatorInactive', {link='BufferLineSeparator
 -- NeoTreeVertSplit    
 vim.api.nvim_set_hl(0, 'NeoTreeWinSeparator', {fg=bgDefault, bg=bgDefault})
 vim.api.nvim_set_hl(0, 'NeoTreeEndOfBuffer', {fg=bgDark20, bg=bgDark20})
-vim.api.nvim_set_hl(0, 'NeoTreeRootName',    {bg=bgDark20})
+vim.api.nvim_set_hl(0, 'NeoTreeRootName',    {link='NeoTreeDirectoryName'})
 -- NeoTreeSymbolicLinkT
 -- NeoTreeWindowsHidden
 
