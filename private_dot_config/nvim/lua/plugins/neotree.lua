@@ -53,6 +53,14 @@ return {{
                 { "name", highlight = "NeoTreeMessage" }, -- nneded to fix indent markers on hidden items
           },
         },
+        event_handlers = {
+            {
+                event = "file_opened",
+                handler = function(_)
+                    require("neo-tree.command").execute({ action = "close" })
+                end
+          },
+        }
     },
     cmd = "Neotree",
     keys = {
