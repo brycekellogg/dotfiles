@@ -38,7 +38,7 @@ return {{
         },
         filesystem = {
             use_libuv_file_watcher = true,
-            group_empty_dirs = true,
+            group_empty_dirs = false,  -- setting this to true causes refresh errors (maybe)
             filtered_items = {
                 hide_dotfiles = false,
             },
@@ -46,6 +46,12 @@ return {{
         source_selector = {
             winbar = true,
             content_layout = 'center',
+        },
+        renderers = {
+            message = {
+                { "indent", with_markers = true },        -- needed to fix indent markers on hidden items
+                { "name", highlight = "NeoTreeMessage" }, -- nneded to fix indent markers on hidden items
+          },
         },
     },
     cmd = "Neotree",
