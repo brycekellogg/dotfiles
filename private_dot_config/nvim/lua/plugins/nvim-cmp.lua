@@ -23,10 +23,9 @@ return {{
                 { name = 'vsnip' },
             }),
             mapping = {
-                ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                ['<Tab>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Select}),
-                ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Select}),
-                ['<Esc>'] = cmp.mapping.close(),
+                ['<CR>']   = cmp.mapping.confirm({ select = true }),
+                ['<Down>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Select}),
+                ['<Up>']   = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Select}),
             },
             completion = {
                 completeopt = 'menu,menuone,noinsert',
