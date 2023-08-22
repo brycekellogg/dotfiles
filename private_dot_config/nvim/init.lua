@@ -190,4 +190,11 @@ mapkey({'n', 'i', 'v'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
 mapkey({'n', 'i', 'v'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
 mapkey({'n', 'i', 'v'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
 mapkey({'n', 'i', 'v'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
+
+-- Change how delete and cut works
+--
+-- I don't want dd or d to put the deleted content
+-- onto the clipboard. To keep the ability to cut,
+-- we add xx as the cut command
 mapkey({'n', 'v'}, 'd',  '"_d')
+mapkey({'n'}, 'xx',  'dd')
