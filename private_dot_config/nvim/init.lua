@@ -195,6 +195,11 @@ mapkey({'n', 'i', 'v'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
 --
 -- I don't want dd or d to put the deleted content
 -- onto the clipboard. To keep the ability to cut,
--- we add xx as the cut command
-mapkey({'n', 'v'}, 'd',  '"_d')
+-- we add xx as the cut command. Additionally, the
+-- Delete key shouldn't copy.
+mapkey({'v'}, 'd',  '"_d')
+mapkey({'n'}, 'dd', '"_dd')
+mapkey({'v'}, 'x',   'd')
 mapkey({'n'}, 'xx',  'dd')
+mapkey({'v'}, '<Del>', '"_d')
+mapkey({'n'}, '<Del>', '"_dl')
