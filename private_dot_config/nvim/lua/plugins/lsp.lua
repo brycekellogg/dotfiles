@@ -41,7 +41,7 @@ return {
             -- Setup each individual server
             require('lspconfig').lua_ls.setup(opts)
             require('lspconfig').pylsp.setup(opts)
-            require('lspconfig').clangd.setup(opts)
+            -- require('lspconfig').clangd.setup(opts)
         end,
     },
     {
