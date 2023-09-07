@@ -37,7 +37,9 @@ return {{
             },
             window = {
                 completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
+            },
+            view = {
+                docs = {auto_open = false},  -- no docs window when doing completion
             },
         })
     end
