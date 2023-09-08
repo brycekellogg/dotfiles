@@ -23,6 +23,14 @@ return {{
             opts = {skip = true}
         },
       },
+
+      lsp = {
+          -- This section controls showing function signatures. We disable the
+          -- auto_open so that you don't get function docs when typing a function.
+          signature = {
+              auto_open = {enabled = false},
+          },
+      },
   },
   dependencies = {
     "MunifTanjim/nui.nvim",
