@@ -9,7 +9,7 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 # Section for installing on Fedora
 if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
-    sudo dnf install python3 python3-pip python3-venv bpython
+    sudo dnf install -y python3 python3-pip python3-virtualenv bpython
 fi
 
 
