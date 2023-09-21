@@ -32,6 +32,18 @@ return {{
                 ['<Esc>']   = cmp.mapping.abort(),
                 ['<Tab>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Select}),
                 ['<S-Tab>']   = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Select}),
+
+                -- When using arrow keys while the completion window is open,
+                -- the window stays open when the cursor moves up/down. These
+                -- mappings will close the window on cursor up/down.
+                ['<Down>'] = function ()
+                    if cmp.visible() then cmp.mapping.abort()() end
+                    vim.cmd('norm! j')
+                end,
+                ['<Up>'] = function ()
+                    if cmp.visible() then cmp.mapping.abort()() end
+                    vim.cmd('norm! k')
+                end,
             },
             completion = {
                 completeopt = 'menu,menuone,noinsert',
