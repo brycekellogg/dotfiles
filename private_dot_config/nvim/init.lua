@@ -120,7 +120,8 @@ local function hide()
     vim.opt.cursorline  = false
 end
 local function unhide()
-    if vim.bo.filetype ~= 'alpha' then  -- no colorcolumn on starting screen
+    if vim.bo.filetype ~= 'alpha' and
+       vim.bo.filetype ~= 'neo-tree' then  -- no colorcolumn on starting screen or neotree
         vim.opt.colorcolumn = '80,120'
     end
     vim.opt.cursorline  = true
