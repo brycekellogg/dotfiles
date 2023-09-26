@@ -1,6 +1,6 @@
 --
 --
-return {{   
+return {{
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'main', -- NerdFont fix not released yet
     dependencies = {
@@ -13,6 +13,7 @@ return {{
         popup_border_style = "rounded",
         close_if_last_window = true,
         use_popups_for_input = false,  -- uses noice via vim.ui.input()
+        enable_diagnostics = false,
         window = {
             mappings = {
                 ['<C-PageUp>']   = 'prev_source',
@@ -34,6 +35,19 @@ return {{
             },
             container = {
                 enable_character_fade = false,
+            },
+            git_status = {
+                symbols = {
+                    -- Disable "change type" git symbols
+                    added     = "",
+                    deleted   = "",
+                    modified  = "",
+                    renamed   = "",
+                    -- Modify "status type" git symbols
+                    staged    = "✚",
+                    unstaged  = "󰏫",
+                },
+                align = "right",
             },
         },
         filesystem = {
