@@ -55,6 +55,9 @@ return {{
             group_empty_dirs = false,  -- setting this to true causes refresh errors (maybe)
             filtered_items = {
                 hide_dotfiles = false,
+                hide_by_name = {
+                    ".git",
+                },
             },
         },
         source_selector = {
