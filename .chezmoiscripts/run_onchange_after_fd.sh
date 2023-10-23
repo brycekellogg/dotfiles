@@ -16,7 +16,7 @@ fi
 # Section for installing on macOS
 if [ "$CHEZMOI_OSID" == "darwin" ]; then
     command -v brew    # Check required tools
-    brew install fd-find  # Use homebrew version
+    brew install fd  # Use homebrew version
 fi
 
 
