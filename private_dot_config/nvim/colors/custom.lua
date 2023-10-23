@@ -305,8 +305,9 @@ vim.api.nvim_set_hl(0, 'NeoTreeGitAdded', {fg=green, bg="NONE"})
 -- NeoTreeGitConflict  
 -- NeoTreeGitDeleted   
 -- NeoTreeGitIgnored   
-vim.api.nvim_set_hl(0, 'NeoTreeGitModified', {fg=orange, bg="NONE"})
--- NeoTreeGitUnstaged
+vim.api.nvim_set_hl(0, 'NeoTreeGitModified', {fg=red, bg="NONE"})
+vim.api.nvim_set_hl(0, 'NeoTreeGitUnstaged', {fg=red, bg="NONE"})
+vim.api.nvim_set_hl(0, 'NeoTreeGitUntracked', {fg=orange, bg="NONE"})
 -- NeoTreeGitUntracked
 -- NeoTreeGitStaged
 -- NeoTreeHiddenByName
