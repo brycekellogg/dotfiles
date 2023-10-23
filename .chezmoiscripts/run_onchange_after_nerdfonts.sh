@@ -44,7 +44,7 @@ if [ "$CHEZMOI_OSID" == "darwin" ]; then
     DEJAVU_DEST="$HOME/Library/fonts/"
 
     mkdir -p $DEJAVU_DEST
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_REGULAR
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_BOLD
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_ITALIC
+    cd $DEJAVU_DEST && curl -fLO $DEJAVU_URL_REGULAR
+    cd $DEJAVU_DEST && curl -fLO $DEJAVU_URL_BOLD
+    cd $DEJAVU_DEST && curl -fLO $DEJAVU_URL_ITALIC
 fi
