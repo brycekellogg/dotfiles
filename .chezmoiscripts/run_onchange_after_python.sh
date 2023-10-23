@@ -22,7 +22,7 @@ fi
 # Section for installing on macOS
 if [ "$CHEZMOI_OSID" == "darwin" ]; then
     command -v brew    # Check required tools
-    brew install python3 python3-pip python3-venv bpython
+    brew install python3 bpython
 fi
 
 # make sure everything installed correctly
