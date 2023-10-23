@@ -31,6 +31,6 @@ command -v pip3
 command -v bpython
 
 # Use pip to install packages
-pip install neovim
+pip3 install neovim
 
 
