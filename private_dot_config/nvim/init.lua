@@ -100,6 +100,7 @@ vim.filetype.add({
         ['.*%.lua%.tmpl'] = 'lua',
         ['.*%.fish%.tmpl'] = 'fish',
         ['.*%.sh%.tmpl'] = 'bash',
+        ['.*%.yml%.tmpl'] = 'yaml',
         ['.*/git/config%.tmpl'] = 'gitconfig',
     },
     filename = {
