@@ -19,7 +19,12 @@ return {{
         sections = {
             lualine_b = {},
             lualine_c = {
-                'navic',
+                function ()
+                    local navic = require('nvim-navic')
+                    local name = vim.fn.expand('%')
+
+                    return name .. "   " .. navic.get_location()
+                end
             },
             lualine_x = {},
         },
