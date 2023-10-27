@@ -32,12 +32,12 @@ set -g prefix2 none
 unbind -T copy-mode     MouseDragEnd1Pane
 unbind -T copy-mode-vi  MouseDragEnd1Pane
 
-# We use this to set the default command to
-# whatever it was when tmux is launched. This
-# allows us to launch it from different shells
-# and have it continue to use those shells,
-# irrespective of what the true default shell is.
-set -g default-command "${SHELL}"
+# We use this to set the default shell tmus uses irrespective of the system
+# default shell. This needs to be templated because macos has a different path.
+{{ if eq .osid "darwin" }}           set -g default-shell "/opt/homebrew/bin/fish" {{ end }}
+{{ if eq .osid "linux-ubuntu-wsl" }} set -g default-shell "/usr/bin/fish"          {{ end }}
+{{ if eq .osid "linux-fedora" }}     set -g default-shell "/usr/bin/fish"          {{ end }}
+
 
 #############################
 ### Visual Customizations ###
