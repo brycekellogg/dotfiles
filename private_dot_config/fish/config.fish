@@ -15,6 +15,7 @@ if status is-interactive
     # We try to install as much as possible without
     # needing root access by using this path.
     fish_add_path --path $HOME/.local/bin
+    fish_add_path --path /opt/homebrew/bin  # needed for brew
 
     # Set the LS_COLORS & EXA_COLORS environment variables
     set -l DIRCOLORS_SCRIPT  "$HOME/.config/dircolors/dircolors.lua"
