@@ -13,6 +13,10 @@ if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
     sudo dnf install tmux  # Use distro version
 fi
 
+# Section for installing on Ubuntu
+if [ "$CHEZMOI_OSID" == "linux-ubuntu" ]; then
+    sudo apt install tmux  # Use distro version
+fi
 
 # Section for installing on macOS
 if [ "$CHEZMOI_OSID" == "darwin" ]; then
@@ -20,3 +24,4 @@ if [ "$CHEZMOI_OSID" == "darwin" ]; then
     brew install tmux  # use homebrew version
 fi
 
+command -v tmux # make it installed correctly

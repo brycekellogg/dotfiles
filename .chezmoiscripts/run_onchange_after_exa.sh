@@ -12,6 +12,11 @@ if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
     sudo dnf install exa  # Use distro version
 fi
 
+# Section for installing on Ubuntu
+if [ "$CHEZMOI_OSID" == "linux-ubuntu" ]; then
+    sudo apt install exa  # Use distro version
+fi
+
 
 # Section for installing on macOS
 if [ "$CHEZMOI_OSID" == "darwin" ]; then

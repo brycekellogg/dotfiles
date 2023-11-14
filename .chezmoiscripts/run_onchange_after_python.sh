@@ -14,9 +14,10 @@ fi
 
 
 # Section for installing on Fedora
-if [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl" ]; then
+if [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl" ] || [ "$CHEZMOI_OSID" == "linux-ubuntu" ]; then
     sudo apt-get install python3 python3-pip python3-venv bpython
 fi
+
 
 
 # Section for installing on macOS

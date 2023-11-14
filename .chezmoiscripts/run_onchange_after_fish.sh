@@ -14,6 +14,12 @@ if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
     sudo dnf install fish  # Use distro version
 fi
 
+# Section for installing on Ubuntu
+if [ "$CHEZMOI_OSID" == "linux-ubuntu" ]; then
+    sudo add-apt-repository ppa:fish-shell/release-3
+    sudo apt install fish  # Use distro version
+fi
+
 
 # Section for installing on macOS
 if [ "$CHEZMOI_OSID" == "darwin" ]; then

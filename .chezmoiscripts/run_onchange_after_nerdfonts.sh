@@ -26,8 +26,8 @@ if [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl"  ]; then
     # Note: restart Windows Terminal to find font
 fi
 
-# Section for installing on Fedora
-if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
+# Section for installing on Fedora or Ubuntu
+if [ "$CHEZMOI_OSID" == "linux-fedora" ] || [ "$CHEZMOI_OSID" == "linux-ubuntu" ]; then
 
     DEJAVU_DEST="$HOME/.local/share/fonts/"
 
