@@ -217,10 +217,10 @@ bind-key -n MouseDown3Pane \
                  '#{?selection_active,Copy,-Copy}'  '' $copyAction     \
                  'Paste' '' 'run "$pasteBinary | tmux load-buffer - ; tmux paste-buffer"'    \
                  ''               \
-                 'New Pane (Right)'  '' 'split-window -h'  \
-                 'New Pane (Left)'   '' 'split-window -hb' \
-                 'New Pane (Up)'     '' 'split-window -vb' \
-                 'New Pane (Down)'   '' 'split-window -v'  \
+                 'New Pane (Right)'  '' 'split-window -h -c "#{pane_current_path}"'  \
+                 'New Pane (Left)'   '' 'split-window -hb -c "#{pane_current_path}"' \
+                 'New Pane (Up)'     '' 'split-window -vb -c "#{pane_current_path}"' \
+                 'New Pane (Down)'   '' 'split-window -v -c "#{pane_current_path}"'  \
                  ""               \
                  'Tab (Right)'  '' 'next-window' \
                  'Tab (Left)'   '' 'previous-window' \
