@@ -14,16 +14,18 @@ DEJAVU_URL_ITALIC="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-font
 # Section for installing on WSL
 if [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl"  ]; then
 
-    DEJAVU_DEST="/mnt/c/Users/$USER/AppData/Local/Microsoft/Windows/Fonts/"
+    USERNAME=$(powershell.exe -c 'echo $env:USERNAME' | tr -d '\r')
+    DEJAVU_DEST="/mnt/c/Users/$USERNAME/AppData/Local/Microsoft/Windows/Fonts/"
 
     # Windows isn't allowing me to overwrite font files
-    rm $DEJAVU_DEST/DejaVuSansMNerdFontMono*
+    rm -rf "$DEJAVU_DEST/DejaVuSansMNerdFontMono*"
 
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_REGULAR
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_BOLD
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_ITALIC
+    mkdir -p "$DEJAVU_DEST"
+    env -C "$DEJAVU_DEST" curl -fLO $DEJAVU_URL_REGULAR
+    env -C "$DEJAVU_DEST" curl -fLO $DEJAVU_URL_BOLD
+    env -C "$DEJAVU_DEST" curl -fLO $DEJAVU_URL_ITALIC
 
-    # Note: restart Windows Terminal to find font
+    # Note: restart Windows to find font
 fi
 
 # Section for installing on Fedora or Ubuntu

@@ -13,7 +13,7 @@ if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
 fi
 
 # Section for installing on Ubuntu
-if [ "$CHEZMOI_OSID" == "linux-ubuntu" ]; then
+if [ "$CHEZMOI_OSID" == "linux-ubuntu" ] || [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl" ]; then
     sudo apt install ripgrep  # Use distro version
 fi
 
