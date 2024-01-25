@@ -173,6 +173,12 @@ vim.api.nvim_set_hl(0, 'Ignore',         {fg='NONE', bg='NONE'})
 -- Error
 -- Todo
 
+
+-- Treesitter Highlight Groups (:help treesitter-highlight-groups) --
+---------------------------------------------------------------------
+vim.api.nvim_set_hl(0, '@string.documentation', {link='Comment'})
+
+
 -- LSP Diagnostics Groups (:help diagnostic-highlights) --
 ----------------------------------------------------------
 
