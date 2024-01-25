@@ -34,6 +34,6 @@ if [ "$DOTFILES_OSID" == "darwin" ]; then
     brew install eza  # Use homebrew version
 fi
 
-command -v eza # make sure it installed correctly
+#command -v eza # make sure it installed correctly
 
 
