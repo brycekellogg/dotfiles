@@ -26,11 +26,11 @@ if status is-interactive
     alias vim='nvim'
 
     # Use exa as ls if it's installed
-    if type -q exa
-        alias ll='exa -l --group-directories-first'
-        alias ls='exa --group-directories-first'
-        alias la='exa -la --group-directories-first'
-        alias tree='exa -T'
+    if type -q eza
+        alias ll='eza -l --group-directories-first'
+        alias ls='eza --group-directories-first'
+        alias la='eza -la --group-directories-first'
+        alias tree='eza -T'
     end
 
     # Ubuntu calls fd "fdfind"
