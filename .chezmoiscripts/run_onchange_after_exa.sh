@@ -9,21 +9,29 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 # Section for installing on Fedora
 if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
-    sudo dnf install exa  # Use distro version
+    command -v curl    # Check required tools
+    command -v tar     # Check required tools
+    EZA_DEST="$HOME/.local/bin/"
+    EZA_URL="https://github.com/eza-community/eza/releases/download/v0.17.2/eza_x86_64-unknown-linux-gnu.tar.gz"
+    curl -L "$EZA_URL" | tar -xz -C "$EZA_DEST"
 fi
 
 # Section for installing on Ubuntu
 if [ "$CHEZMOI_OSID" == "linux-ubuntu" ] || [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl" ]; then
-    sudo apt install exa  # Use distro version
+    command -v curl    # Check required tools
+    command -v tar     # Check required tools
+    EZA_DEST="$HOME/.local/bin/"
+    EZA_URL="https://github.com/eza-community/eza/releases/download/v0.17.2/eza_x86_64-unknown-linux-gnu.tar.gz"
+    curl -sL "$EZA_URL" | tar -xz -C "$EZA_DEST"
 fi
 
 
 # Section for installing on macOS
 if [ "$CHEZMOI_OSID" == "darwin" ]; then
     command -v brew    # Check required tools
-    brew install exa  # Use homebrew version
+    brew install eza  # Use homebrew version
 fi
 
-command -v exa # make sure it installed correctly
+command -v eza # make sure it installed correctly
 
 
