@@ -21,9 +21,9 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu-wsl"  ]; then
     rm -rf "$DEJAVU_DEST/DejaVuSansMNerdFontMono*"
 
     mkdir -p "$DEJAVU_DEST"
-    env -C "$DEJAVU_DEST" curl -fLO $DEJAVU_URL_REGULAR
-    env -C "$DEJAVU_DEST" curl -fLO $DEJAVU_URL_BOLD
-    env -C "$DEJAVU_DEST" curl -fLO $DEJAVU_URL_ITALIC
+    env -C "$DEJAVU_DEST" curl -fsLO $DEJAVU_URL_REGULAR
+    env -C "$DEJAVU_DEST" curl -fsLO $DEJAVU_URL_BOLD
+    env -C "$DEJAVU_DEST" curl -fsLO $DEJAVU_URL_ITALIC
 
     # Note: restart Windows to find font
 fi
@@ -34,9 +34,9 @@ if [ "$DOTFILES_OSID" == "linux-fedora" ] || [ "$DOTFILES_OSID" == "linux-ubuntu
     DEJAVU_DEST="$HOME/.local/share/fonts/"
 
     mkdir -p $DEJAVU_DEST
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_REGULAR
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_BOLD
-    env -C $DEJAVU_DEST curl -fLO $DEJAVU_URL_ITALIC
+    env -C $DEJAVU_DEST curl -fsLO $DEJAVU_URL_REGULAR
+    env -C $DEJAVU_DEST curl -fsLO $DEJAVU_URL_BOLD
+    env -C $DEJAVU_DEST curl -fsLO $DEJAVU_URL_ITALIC
     fc-cache -f
 fi
 
@@ -46,7 +46,7 @@ if [ "$DOTFILES_OSID" == "darwin" ]; then
     DEJAVU_DEST="$HOME/Library/fonts/"
 
     mkdir -p $DEJAVU_DEST
-    cd $DEJAVU_DEST && curl -fLO $DEJAVU_URL_REGULAR
-    cd $DEJAVU_DEST && curl -fLO $DEJAVU_URL_BOLD
-    cd $DEJAVU_DEST && curl -fLO $DEJAVU_URL_ITALIC
+    cd $DEJAVU_DEST && curl -fsLO $DEJAVU_URL_REGULAR
+    cd $DEJAVU_DEST && curl -fsLO $DEJAVU_URL_BOLD
+    cd $DEJAVU_DEST && curl -fsLO $DEJAVU_URL_ITALIC
 fi

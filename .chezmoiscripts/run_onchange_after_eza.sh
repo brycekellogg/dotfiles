@@ -6,21 +6,16 @@ set -e
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
+# Section for installing on Fedora or Ubuntu or Ubuntu WSL
+if [ "$DOTFILES_OSID" == "linux-fedora" ] ||
+   [ "$DOTFILES_OSID" == "linux-ubuntu" ] ||
+   [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
 
-# Section for installing on Fedora
-if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
-    command -v curl    # Check required tools
-    command -v tar     # Check required tools
-    EZA_DEST="$HOME/.local/bin/"
-    EZA_URL="https://github.com/eza-community/eza/releases/download/v0.17.2/eza_x86_64-unknown-linux-gnu.tar.gz"
-    mkdir -p "$EZA_DEST"
-    curl -L "$EZA_URL" | tar -xz -C "$EZA_DEST"
-fi
+    # Check required tools
+    command -v curl > /dev/null
+    command -v tar  > /dev/null
 
-# Section for installing on Ubuntu
-if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
-    command -v curl    # Check required tools
-    command -v tar     # Check required tools
+    # Download & install
     EZA_DEST="$HOME/.local/bin/"
     EZA_URL="https://github.com/eza-community/eza/releases/download/v0.17.2/eza_x86_64-unknown-linux-gnu.tar.gz"
     mkdir -p "$EZA_DEST"
@@ -34,6 +29,6 @@ if [ "$DOTFILES_OSID" == "darwin" ]; then
     brew install eza  # Use homebrew version
 fi
 
-#command -v eza # make sure it installed correctly
-
-
+# make sure it installed correctly
+export PATH=$PATH:"$HOME/.local/bin/"
+command -v eza

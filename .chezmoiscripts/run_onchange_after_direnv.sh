@@ -7,15 +7,15 @@ set -e
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
-
-# Section for installing on Fedora
-if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
-    : # ???    
-fi
-
-# Section for installing on Ubuntu
-if [ "$DOTFILES_OSID" == "linux-ubuntu" ]; then
-    sudo apt install direnv
+# Section for installing on Fedora or Ubuntu or Ubuntu WSL
+if [ "$DOTFILES_OSID" == "linux-fedora" ] ||
+   [ "$DOTFILES_OSID" == "linux-ubuntu" ] ||
+   [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
+    DIRENV_DEST="$HOME/.local/bin/"
+    DIRENV_URL="https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64"
+    mkdir -p "$DIRENV_DEST"
+    curl -fsL $DIRENV_URL -o "$DIRENV_DEST/direnv"
+    chmod a+x "$DIRENV_DEST/direnv"
 fi
 
 
@@ -24,4 +24,6 @@ if [ "$DOTFILES_OSID" == "darwin" ]; then
     : # ???
 fi
 
-command -v direnv # make sure it installed correctly
+# make sure it installed correctly
+export PATH=$PATH:"$HOME/.local/bin/"
+command -v direnv
