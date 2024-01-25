@@ -5,7 +5,15 @@ return {
         'nvim-treesitter/nvim-treesitter',
         event = {"BufReadPost", "BufNewFile"},
         opts = {
-            ensure_installed = {"c", "cpp", "lua", "fish", "vim", "elixir"},
+            ensure_installed = {
+                "c",
+                "cpp",
+                "lua",
+                "fish",
+                "vim",
+                "elixir",
+                "python",
+            },
             ignore_installed = {"help"},
             highlight = {
                 enable = true
