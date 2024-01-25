@@ -14,7 +14,7 @@ fi
 
 # Section for installing on Ubuntu
 if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
-    sudo apt install lua5.4  # Use distro version
+    sudo apt install lua5.3  # Use distro version
 fi
 
 # Section for installing on macOS
