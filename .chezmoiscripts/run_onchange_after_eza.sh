@@ -13,6 +13,7 @@ if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
     command -v tar     # Check required tools
     EZA_DEST="$HOME/.local/bin/"
     EZA_URL="https://github.com/eza-community/eza/releases/download/v0.17.2/eza_x86_64-unknown-linux-gnu.tar.gz"
+    mkdir -p "$EZA_DEST"
     curl -L "$EZA_URL" | tar -xz -C "$EZA_DEST"
 fi
 
@@ -22,6 +23,7 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu
     command -v tar     # Check required tools
     EZA_DEST="$HOME/.local/bin/"
     EZA_URL="https://github.com/eza-community/eza/releases/download/v0.17.2/eza_x86_64-unknown-linux-gnu.tar.gz"
+    mkdir -p "$EZA_DEST"
     curl -sL "$EZA_URL" | tar -xz -C "$EZA_DEST"
 fi
 
