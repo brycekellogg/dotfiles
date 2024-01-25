@@ -8,17 +8,17 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 
 # Section for installing on Fedora
-if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
+if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
     sudo dnf install ripgrep  # Use distro version
 fi
 
 # Section for installing on Ubuntu
-if [ "$CHEZMOI_OSID" == "linux-ubuntu" ] || [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl" ]; then
+if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
     sudo apt install ripgrep  # Use distro version
 fi
 
 # Section for installing on macOS
-if [ "$CHEZMOI_OSID" == "darwin" ]; then
+if [ "$DOTFILES_OSID" == "darwin" ]; then
     command -v brew    # Check required tools
     brew install ripgrep  # Use homebrew version
 fi

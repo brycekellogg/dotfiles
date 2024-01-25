@@ -10,9 +10,9 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 # This is the section that manages installing
 # nvim if we are in a linux based environment.
-if [ "$CHEZMOI_OSID" == "linux-ubuntu" ]     || \
-   [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl" ] || \
-   [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
+if [ "$DOTFILES_OSID" == "linux-ubuntu" ]     || \
+   [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ] || \
+   [ "$DOTFILES_OSID" == "linux-fedora" ]; then
 
     command -v wget
     command -v tar
@@ -39,7 +39,7 @@ fi
 
 # This is the section that manages
 # installing nvim if we are in macos.
-if [ "$CHEZMOI_OSID" == "darwin" ]; then
+if [ "$DOTFILES_OSID" == "darwin" ]; then
 
     # Check required tools
     command -v curl   # required to download

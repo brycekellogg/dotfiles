@@ -10,19 +10,19 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 command -v curl  # required for all OSIDs
 
 # Section for installing on Fedora
-if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
+if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
     sudo dnf install fish  # Use distro version
 fi
 
 # Section for installing on Ubuntu
-if [ "$CHEZMOI_OSID" == "linux-ubuntu" ] || [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl" ]; then
-    sudo add-apt-repository ppa:fish-shell/release-3
-    sudo apt install fish  # Use distro version
+if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
+    sudo add-apt-repository -y ppa:fish-shell/release-3
+    sudo apt-get -y -q install fish  # Use distro version
 fi
 
 
 # Section for installing on macOS
-if [ "$CHEZMOI_OSID" == "darwin" ]; then
+if [ "$DOTFILES_OSID" == "darwin" ]; then
     command -v brew    # Check required tools
     brew install fish  # use homebrew version
 fi

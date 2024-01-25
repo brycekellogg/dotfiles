@@ -9,12 +9,12 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 
 # Section for installing on Fedora
-if [ "$CHEZMOI_OSID" == "linux-fedora" ]; then
+if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
     sudo dnf install coreutils  # Use distro version
 fi
 
 
 # Section for installing on macOS
-# if [ "$CHEZMOI_OSID" == "darwin" ]; then
+# if [ "$DOTFILES_OSID" == "darwin" ]; then
     # do nothing
 # fi

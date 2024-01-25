@@ -12,7 +12,7 @@ DEJAVU_URL_BOLD="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/
 DEJAVU_URL_ITALIC="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DejaVuSansMono/Italic/DejaVuSansMNerdFontMono-Oblique.ttf"
 
 # Section for installing on WSL
-if [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl"  ]; then
+if [ "$DOTFILES_OSID" == "linux-ubuntu-wsl"  ]; then
 
     USERNAME=$(powershell.exe -c 'echo $env:USERNAME' | tr -d '\r')
     DEJAVU_DEST="/mnt/c/Users/$USERNAME/AppData/Local/Microsoft/Windows/Fonts/"
@@ -29,7 +29,7 @@ if [ "$CHEZMOI_OSID" == "linux-ubuntu-wsl"  ]; then
 fi
 
 # Section for installing on Fedora or Ubuntu
-if [ "$CHEZMOI_OSID" == "linux-fedora" ] || [ "$CHEZMOI_OSID" == "linux-ubuntu" ]; then
+if [ "$DOTFILES_OSID" == "linux-fedora" ] || [ "$DOTFILES_OSID" == "linux-ubuntu" ]; then
 
     DEJAVU_DEST="$HOME/.local/share/fonts/"
 
@@ -41,7 +41,7 @@ if [ "$CHEZMOI_OSID" == "linux-fedora" ] || [ "$CHEZMOI_OSID" == "linux-ubuntu" 
 fi
 
 # Section for installing on macOS
-if [ "$CHEZMOI_OSID" == "darwin" ]; then
+if [ "$DOTFILES_OSID" == "darwin" ]; then
 
     DEJAVU_DEST="$HOME/Library/fonts/"
 
