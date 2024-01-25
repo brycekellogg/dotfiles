@@ -31,6 +31,7 @@ return {{
             mappings = {
                 i = {
                     ['<esc>'] = function(_) require('telescope.actions').close(_) end,  -- close on first escape
+                    ['<LeftMouse>'] = function(_) end, -- do nothing
                 },
             },
         },
