@@ -33,11 +33,6 @@ if status is-interactive
         alias tree='eza -T'
     end
 
-    # Ubuntu calls fd "fdfind"
-    if type -q fdfind
-        alias fd='fdfind'
-    end
-
     set -gx EDITOR nvim
     set -gx VISUAL nvim
 
