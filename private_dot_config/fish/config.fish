@@ -3,6 +3,14 @@
 # needs to be set to blank to disable.
 set fish_greeting
 
+
+# We try to install as much as possible without
+# needing root access by using this path.
+# This is needed for non-interactive shells
+# due to mosh.
+fish_add_path --path $HOME/.local/bin
+fish_add_path --path /opt/homebrew/bin  # needed for brew
+
 if status is-interactive
 
     # In interactive mode, we set the
@@ -12,10 +20,6 @@ if status is-interactive
     # true default shell.
     set -x SHELL (status fish-path)
 
-    # We try to install as much as possible without
-    # needing root access by using this path.
-    fish_add_path --path $HOME/.local/bin
-    fish_add_path --path /opt/homebrew/bin  # needed for brew
 
     # Set the LS_COLORS & EXA_COLORS environment variables
     set -l DIRCOLORS_SCRIPT  "$HOME/.config/dircolors/dircolors.lua"
