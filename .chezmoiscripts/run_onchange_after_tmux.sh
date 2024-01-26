@@ -23,10 +23,10 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu
     # Required to build
     sudo apt-get -y -qq install libevent-dev
     
-    curl -sL "$TMUX_URL" | tar -xz -C "$TMUX_BUILD_DIR"
-    env -C "$TMUX_BUILD_DIR/tmux-3.3a/" ./configure --prefix="$TMUX_DEST_DIR"
-    make -C "$TMUX_BUILD_DIR/tmux-3.3a/"
-    make -C "$TMUX_BUILD_DIR/tmux-3.3a/" install
+    curl -sL "$TMUX_URL" | tar -xz -C "$TMUX_BUILD_DIR" --strip-components=1
+    env -C "$TMUX_BUILD_DIR/" ./configure --prefix="$TMUX_DEST_DIR"
+    make -C "$TMUX_BUILD_DIR/"
+    make -C "$TMUX_BUILD_DIR/" install
     
 
     rm -rf "$TMUX_BUILD_DIR"
