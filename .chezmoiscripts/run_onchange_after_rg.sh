@@ -7,14 +7,26 @@ trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 
-# Section for installing on Fedora
-if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
-    sudo dnf install ripgrep  # Use distro version
-fi
+# Section for installing on Fedora or Ubuntu or Ubuntu WSL
+if [ "$DOTFILES_OSID" == "linux-fedora" ] ||
+   [ "$DOTFILES_OSID" == "linux-ubuntu" ] ||
+   [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
 
-# Section for installing on Ubuntu
-if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
-    sudo apt install ripgrep  # Use distro version
+    # Check required tools
+    command -v curl > /dev/null
+    command -v tar  > /dev/null
+
+    RG_TAR_DIR=$(mktemp -d)
+    RG_URL="https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz"
+    RG_BIN_DEST="$HOME/.local/bin/"
+    RG_MAN_DEST="$HOME/.local/share/man/man1/"
+
+    mkdir -p "$RG_BIN_DEST"
+    mkdir -p "$RG_MAN_DEST"
+
+    curl -sL "$RG_URL" | tar -xz -C "$RG_TAR_DIR" --strip-components=1
+    cp "$RG_TAR_DIR/rg" "$RG_BIN_DEST"
+    cp "$RG_TAR_DIR/doc/rg.1" "$RG_MAN_DEST"
 fi
 
 # Section for installing on macOS
@@ -23,7 +35,6 @@ if [ "$DOTFILES_OSID" == "darwin" ]; then
     brew install ripgrep  # Use homebrew version
 fi
 
-command -v rg # make sure it installed correctly
-
-
-
+# make sure it installed correctly
+export PATH=$PATH:"$HOME/.local/bin/"
+command -v rg
