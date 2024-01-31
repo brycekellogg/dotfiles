@@ -12,8 +12,8 @@ wget -qO - $SUBLIME_KEY_URL | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/su
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
 # Install Sublime
-sudo apt update
-sudo apt install sublime-text
+sudo apt-get update
+sudo apt-get install -y sublime-text
 
 {{ end }}
 
