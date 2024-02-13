@@ -6,6 +6,20 @@ set -e
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
+# Install build dependencies
+if [ "$DOTFILES_OSID" == "linux-ubuntu" ] ||
+   [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
+
+    sudo apt-get install -y build-essential \
+                            protobuf-compiler \
+                            libprotobuf-dev \
+                            pkg-config \
+                            libutempter-dev \
+                            zlib1g-dev \
+                            libncurses5-dev \
+                            libssl-dev
+fi
+
 
 # Section for installing on Fedora or Ubuntu or Ubuntu WSL
 if [ "$DOTFILES_OSID" == "linux-fedora" ] ||
@@ -16,14 +30,6 @@ if [ "$DOTFILES_OSID" == "linux-fedora" ] ||
     command -v curl > /dev/null
     command -v tar  > /dev/null
 
-    sudo apt-get install -y build-essential \
-                            protobuf-compiler \
-                            libprotobuf-dev \
-                            pkg-config \
-                            libutempter-dev \
-                            zlib1g-dev \
-                            libncurses5-dev \
-                            libssl-dev
 
     MOSH_BUILD_DIR=$(mktemp -d)
     MOSH_DEST_DIR="$HOME/.local/"
