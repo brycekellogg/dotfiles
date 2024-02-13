@@ -10,13 +10,13 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 # Section for installing on Fedora
 if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
-    sudo dnf install alacritty  # Use distro version
+    sudo dnf -y install alacritty  # Use distro version
 fi
 
 # Section for installing on Ubuntu
 if [ "$DOTFILES_OSID" == "linux-ubuntu" ]; then
     sudo add-apt-repository -y ppa:aslatter/ppa
-    sudo apt-get -y -q install alacritty  # Use distro version
+    sudo apt-get -y install alacritty  # Use distro version
 fi
 
 
