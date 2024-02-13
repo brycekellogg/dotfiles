@@ -11,13 +11,13 @@ command -v curl  # required for all OSIDs
 
 # Section for installing on Fedora
 if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
-    sudo dnf install fish  # Use distro version
+    sudo dnf -y install fish  # Use distro version
 fi
 
 # Section for installing on Ubuntu
 if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ]; then
     sudo add-apt-repository -y ppa:fish-shell/release-3
-    sudo apt-get -y -q install fish  # Use distro version
+    sudo apt-get -y install fish  # Use distro version
 fi
 
 
