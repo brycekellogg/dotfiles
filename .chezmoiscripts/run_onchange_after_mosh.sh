@@ -20,6 +20,12 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu" ] ||
                             libssl-dev
 fi
 
+if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
+    sudo dnf -y install make \
+                        automake \
+                        gcc \
+                        gcc-c++
+fi
 
 # Section for installing on Fedora or Ubuntu or Ubuntu WSL
 if [ "$DOTFILES_OSID" == "linux-fedora" ] ||
