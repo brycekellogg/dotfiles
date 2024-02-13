@@ -9,7 +9,7 @@ trap 'echo "\"${last_command}\" command failed with exit code $?."' ERR
 
 # Section for installing on Fedora
 if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
-    sudo dnf install lua  # Use distro version
+    sudo dnf -y install lua  # Use distro version
 fi
 
 # Section for installing on Ubuntu
