@@ -13,6 +13,7 @@ return {
                 "vim",
                 "elixir",
                 "python",
+                "c_sharp",
             },
             ignore_installed = {"help"},
             highlight = {

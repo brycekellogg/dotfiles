@@ -49,6 +49,9 @@ return {{
                 },
                 align = "right",
             },
+            symlink_target = {
+                enabled = true,
+            },
         },
         filesystem = {
             use_libuv_file_watcher = true,
