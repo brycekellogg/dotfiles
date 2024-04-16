@@ -87,7 +87,7 @@ vim.api.nvim_set_hl(0, 'LineNr',       {fg=fgUnderstate, bg=bgLight})
 -- MsgArea
 -- MsgSeparator
 -- MoreMsg
--- NonText
+vim.api.nvim_set_hl(0, 'NonText',      {link="Comment"})
 vim.api.nvim_set_hl(0, 'Normal',       {fg=fgDefault, bg=bgDefault})
 vim.api.nvim_set_hl(0, 'NormalFloat',  {fg=fgDefault, bg=bgLight})
 -- FloatBorder
