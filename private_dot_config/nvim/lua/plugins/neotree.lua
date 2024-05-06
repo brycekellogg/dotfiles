@@ -27,6 +27,20 @@ return {{
                 ['s'] = 'none',
                 ['q'] = 'none',
                 ['e'] = 'none',
+
+                -- A telescope string search initiated from neotree should only search
+                -- files that are children of the currently selected file/folder.
+                ['<C-f>'] = function (state)
+                    local root = state.tree:get_node().path
+                    require('telescope.builtin').live_grep({cwd=root})
+                end,
+
+                -- A telescope file search initiated from neotree should only search
+                -- files that are children of the currently selected file/folder.
+                ['<C-p>'] = function (state)
+                    local root = state.tree:get_node().path
+                    require('telescope.builtin').find_files({cwd=root})
+                end,
             },
         },
         default_component_configs = {
