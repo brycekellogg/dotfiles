@@ -1,0 +1,72 @@
+#
+# https://alacritty.org/config-alacritty.html
+#
+
+{{ if eq .osid "darwin" }}
+    shell = "/opt/homebrew/bin/tmux"
+{{ else }}
+    shell = "tmux"
+{{ end }}
+working_directory = "None"
+live_config_reload = true
+
+
+# enable_experimental_conpty_backend = false
+
+[env]
+TERM = "xterm-256color"
+
+
+[window]
+padding = { x = 2, y = 2}
+decorations = "None"
+startup_mode = "Maximized"
+
+
+[scrolling]
+history = 0
+
+
+[font]
+normal = { family = "DejaVuSansM Nerd Font Mono", style  = "Regular" }
+bold   = { family = "DejaVuSansM Nerd Font Mono", style  = "Bold"    }
+italic = { family = "DejaVuSansM Nerd Font Mono", style  = "Italic"  }
+size = 10.0
+
+
+[colors]
+primary.foreground = "0x839496"
+primary.background = "0x00222b"
+# primary.dim_foreground = ""
+# primary.bright_foreground = ""
+
+cursor.text   = "0x002b36"
+cursor.cursor = "0x839496"
+
+normal.black   = "0x073642"
+normal.red     = "0xdc322f"
+normal.green   = "0x859900"
+normal.yellow  = "0xb58900"
+normal.blue    = "0x268bd2"
+normal.magenta = "0xd33682"
+normal.cyan    = "0x2aa198"
+normal.white   = "0xeee8d5"
+
+bright.black   = "0x002b36"
+bright.red     = "0xcb4b16"
+bright.green   = "0x586e75"
+bright.yellow  = "0x657b83"
+bright.blue    = "0x839496"
+bright.magenta = "0x6c71c4"
+bright.cyan    = "0x93a1a1"
+bright.white   = "0xfdf6e3"
+
+# dim.* = ""
+
+draw_bold_text_with_bright_colors = true
+
+
+[terminal]
+osc52 = "CopyPaste"
+
+
