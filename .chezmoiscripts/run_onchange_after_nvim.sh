@@ -14,18 +14,18 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu" ]     || \
    [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ] || \
    [ "$DOTFILES_OSID" == "linux-fedora" ]; then
 
-    command -v wget
+    command -v curl
     command -v tar
 
     # Neovim version & various helper variables
-    NVIM_VERSION="0.9.1"
+    NVIM_VERSION="0.9.5"
     NVIM_TARFILE="nvim-linux64.tar.gz"
     NVIM_DIR="$(mktemp -d)"
     NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
     NVIM_DEST="$HOME/.local/"
 
     # Download & install neovim
-    wget -P $NVIM_DIR $NVIM_URL                              # Download nvim source
+    curl -sLo $NVIM_DIR/${NVIM_TARFILE} $NVIM_URL            # Download nvim source
     tar -C $NVIM_DIR -xzf $NVIM_DIR/$NVIM_TARFILE            # Unpack the tarfile
     mkdir -p $NVIM_DEST/bin/                                 # Create destination directory
     mkdir -p $NVIM_DEST/lib/
