@@ -28,6 +28,9 @@ unbind '%'
 set -g prefix none
 set -g prefix2 none
 
+# ???
+# https://github.com/tmux/tmux/wiki/FAQ#what-is-the-passthrough-escape-sequence-and-how-do-i-use-it
+set-window-option -g allow-passthrough on
 
 unbind -T copy-mode     MouseDragEnd1Pane
 unbind -T copy-mode-vi  MouseDragEnd1Pane
@@ -56,7 +59,8 @@ set -g status-right "%a %d %b, %I:%M %p"
 
 # Set Terminal
 set -g default-terminal "screen-256color"
-set -g terminal-overrides ",xterm-256color:Tc"
+set -ag terminal-overrides ",xterm-256color:Tc"
+# set -ag terminal-overrides ",xterm-256color:Ms=\\E]52;c;%p2%s\\7"
 
 # default statusbar colors
 set-option -g status-bg colour235 #base02
@@ -172,7 +176,7 @@ bind-key -T copy-mode-vi End  send-keys -X end-of-line
 # Kinda annoying that escape does not exit copy-mode
 # by default. This keybinding makes it so if you
 # hit escape while in copy mode, it will exit.
-bind-key -T copy-mode-vi Escape  copy-mode -q
+bind-key -T copy-mode-vi Escape  send-keys -X clear-selection
 
 
 # Bind Alt-RightClick to a context
