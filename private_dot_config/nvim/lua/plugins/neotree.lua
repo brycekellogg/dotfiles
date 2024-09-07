@@ -32,6 +32,7 @@ return {{
                 -- files that are children of the currently selected file/folder.
                 ['<C-f>'] = function (state)
                     local root = state.tree:get_node().path
+                    require("neo-tree.command").execute({ action = "close" })
                     require('telescope.builtin').live_grep({cwd=root})
                 end,
 
@@ -39,9 +40,13 @@ return {{
                 -- files that are children of the currently selected file/folder.
                 ['<C-p>'] = function (state)
                     local root = state.tree:get_node().path
+                    require("neo-tree.command").execute({ action = "close" })
                     require('telescope.builtin').find_files({cwd=root})
                 end,
             },
+        },
+        buffers = {
+            show_unloaded = true,
         },
         default_component_configs = {
             name = {
