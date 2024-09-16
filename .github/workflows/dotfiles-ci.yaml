@@ -1,17 +1,21 @@
 name: "Dotfiles CI"
+on: push
 jobs:
   ubuntu-2004:
     runs-on: ubuntu-20.04
     container: {image: ubuntu:20.04}
     steps:
+      - name: Checkout Dotfiles
+        uses: actions/checkout@v4
+
       - name: Container Prep
         run: |
-          apt-get update -qq
-          DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends sudo software-properties-common
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends sudo software-properties-common
+          apt-get install -y fontconfig curl
         
       - name: Install Chezmoi
         run: |
-          sudo apt-get update -qq && sudo apt-get install -qq -y curl
           sudo sh -c "$(curl -fsLS https://chezmoi.io/get)" -- -b /usr/bin/
 
       - name: Chezmoi Init & Apply
