@@ -3,7 +3,7 @@ on: push
 jobs:
   ubuntu-2004:
     runs-on: ubuntu-20.04
-    container: {image: ubuntu:20.04}
+    container: {image: 'ubuntu:20.04'}
     steps:
       - name: Checkout Dotfiles
         uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
 
   fedora-39:
     runs-on: ubuntu-20.04
-    container: {image: fedora:39}
+    container: {image: 'fedora:39'}
     steps:
       - name: Checkout Dotfiles
         uses: actions/checkout@v4
