@@ -68,10 +68,6 @@ fi
 
 
 
-# Clean, install, & update all Neovim plugins. We do this
-# by running a command on startup (display the UI for progress),
-# save the output to a log, & then cat the logfile.
-$NVIM_DEST/bin/nvim -c "autocmd User VeryLazy Lazy! sync | w! lazy.log | qall"
-cat lazy.log
-rm -f lazy.log
+# Clean, install, & update all Neovim plugins
+$NVIM_DEST/bin/nvim --headless "+Lazy! sync" "+qall"
 

@@ -21,7 +21,7 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu" ] || [ "$DOTFILES_OSID" == "linux-ubuntu
     TMUX_URL="https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz"
 
     # Required to build
-    sudo apt-get -y install libevent-dev
+    sudo apt-get -y install libevent-dev libncurses-dev
     
     curl -sL "$TMUX_URL" | tar -xz -C "$TMUX_BUILD_DIR" --strip-components=1
     env -C "$TMUX_BUILD_DIR/" ./configure --prefix="$TMUX_DEST_DIR"
