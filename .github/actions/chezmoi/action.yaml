@@ -1,0 +1,11 @@
+name: "Chezmoi Install, Init, & Apply"
+runs:
+  using: "composite"
+  steps:
+    - name: Install Chezmoi
+      run: |
+        sudo sh -c "$(curl -fsLS https://chezmoi.io/get)" -- -b /usr/bin/
+
+    - name: Chezmoi Init & Apply
+      run: |
+        chezmoi -S ${GITHUB_WORKSPACE} init --apply --promptString "What is your full name=Example,What is your email=name@example.org"
