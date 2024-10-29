@@ -29,7 +29,23 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu-wsl"  ]; then
 fi
 
 # Section for installing on Fedora or Ubuntu
-if [ "$DOTFILES_OSID" == "linux-fedora" ] || [ "$DOTFILES_OSID" == "linux-ubuntu" ]; then
+if [ "$DOTFILES_OSID" == "linux-fedora" ]; then
+
+    command -v fc-cache
+
+    DEJAVU_DEST="$HOME/.local/share/fonts/"
+
+    mkdir -p $DEJAVU_DEST
+    env -C $DEJAVU_DEST curl -fsLO $DEJAVU_URL_REGULAR
+    env -C $DEJAVU_DEST curl -fsLO $DEJAVU_URL_BOLD
+    env -C $DEJAVU_DEST curl -fsLO $DEJAVU_URL_ITALIC
+    fc-cache -f
+fi
+
+if [ "$DOTFILES_OSID" == "linux-ubuntu" ]; then
+
+    sudo apt-get install -y fontconfig
+    command -v fc-cache
 
     DEJAVU_DEST="$HOME/.local/share/fonts/"
 

@@ -11,8 +11,13 @@ return {
                 "lua",
                 "fish",
                 "vim",
+                "vimdoc",
+                "query",
                 "elixir",
                 "python",
+                "c_sharp",
+                "bash",
+                "typescript",
             },
             ignore_installed = {"help"},
             highlight = {

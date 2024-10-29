@@ -1,0 +1,36 @@
+name: "Dotfiles CI"
+on: push
+jobs:
+
+
+
+  ubuntu-2004:
+    runs-on: ubuntu-20.04
+    container: {image: 'ubuntu:20.04'}
+    timeout-minutes: 5
+    steps:
+      - name: Checkout dotfiles
+        uses: actions/checkout@v4
+
+      - name: Container prep
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends sudo software-properties-common
+          apt-get install -y fontconfig curl
+
+      - name: Install Chezmoi, init, & apply
+        uses: ./.github/actions/chezmoi
+
+
+
+  fedora-39:
+    runs-on: ubuntu-20.04
+    container: {image: 'fedora:39'}
+    timeout-minutes: 5
+    steps:
+      - name: Checkout dotfiles
+        uses: actions/checkout@v4
+
+      - name: Install Chezmoi, init, & apply
+        uses: ./.github/actions/chezmoi
+

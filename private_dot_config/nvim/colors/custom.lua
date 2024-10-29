@@ -87,7 +87,7 @@ vim.api.nvim_set_hl(0, 'LineNr',       {fg=fgUnderstate, bg=bgLight})
 -- MsgArea
 -- MsgSeparator
 -- MoreMsg
--- NonText
+vim.api.nvim_set_hl(0, 'NonText',      {link="Comment"})
 vim.api.nvim_set_hl(0, 'Normal',       {fg=fgDefault, bg=bgDefault})
 vim.api.nvim_set_hl(0, 'NormalFloat',  {fg=fgDefault, bg=bgLight})
 -- FloatBorder
@@ -274,11 +274,11 @@ vim.api.nvim_set_hl(0, 'BufferLineDuplicateSelected', {fg=fgUnderstate, bg=bgDef
 -- BufferLineIndicatorVisible
 -- BufferLineIndicatorSelected        
 
--- BufferLineTab
--- BufferLineTabSelected              
--- BufferLineTabClose
--- BufferLineTabSeparator             
--- BufferLineTabSeparatorSelected
+vim.api.nvim_set_hl(0, 'BufferLineTab',                  {link='BufferLineBufferVisible'})
+vim.api.nvim_set_hl(0, 'BufferLineTabSelected',          {link='BufferLineBufferSelected'})
+vim.api.nvim_set_hl(0, 'BufferLineTabClose',             {fg=fgUnderstate, bg=bgDark30})
+vim.api.nvim_set_hl(0, 'BufferLineTabSeparator',         {link='BufferLineSeparator'})
+vim.api.nvim_set_hl(0, 'BufferLineTabSeparatorSelected', {link='BufferLineSeparatorSelected'})
 
 -- BufferLinePick
 -- BufferLinePickVisible              

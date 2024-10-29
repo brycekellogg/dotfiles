@@ -12,14 +12,14 @@ vim.o.background = 'dark'
 -- By default vim will wrap a line when it gets too long
 -- to fit in the current window size. I hate line wrapping
 -- and would rather it just gets cut off. This does that.
-vim.o.wrap = 0
+vim.o.wrap = false
 
 
 -- Show line numbers
 --
 -- This will show line numbers in
 -- the far left column in each pane.
-vim.o.number = 1
+vim.o.number = true
 
 -- Hide Status Line
 --
@@ -33,13 +33,13 @@ vim.o.laststatus = 0
 -- A tab should be shown as 4 spaces, and
 -- any time a tab in inserted, replace
 -- with 4 spaces instead.
-vim.o.expandtab = 1
+vim.o.expandtab = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 
 -- Split below and right
-vim.o.splitbelow = 1
-vim.o.splitright = 1
+vim.o.splitbelow = true
+vim.o.splitright = true
 
 -- Fix C indentation for switch
 --
@@ -52,7 +52,7 @@ vim.o.cinoptions = 'l1'
 --
 -- Allow us to have unsaved hidden buffers which act
 -- similar to how tabs in other editors are used.
-vim.o.hidden = 1
+vim.o.hidden = true
 
 -- Cursor ccrolling offset
 -- Vim uses this setting to decide when to scroll
@@ -128,7 +128,7 @@ local function unhide()
     vim.opt.cursorline  = true
 end
 vim.api.nvim_create_autocmd({'WinLeave', 'FocusLost'},   {callback=hide})
-vim.api.nvim_create_autocmd({'WinEnter', 'FocusGained', 'BufEnter'}, {callback=unhide})
+vim.api.nvim_create_autocmd({'WinEnter', 'FocusGained', 'BufEnter', 'BufAdd', 'BufNew'}, {callback=unhide})
 
 
 
@@ -186,6 +186,7 @@ mapkey({'n'},      '<C-Del>', killWindow)
 mapkey({'n'},      '<Esc>', '<Cmd>nohlsearch<CR>')  -- clear search highlight on ESC in normal mode
 mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferLineCyclePrev<CR>')
 mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferLineCycleNext<CR>')
+mapkey({'n', 'i'}, '<C-S-Del>', '<Cmd>tabclose<CR>')
 mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
 mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
 mapkey({'n', 'i', 'v'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
