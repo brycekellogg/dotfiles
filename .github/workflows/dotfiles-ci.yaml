@@ -34,3 +34,14 @@ jobs:
       - name: Install Chezmoi, init, & apply
         uses: ./.github/actions/chezmoi
 
+
+
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout dotfiles
+        uses: actions/checkout@v4
+
+      - name: Install Chezmoi, init, & apply
+        uses: ./.github/actions/chezmoi
