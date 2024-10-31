@@ -21,7 +21,7 @@ fi
 
 # Section for installing on macOS
 if [ "$DOTFILES_OSID" == "darwin" ]; then
-    : # ???
+    brew install direnv
 fi
 
 # make sure it installed correctly
