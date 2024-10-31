@@ -5,7 +5,7 @@ runs:
     - name: Install Chezmoi
       shell: sh
       run: |
-        sudo sh -c "$(curl -fsLS https://chezmoi.io/get)" -- -b /usr/bin/
+        sudo sh -c "$(curl -fsLS https://chezmoi.io/get)" -- -b /usr/local/bin/
 
     - name: Chezmoi Init & Apply
       shell: sh
