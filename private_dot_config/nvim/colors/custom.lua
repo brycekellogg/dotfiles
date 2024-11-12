@@ -68,6 +68,9 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', {fg=fgDefault, bg=bgLight})
 -- CursorLineFold
 -- CursorLineSign
 -- Directory
+vim.api.nvim_set_hl(0, 'Added',        {link="DiffAdd"})
+vim.api.nvim_set_hl(0, 'Changed',      {link="DiffChange"})
+vim.api.nvim_set_hl(0, 'Removed',      {link="DiffDelete"})
 vim.api.nvim_set_hl(0, 'DiffAdd',      {fg=green,  bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffChange',   {fg=yellow, bg=bgLight})
 vim.api.nvim_set_hl(0, 'DiffDelete',   {fg=red,    bg=bgLight})
@@ -177,6 +180,7 @@ vim.api.nvim_set_hl(0, 'Ignore',         {fg='NONE', bg='NONE'})
 -- Treesitter Highlight Groups (:help treesitter-highlight-groups) --
 ---------------------------------------------------------------------
 vim.api.nvim_set_hl(0, '@string.documentation', {link='Comment'})
+vim.api.nvim_set_hl(0, '@variable', {fg=fgDefault})
 
 
 -- LSP Diagnostics Groups (:help diagnostic-highlights) --
