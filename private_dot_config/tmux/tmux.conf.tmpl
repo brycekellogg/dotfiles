@@ -100,14 +100,6 @@ bind-key -T copy-mode-vi M-Down  select-pane -D
 bind-key -T copy-mode-vi M-Up    select-pane -U
 bind-key -T copy-mode-vi M-Right select-pane -R
 
-# Panels can be moved by swapping the current pane with a
-# one of the adjacent panes with Alt-Shift-<Arrow Key>.
-# TODO: prevent swapping towards the edges
-# TODO: resize current pane somehow using these, no swapping
-bind-key -n M-S-Left  swap-pane -t '{left-of}'
-bind-key -n M-S-Down  swap-pane -t '{down-of}'
-bind-key -n M-S-Up    swap-pane -t '{up-of}'
-bind-key -n M-S-Right swap-pane -t '{right-of}'
 
 # We can select windows with Alt-PageUp & Alt-PageDown
 # where Alt-PageUp selects the window to the left, and
