@@ -28,6 +28,13 @@ return {{
                 ['q'] = 'none',
                 ['e'] = 'none',
 
+                -- The key combo declared below for toggling doesn't seem
+                -- to work if neo-tree has focus. This makes sure we close
+                -- if neo-tree is open and focused.
+                ["<C-b>"] = function(state)
+                    require("neo-tree.command").execute({ action = "close" })
+                end,
+
                 -- A telescope string search initiated from neotree should only search
                 -- files that are children of the currently selected file/folder.
                 ['<C-f>'] = function (state)
