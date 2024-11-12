@@ -8,6 +8,10 @@ return {{
         signs = {
             add    = {text = "█"},
             change = {text = "█"},
+        },
+        signs_staged = {
+            add    = {text = "█"},
+            change = {text = "█"},
         }
     },
 }}
