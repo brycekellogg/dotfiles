@@ -18,7 +18,7 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu" ]     || \
     command -v tar
 
     # Neovim version & various helper variables
-    NVIM_VERSION="0.9.5"
+    NVIM_VERSION="0.10.2"
     NVIM_TARFILE="nvim-linux64.tar.gz"
     NVIM_DIR="$(mktemp -d)"
     NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
