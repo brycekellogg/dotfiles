@@ -119,7 +119,7 @@ vim.api.nvim_set_hl(0, 'PmenuSel', {fg=fgDefault, bg=bgLight10})
 -- Title
 vim.api.nvim_set_hl(0, 'Visual', {fg=base02, bg=bgLight30})
 -- VisualNOS
--- WarningMsg
+vim.api.nvim_set_hl(0, 'WarningMsg', {fg=orange})
 -- Whitespace
 -- WildMenu
 -- WinBar
