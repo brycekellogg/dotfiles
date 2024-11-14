@@ -172,7 +172,9 @@ nvim_tmux_navigation.setup {
 
 -- Killing Windows
 local function killWindow()
-    vim.api.nvim_win_close(0, false)
+    if not pcall(function() vim.api.nvim_win_close(0, false) end) then
+        vim.notify("Cannot close last window", vim.log.levels.WARN)
+    end
 end
 
 
