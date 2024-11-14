@@ -182,6 +182,9 @@ vim.api.nvim_set_hl(0, 'Ignore',         {fg='NONE', bg='NONE'})
 vim.api.nvim_set_hl(0, '@string.documentation', {link='Comment'})
 vim.api.nvim_set_hl(0, '@variable', {fg=fgDefault})
 
+vim.api.nvim_set_hl(0, '@constant.bash',         {link='Special'})
+vim.api.nvim_set_hl(0, '@function.builtin.bash', {link='Function'})
+
 
 -- LSP Diagnostics Groups (:help diagnostic-highlights) --
 ----------------------------------------------------------
