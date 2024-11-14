@@ -28,6 +28,13 @@ vim.o.number = true
 -- actual status line is loaded
 vim.o.laststatus = 0
 
+-- Hide Mode Message
+--
+-- Since our statusline already shows what
+-- mode we are in, we disable the extra mode
+-- message from showing in the command line
+vim.o.showmode = false
+
 -- Tab settings
 --
 -- A tab should be shown as 4 spaces, and
