@@ -28,6 +28,16 @@ return {{
                 ['q'] = 'none',
                 ['e'] = 'none',
 
+                -- When using yank-line (like in normal mode), we want to
+                -- copy the file path relative to the CWD to the clipboard.
+                ['y'] = 'none',
+                ['yy'] = function (state)
+                    local node = state.tree:get_node()
+                    local filename = vim.fn.fnamemodify(node.path, ":.")
+                    vim.fn.setreg('+', filename)
+                    vim.notify("Copied: " .. filename)
+                end,
+
                 -- The key combo declared below for toggling doesn't seem
                 -- to work if neo-tree has focus. This makes sure we close
                 -- if neo-tree is open and focused.
