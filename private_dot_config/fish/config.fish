@@ -39,6 +39,7 @@ if status is-interactive
 
     set -gx EDITOR nvim
     set -gx VISUAL nvim
+    set -gx SUDO_EDITOR "$HOME/.local/bin/nvim"
 
     # Configure custom colors
     set -g fish_color_autosuggestion 555 brblack
