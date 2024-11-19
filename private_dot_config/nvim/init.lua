@@ -76,6 +76,14 @@ vim.o.scrolloff=5
 vim.api.nvim_create_autocmd({"VimResized"}, {pattern = '*', command = "wincmd ="})
 
 
+-- Close Neotree on quit
+--
+-- This is used as a workaroud for the Neotree window being restored by the
+-- persistence plugin. This needs to be defined here instead of in the neotree
+-- plugin setup because of he ordering with the persistence autocmd
+vim.api.nvim_create_autocmd({"VimLeavePre"}, {pattern = '*', command = "Neotree close"})
+
+
 -- Configure clipboard
 --
 -- Because WSL now supports xsel & xclip,
