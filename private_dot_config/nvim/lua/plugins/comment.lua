@@ -1,6 +1,6 @@
 --
 --
-return {{   
+return {{
     'numToStr/comment.nvim',  -- git URL of plugin
     opts = {                  -- options to be passed to setup
         toggler = {
