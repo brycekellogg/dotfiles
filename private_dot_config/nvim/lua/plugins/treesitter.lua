@@ -23,6 +23,9 @@ return {
             highlight = {
                 enable = true
             },
+            indent = {
+                enable = true
+            },
 
             -- Config for nvim-ts-rainbow
             -- Currently disable until colors
