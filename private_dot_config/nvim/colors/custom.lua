@@ -356,7 +356,14 @@ vim.api.nvim_set_hl(0, 'LualineWinbarInactive_x', {fg=fgDefault, bg=bgDefault})
 -------------------------------------------------------------------------
 vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {fg=bgLight})
 
+
 -- Incline Floating Winbar Specific Groups (:help incline-config-highlight) --
 ------------------------------------------------------------------------------
 vim.api.nvim_set_hl(0, 'InclineNormal',   {fg=fgUnderstate, bg=bgDefault})
 vim.api.nvim_set_hl(0, 'InclineNormalNC', {fg=fgUnderstate, bg=bgDefault})
+
+
+-- VisualWhitespace Specific Groups ---
+---------------------------------------
+vim.api.nvim_set_hl(0, 'VisualNonText', {fg=bgLight20, bg=bgLight30})
+
