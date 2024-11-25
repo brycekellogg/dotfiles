@@ -193,6 +193,25 @@ local function killWindow()
 end
 
 
+-- Helper function for a smarter <Home> key
+--
+-- This function compares the current cursor column
+-- with the column of the first non-whitespace text.
+-- If the cursor is to the right of the first non-
+-- whitespace text, <Home> moves the cursor to the
+-- location of the first non-whitespace text. If the
+-- cursor is on or to the left of the first non-
+-- whitespace text, <Home> moves the cursot to the
+-- start of the line.
+local function home()
+    local srcRow, srcCol = (table.unpack or unpack)(vim.api.nvim_win_get_cursor(0))
+    local txtCol = vim.api.nvim_get_current_line():find('%S') - 1
+    local dstRow = srcRow
+    local dstCol = srcCol > txtCol and txtCol or 0
+    vim.api.nvim_win_set_cursor(0, {dstRow,dstCol})
+end
+
+
 -- Key Map
 --
 -- First Arg: mode
@@ -210,6 +229,7 @@ mapkey({'n', 'i', 'v'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
 mapkey({'n', 'i', 'v'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
 mapkey({'n', 'i', 'v'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
 mapkey({'n', 'i', 'v'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
+mapkey({'n', 'i', 'v'}, '<Home>', home)
 
 -- Change how delete and cut works
 --
