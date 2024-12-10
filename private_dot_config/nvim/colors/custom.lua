@@ -352,9 +352,9 @@ vim.api.nvim_set_hl(0, 'LualineWinbarInactive_c', {fg=fgDefault, bg=bgDefault})
 vim.api.nvim_set_hl(0, 'LualineWinbarInactive_x', {fg=fgDefault, bg=bgDefault})
 
 
--- IndentBlankline Specific Groups (:help indent-blankline-highlights) --
--------------------------------------------------------------------------
-vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {fg=bgLight})
+-- IndentBlankline Specific Groups (:help ibl.highlights) --
+------------------------------------------------------------
+vim.api.nvim_set_hl(0, 'IblIndent', {fg=bgLight})
 
 
 -- Incline Floating Winbar Specific Groups (:help incline-config-highlight) --

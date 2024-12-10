@@ -3,5 +3,12 @@
 return {{
     "lukas-reineke/indent-blankline.nvim",
     event = 'BufAdd',
-    enabled = false,  -- causing UI glitches
+    main = 'ibl',
+    config = true,
+    opts = {
+        indent = {
+            char = '┃'
+        },
+        scope = {enabled = false},
+    },
 }}
