@@ -229,6 +229,7 @@ return {
 
             -- Setup each individual server
             require('lspconfig').lua_ls.setup(opts)
+            require('lspconfig').vtsls.setup(opts)  -- typescript
             -- require('lspconfig').pylsp.setup(opts)
             -- require('lspconfig').clangd.setup(opts)
         end,
@@ -250,6 +251,7 @@ return {
                 'lua_ls',
                 'pylsp',
                 'clangd',
+                'vtsls',
             },
         },
     },
@@ -561,6 +563,8 @@ return {
                 "c_sharp",
                 "bash",
                 "typescript",
+                "javascript",
+                "tsx",
                 "make",
             },
             ignore_installed = {"help"},
