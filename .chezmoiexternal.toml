@@ -1,8 +1,11 @@
+
+
 [".local/bin/eza"]
     type = "archive-file"
     stripComponents = 1
     path = "eza"
     url  = "https://github.com/eza-community/eza/releases/download/v0.20.16/eza_x86_64-unknown-linux-gnu.tar.gz"
+
 
 [".local/bin/rg"]
     type = "archive-file"
@@ -14,11 +17,13 @@
     url  = "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz"
 {{ end }}
 
+
 [".local/share/man/man1/rg.1"]
     type = "archive-file"
     stripComponents = 1
     path = "doc/rg.1"
     url  = "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz"
+
 
 [".local/bin/fd"]
     type = "archive-file"
@@ -26,13 +31,19 @@
     path = "fd"
     url  = "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-gnu.tar.gz"
 
+
 [".local/share/man/man1/fd.1"]
     type = "archive-file"
     stripComponents = 1
     path = "fd.1"
     url  = "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-gnu.tar.gz"
 
+
 [".local/bin/direnv"]
     type = "file"
     executable = true
-    url = "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64"
+{{ if eq .osid "darwin" }}
+    url = "https://github.com/direnv/direnv/releases/download/v2.35.0/direnv.darwin-arm64"
+{{ else }}
+    url = "https://github.com/direnv/direnv/releases/download/v2.35.0/direnv.linux-amd64"
+{{ end }}
