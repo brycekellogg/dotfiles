@@ -114,12 +114,12 @@ return {
         keys = {
             {
                 '<C-PageUp>',
-                function() require('bufferline').cycle(1) end,
+                function() require('bufferline').cycle(-1) end,
                 mode = {'n', 'i'},
             },
             {
                 '<C-PageDown>',
-                function() require('bufferline').cycle(-1) end,
+                function() require('bufferline').cycle(1) end,
                 mode = {'n', 'i'},
             },
         },
@@ -251,44 +251,27 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         event = 'BufEnter',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
-            'SmiteshP/nvim-navic',
-        },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         opts = {
             options = {
+                icons_enabled = false,
                 theme = 'solarized_dark',
-                disabled_filetypes = {
-                    'alpha',
-                },
                 globalstatus = true,
             },
             sections = {
                 lualine_b = {},
-                lualine_c = {
-                    function ()
-                        local navic = require('nvim-navic')
-                        local name = vim.fn.expand('%')
-
-                        return name .. "   " .. navic.get_location()
-                    end
-                },
-                lualine_x = {},
+                -- lualine_c = {},
+                lualine_x = {'filetype'},
             },
         },
     },
     {
         'echasnovski/mini.bufremove',
         event = 'BufAdd',
-        config = function(_, opts)
-            require('mini.bufremove').setup(opts)
-        end,
         keys = {
             {
-                "<C-H>",  -- actually <C-BS>
-                function()
-                    require('mini.bufremove').delete()
-                end,
+                "<C-H>",  -- actually <C-Backspace>
+                function() require('mini.bufremove').delete() end,
                 desc = "Close Buffer"
             }
         }
@@ -455,19 +438,6 @@ return {
                     ['<Esc>']   = cmp.mapping.abort(),
                     ['<Down>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Select}),
                     ['<Up>']   = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Select}),
-
-
-                    -- When using arrow keys while the completion window is open,
-                    -- the window stays open when the cursor moves up/down. These
-                    -- mappings will close the window on cursor up/down.
-                    -- ['<Down>'] = function ()
-                    --     if cmp.visible() then cmp.mapping.abort()() end
-                    --     vim.cmd('norm! j')
-                    -- end,
-                    -- ['<Up>'] = function ()
-                    --     if cmp.visible() then cmp.mapping.abort()() end
-                    --     vim.cmd('norm! k')
-                    -- end,
                 },
                 completion = {
                     completeopt = 'menu,menuone,noinsert',
