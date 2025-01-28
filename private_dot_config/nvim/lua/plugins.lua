@@ -97,7 +97,7 @@ return {
                 separator_style = "slant",
                 show_buffer_icons = false,
                 close_command = function(bufnum)
-                    MiniBufremove.delete(bufnum)
+                    require('mini.bufremove').delete(bufnum)
                     vim.cmd('redraw!')
                 end,
                 offsets = {
@@ -296,7 +296,7 @@ return {
             {
                 "<C-H>",  -- actually <C-BS>
                 function()
-                    MiniBufremove.delete()
+                    require('mini.bufremove').delete()
                 end,
                 desc = "Close Buffer"
             }
