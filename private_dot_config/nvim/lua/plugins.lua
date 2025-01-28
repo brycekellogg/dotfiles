@@ -111,6 +111,18 @@ return {
                 },
             }
         },
+        keys = {
+            {
+                '<C-PageUp>',
+                function() require('bufferline').cycle(1) end,
+                mode = {'n', 'i'},
+            },
+            {
+                '<C-PageDown>',
+                function() require('bufferline').cycle(-1) end,
+                mode = {'n', 'i'},
+            },
+        },
     },
 
     {

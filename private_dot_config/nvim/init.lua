@@ -215,8 +215,6 @@ end
 local mapkey = vim.keymap.set
 mapkey({'n'},      '<C-Del>', killWindow)
 mapkey({'n'},      '<Esc>', '<Cmd>nohlsearch<CR>')  -- clear search highlight on ESC in normal mode
-mapkey({'n', 'i'}, '<C-PageUp>',   '<Cmd>BufferLineCyclePrev<CR>')
-mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferLineCycleNext<CR>')
 mapkey({'n', 'i'}, '<C-S-Del>', '<Cmd>tabclose<CR>')
 mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
 mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
