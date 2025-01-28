@@ -90,6 +90,7 @@ vim.api.nvim_create_autocmd({"VimLeavePre"}, {pattern = '*', command = "Neotree 
 -- we only need to set the clipboard register
 vim.o.clipboard = 'unnamedplus'
 
+
 -- Bootstrap lasy.nvim plugin manager. This should install
 -- it when vim is first run if it's not already installed.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -122,7 +123,6 @@ vim.filetype.add({
         ['tmux.conf.tmpl'] = 'tmux',
     },
 })
-
 
 
 -- Hiding UI elements when focus lost
@@ -186,6 +186,7 @@ local function killWindow()
         vim.notify("Cannot close last window", vim.log.levels.WARN)
     end
 end
+vim.keymap.set({'n'},      '<C-Del>', killWindow)
 
 
 -- Helper function for a smarter <Home> key
@@ -198,28 +199,23 @@ end
 -- cursor is on or to the left of the first non-
 -- whitespace text, <Home> moves the cursot to the
 -- start of the line.
-local function home()
-    local srcRow, srcCol = (table.unpack or unpack)(vim.api.nvim_win_get_cursor(0))
-    local txtCol = vim.api.nvim_get_current_line():find('%S') - 1
-    local dstRow = srcRow
-    local dstCol = srcCol > txtCol and txtCol or 0
-    vim.api.nvim_win_set_cursor(0, {dstRow,0})  -- scroll all the way left first
-    vim.api.nvim_win_set_cursor(0, {dstRow,dstCol})
-end
+vim.keymap.set({'n', 'i', 'v'}, '<Home>',
+    function()
+        local srcRow, srcCol = (table.unpack or unpack)(vim.api.nvim_win_get_cursor(0))
+        local txtCol = (vim.api.nvim_get_current_line():find('%S') or 1) - 1
+        local dstRow = srcRow
+        local dstCol = (srcCol > txtCol or srcCol == 0) and txtCol or 0
+        vim.api.nvim_win_set_cursor(0, {dstRow,0})  -- scroll all the way left first
+        vim.api.nvim_win_set_cursor(0, {dstRow,dstCol})
+    end
+)
 
 
 -- Key Map
---
--- First Arg: mode
--- Second Arg: keycode
--- Third Arg: action
-local mapkey = vim.keymap.set
-mapkey({'n'},      '<C-Del>', killWindow)
-mapkey({'n'},      '<Esc>', '<Cmd>nohlsearch<CR>')  -- clear search highlight on ESC in normal mode
-mapkey({'n', 'i'}, '<C-S-Del>', '<Cmd>tabclose<CR>')
-mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
-mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
-mapkey({'n', 'i', 'v'}, '<Home>', home)
+vim.keymap.set({'n'},      '<Esc>', '<Cmd>nohlsearch<CR>')  -- clear search highlight on ESC in normal mode
+vim.keymap.set({'n', 'i'}, '<C-S-Del>', '<Cmd>tabclose<CR>')
+vim.keymap.set({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
+vim.keymap.set({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
 
 -- Use Ctrl-/ to toggle commens using built-in neovim comment
 vim.keymap.set({'n'}, '<C-_>', 'gcc', {remap = true})
@@ -241,9 +237,9 @@ vim.keymap.set({'v'}, '<S-Tab>', '<gv')
 -- onto the clipboard. To keep the ability to cut,
 -- we add xx as the cut command. Additionally, the
 -- Delete key shouldn't copy.
-mapkey({'v'}, 'd',  '"_d')
-mapkey({'n'}, 'dd', '"_dd')
-mapkey({'v'}, 'x',   'd')
-mapkey({'n'}, 'xx',  'dd')
-mapkey({'v'}, '<Del>', '"_d')
-mapkey({'n'}, '<Del>', '"_dl')
+vim.keymap.set({'v'}, 'd',  '"_d')
+vim.keymap.set({'n'}, 'dd', '"_dd')
+vim.keymap.set({'v'}, 'x',   'd')
+vim.keymap.set({'n'}, 'xx',  'dd')
+vim.keymap.set({'v'}, '<Del>', '"_d')
+vim.keymap.set({'n'}, '<Del>', '"_dl')
