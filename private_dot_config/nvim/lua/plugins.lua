@@ -202,6 +202,8 @@ return {
         ft = {
             'lua',
             'python',
+            'typescript',
+            'typescriptreact',
         },
         opts = {
             settings = {
@@ -229,6 +231,7 @@ return {
 
             -- Setup each individual server
             require('lspconfig').lua_ls.setup(opts)
+            require('lspconfig').vtsls.setup(opts)  -- typescript
             -- require('lspconfig').pylsp.setup(opts)
             -- require('lspconfig').clangd.setup(opts)
         end,
@@ -250,6 +253,7 @@ return {
                 'lua_ls',
                 'pylsp',
                 'clangd',
+                'vtsls',
             },
         },
     },
@@ -561,7 +565,10 @@ return {
                 "c_sharp",
                 "bash",
                 "typescript",
+                "javascript",
+                "tsx",
                 "make",
+                "toml",
             },
             ignore_installed = {"help"},
             highlight = {
@@ -569,15 +576,6 @@ return {
             },
             indent = {
                 enable = true
-            },
-
-            -- Config for nvim-ts-rainbow
-            -- Currently disable until colors
-            -- are fixed. Looks bad right now.
-            rainbow = {
-                enable = false,
-                extended_mode = true,
-                max_file_lines = nil,
             },
         },
         config = function(_, opts)
