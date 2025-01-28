@@ -231,6 +231,16 @@ mapkey({'n', 'i', 'v'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
 mapkey({'n', 'i', 'v'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
 mapkey({'n', 'i', 'v'}, '<Home>', home)
 
+-- Use Tab & Shift-Tab in normal mode for indenting and unindenting
+vim.keymap.set({'n'}, '<Tab>', '>>')
+vim.keymap.set({'n'}, '<S-Tab>', '<<')
+
+-- Use Tab & Shift-Tab in visual mode for indenting and unindenting
+-- but stay in visual mode after indent/unindent action
+vim.keymap.set({'v'}, '<Tab>', '>gv')
+vim.keymap.set({'v'}, '<S-Tab>', '<gv')
+
+
 -- Change how delete and cut works
 --
 -- I don't want dd or d to put the deleted content
