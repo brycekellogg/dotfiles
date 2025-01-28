@@ -221,6 +221,10 @@ mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
 mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
 mapkey({'n', 'i', 'v'}, '<Home>', home)
 
+-- Use Ctrl-/ to toggle commens using built-in neovim comment
+vim.keymap.set({'n'}, '<C-_>', 'gcc', {remap = true})
+vim.keymap.set({'v'}, '<C-_>', 'gc',  {remap = true})
+
 -- Use Tab & Shift-Tab in normal mode for indenting and unindenting
 vim.keymap.set({'n'}, '<Tab>', '>>')
 vim.keymap.set({'n'}, '<S-Tab>', '<<')
