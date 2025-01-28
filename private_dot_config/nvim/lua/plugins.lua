@@ -592,5 +592,34 @@ return {
     },
     {
         'alexghergh/nvim-tmux-navigation',
+        opts = {
+            disable_when_zoomed = true,
+        },
+        keys = {
+            {
+                '<M-Left>',
+                function() require('nvim-tmux-navigation').NvimTmuxNavigateLeft() end,
+                mode = {'n', 'i', 'v'},
+                silent = true,
+            },
+            {
+                '<M-Right>',
+                function() require('nvim-tmux-navigation').NvimTmuxNavigateRight() end,
+                mode = {'n', 'i', 'v'},
+                silent = true,
+            },
+            {
+                '<M-Up>',
+                function() require('nvim-tmux-navigation').NvimTmuxNavigateUp() end,
+                mode = {'n', 'i', 'v'},
+                silent = true,
+            },
+            {
+                '<M-Down>',
+                function() require('nvim-tmux-navigation').NvimTmuxNavigateDown() end,
+                mode = {'n', 'i', 'v'},
+                silent = true,
+            },
+        }
     },
 }

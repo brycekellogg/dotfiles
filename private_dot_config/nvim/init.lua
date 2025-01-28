@@ -178,11 +178,6 @@ vim.opt.termguicolors = true
 vim.api.nvim_create_autocmd({"VimEnter"}, {nested=true, pattern='*', command="colorscheme custom"})
 
 
--- Configure Tmux Navigation
-local nvim_tmux_navigation = require('nvim-tmux-navigation')
-nvim_tmux_navigation.setup {
-    disable_when_zoomed = true,
-}
 
 
 -- Killing Windows
@@ -225,10 +220,6 @@ mapkey({'n', 'i'}, '<C-PageDown>', '<Cmd>BufferLineCycleNext<CR>')
 mapkey({'n', 'i'}, '<C-S-Del>', '<Cmd>tabclose<CR>')
 mapkey({'n'}, '|', ':vsplit<CR>', {silent=true})  -- TODO: make <C-|> work
 mapkey({'n'}, '-', ':split<CR>',  {silent=true})  -- TODO: make <C--> work
-mapkey({'n', 'i', 'v'}, '<M-Left>',  nvim_tmux_navigation.NvimTmuxNavigateLeft)
-mapkey({'n', 'i', 'v'}, '<M-Right>', nvim_tmux_navigation.NvimTmuxNavigateRight)
-mapkey({'n', 'i', 'v'}, '<M-Up>',    nvim_tmux_navigation.NvimTmuxNavigateUp)
-mapkey({'n', 'i', 'v'}, '<M-Down>',  nvim_tmux_navigation.NvimTmuxNavigateDown)
 mapkey({'n', 'i', 'v'}, '<Home>', home)
 
 -- Use Tab & Shift-Tab in normal mode for indenting and unindenting
