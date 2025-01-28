@@ -11,3 +11,12 @@ runs:
       shell: sh
       run: |
         chezmoi -S ${GITHUB_WORKSPACE} init --apply --promptString "What is your full name=Example,What is your email=name@example.org"
+    - name: Validate tool install
+      shell: sh
+      run: |
+        export PATH=$PATH:"$HOME/.local/bin/"
+        command -v rg
+        command -v eza
+        command -v fd
+        command -v direnv
+
