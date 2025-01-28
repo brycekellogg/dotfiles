@@ -203,6 +203,7 @@ local function home()
     local txtCol = vim.api.nvim_get_current_line():find('%S') - 1
     local dstRow = srcRow
     local dstCol = srcCol > txtCol and txtCol or 0
+    vim.api.nvim_win_set_cursor(0, {dstRow,0})  -- scroll all the way left first
     vim.api.nvim_win_set_cursor(0, {dstRow,dstCol})
 end
 
