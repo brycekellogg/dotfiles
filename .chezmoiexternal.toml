@@ -29,7 +29,11 @@
     type = "archive-file"
     stripComponents = 1
     path = "fd"
-    url  = "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-gnu.tar.gz"
+{{ if eq .osid "darwin" }}
+    url  = "https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-v10.2.0-aarch64-apple-darwin.tar.gz"
+{{ else }}
+    url  = "https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-v10.2.0-x86_64-unknown-linux-gnu.tar.gz"
+{{ end }}
 
 
 [".local/share/man/man1/fd.1"]
