@@ -189,16 +189,14 @@ end
 vim.keymap.set({'n'},      '<C-Del>', killWindow)
 
 
--- Helper function for a smarter <Home> key
+-- Map <Home> key to a function that provides a "smart home" implementation.
 --
--- This function compares the current cursor column
--- with the column of the first non-whitespace text.
--- If the cursor is to the right of the first non-
--- whitespace text, <Home> moves the cursor to the
--- location of the first non-whitespace text. If the
--- cursor is on or to the left of the first non-
--- whitespace text, <Home> moves the cursot to the
--- start of the line.
+-- This function compares the current cursor column with the column of the first
+-- non-whitespace text. If the cursor is to the right of the first non-whitespace
+-- text, <Home> moves the cursor to the location of the first non-whitespace text.
+-- If the cursor is on or to the left of the first non-whitespace text, <Home>
+-- moves the cursot to the start of the line. If the cursor is already on the
+-- start of the line, it will be moved to the first non-whitespace text.
 vim.keymap.set({'n', 'i', 'v'}, '<Home>',
     function()
         local srcRow, srcCol = (table.unpack or unpack)(vim.api.nvim_win_get_cursor(0))
