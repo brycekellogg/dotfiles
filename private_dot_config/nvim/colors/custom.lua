@@ -1,5 +1,8 @@
 
 
+
+
+
 -- Solarized Colors
 local base03  = '#002b36'
 local base02  = '#073642'
@@ -17,6 +20,52 @@ local violet  = '#6c71c4'
 local blue    = '#268bd2'
 local cyan    = '#2aa198'
 local green   = '#859900'
+
+-- Solarized Osaka Colors
+local base04_osaka     = '#00141a'
+local base0_osaka      = '#9eacad'
+local base1_osaka      = '#adb8b8'
+local base4_osaka      = '#ffffff'
+local green900_osaka   = '#2c3300'
+local green700_osaka   = '#596600'
+local green500_osaka   = '#859900'
+local green300_osaka   = '#bafb00'
+local green100_osaka   = '#d6ffac'
+local cyan100_osaka    = '#B9FFFA'
+local cyan300_osaka    = '#29EEDF'
+local cyan500_osaka    = '#2AA198'
+local cyan700_osaka    = '#1A6265'
+local cyan900_osaka    = '#103B3D'
+local blue100_osaka    = '#AADCFF'
+local blue300_osaka    = '#49AEF5'
+local blue500_osaka    = '#268BD2'
+local blue700_osaka    = '#1B6497'
+local blue900_osaka    = '#103956'
+local violet100_osaka  = '#CCCFFF'
+local violet300_osaka  = '#9CA0ED'
+local violet500_osaka  = '#6C71C4'
+local violet700_osaka  = '#494FB6'
+local violet900_osaka  = '#25285B'
+local magenta100_osaka = '#FF77B9'
+local magenta300_osaka = '#F255A1'
+local magenta500_osaka = '#D33682'
+local magenta700_osaka = '#B02669'
+local magenta900_osaka = '#541232'
+local red100_osaka     = '#FF9D9B'
+local red300_osaka     = '#F6524F'
+local red500_osaka     = '#DC322F'
+local red700_osaka     = '#B7211F'
+local red900_osaka     = '#57100F'
+local orange100_osaka  = '#FF9468'
+local orange300_osaka  = '#F8520E'
+local orange500_osaka  = '#CB4B16'
+local orange700_osaka  = '#A13C11'
+local orange900_osaka  = '#5C220A'
+local yellow100_osaka  = '#FFE999'
+local yellow300_osaka  = '#FFC100'
+local yellow500_osaka  = '#B58900'
+local yellow700_osaka  = '#664D00'
+local yellow900_osaka  = '#332700'
 
 -- Color definitions
 local bgDark90  = '#000405'  -- base03 with 90% darker tint TODO: use tint function
@@ -42,7 +91,7 @@ local bgLight90 = '#e6eaeb'  -- base03 with 90% lighter tint
 
 
 local fgEmphasize  = base1
-local fgDefault    = base0
+local fgDefault    = base0_osaka
 local fgUnderstate = base01
 
 
