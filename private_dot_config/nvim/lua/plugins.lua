@@ -88,6 +88,7 @@ return {
         end,
     },
 
+
     {
         'akinsho/bufferline.nvim',
         dependencies = {'echasnovski/mini.bufremove'}, -- for close command
@@ -145,9 +146,12 @@ return {
     },
 
 
-    -- ???
-    -- ???
-    -- ???
+    --------------------------------------------
+    -- Incline                                --
+    --                                        --
+    -- Shows the filename of the open buffer  --
+    -- in the upper right corner of the pane. --
+    --------------------------------------------
     {
         'b0o/incline.nvim',
         event = 'BufAdd',
@@ -171,19 +175,12 @@ return {
                 return {{res, guibg='NONE'}}
             end,
         },
-        config = function(_, opts)
-
-            -- currently, incline doesn't refresh on these events,
-            -- apply hack to refresh anyway
-            vim.api.nvim_create_autocmd({'FocusLost', 'FocusGained'}, {
-                callback = function()
-                    require('incline').enable()
-                end,
-            })
-
-            require('incline').setup(opts)
-        end,
     },
+
+
+    ----------------
+    -- LSP Config --
+    ----------------
     {
         'neovim/nvim-lspconfig',
         dependencies = {
@@ -248,6 +245,11 @@ return {
             },
         },
     },
+
+
+    -- Status Line
+    --
+    -- ???
     {
         'nvim-lualine/lualine.nvim',
         event = 'BufEnter',
@@ -276,6 +278,11 @@ return {
             }
         }
     },
+
+
+    -- File Tree
+    --
+    -- ???
     {
         'nvim-neo-tree/neo-tree.nvim',
         branch = 'main', -- NerdFont fix not released yet
@@ -405,52 +412,23 @@ return {
             }
         }
     },
-    {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-vsnip',
-            'hrsh7th/vim-vsnip',
-        },
-        config = function()
-            local cmp = require('cmp')
 
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
-                    end,
-                },
-                sources = cmp.config.sources({
-                    {
-                        name = 'nvim_lsp',
-                        entry_filter = function (entry, _)
-                            return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
-                        end
-                    },
-                    { name = 'vsnip' },
-                }),
-                mapping = {
-                    ['<Tab>']   = cmp.mapping.confirm({ select = true }),
-                    ['<Esc>']   = cmp.mapping.abort(),
-                    ['<Down>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Select}),
-                    ['<Up>']   = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Select}),
-                },
-                completion = {
-                    completeopt = 'menu,menuone,noinsert',
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                },
-                view = {
-                    docs = {auto_open = false},  -- no docs window when doing completion
-                },
-            })
-        end
+
+    -----------------------
+    -- Completion Plugin --
+    -----------------------
+    {
+        'saghen/blink.cmp',
+        version = '1.*',
+        opts = {
+
+        },
     },
+
+
+    ------------------------
+    -- Persistence Plugin --
+    ------------------------
     {
       "folke/persistence.nvim",
       lazy = true,
@@ -459,6 +437,11 @@ return {
           options = {"buffers", "winsize"},
       },
     },
+
+
+    ---------------
+    -- Telescope --
+    ---------------
     {
         'nvim-telescope/telescope.nvim',
         dependencies = {
@@ -509,6 +492,11 @@ return {
             },
         }
     },
+
+
+    -- Treesitter
+    --
+    -- ???
     {
         'nvim-treesitter/nvim-treesitter',
         event = {"BufReadPost", "BufNewFile"},
@@ -551,6 +539,11 @@ return {
         'mcauley-penney/visual-whitespace.nvim',
         config = true,
     },
+
+
+    -- Tmux Navigation
+    --
+    -- ???
     {
         'alexghergh/nvim-tmux-navigation',
         opts = {
@@ -583,4 +576,26 @@ return {
             },
         }
     },
+
+
+    -- Folding
+    -- {
+    --     'kevinhwang91/nvim-ufo',
+    --     dependencies = {'kevinhwang91/promise-async'},
+    --
+    --     opts = {
+    --         provider_selector = function(bufnr, filetype, buftype)
+    --             return {'treesitter', 'indent'}
+    --         end
+    --     },
+    --
+    --     config = function(_, opts)
+    --         vim.o.foldcolumn = '6'
+    --         vim.o.foldlevel = 99
+    --         vim.o.foldlevelstart = 99
+    --         vim.o.foldnestmax = 2
+    --         vim.o.foldenable = true
+    --         require('ufo').setup(opts)
+    --     end,
+    -- },
 }
