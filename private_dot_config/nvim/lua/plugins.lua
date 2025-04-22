@@ -420,8 +420,21 @@ return {
     {
         'saghen/blink.cmp',
         version = '1.*',
+        event = "BufEnter",
         opts = {
-
+            completion = {
+                list = {
+                    selection = {
+                        auto_insert = false,
+                    }
+                },
+                ghost_text = {
+                    enabled = true,
+                },
+            },
+            keymap = {
+                ['<Tab>'] = {'accept', 'fallback'}
+            }
         },
     },
 
@@ -538,6 +551,7 @@ return {
     {
         'mcauley-penney/visual-whitespace.nvim',
         config = true,
+        enabled = false,
     },
 
 
