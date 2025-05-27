@@ -26,7 +26,7 @@ fi
 if [ "$DOTFILES_OSID" == "darwin" ]; then
     command -v brew    # Check required tools
     brew install python3 bpython
-    pip3 install --break-system-packages neovim
+    pip3 install neovim
 fi
 
 # make sure everything installed correctly

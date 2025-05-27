@@ -20,6 +20,7 @@ the "XCode Command Line Tools"; from there Homebrew & Chezmoi can be installed a
 ```shell
 xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+export PATH=$PATH:/opt/homebrew/bin/
 brew install chezmoi
 chezmoi init --apply brycekellogg
 ```

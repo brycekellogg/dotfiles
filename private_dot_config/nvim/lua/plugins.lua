@@ -192,6 +192,7 @@ return {
             'python',
             'typescript',
             'typescriptreact',
+            'cpp'
         },
         opts = {
             settings = {
@@ -219,7 +220,8 @@ return {
 
             -- Setup each individual server
             require('lspconfig').lua_ls.setup(opts)
-            require('lspconfig').vtsls.setup(opts)  -- typescript
+            require('lspconfig').vtsls.setup(opts)   -- typescript
+            require('lspconfig').clangd.setup(opts)  -- c++
             -- require('lspconfig').pylsp.setup(opts)
             -- require('lspconfig').clangd.setup(opts)
         end,
@@ -421,6 +423,7 @@ return {
         'saghen/blink.cmp',
         version = '1.*',
         event = "BufEnter",
+        enabled = false,
         opts = {
             completion = {
                 list = {
@@ -542,6 +545,31 @@ return {
         },
         config = function(_, opts)
             require('nvim-treesitter.configs').setup(opts)
+
+
+            vim.treesitter.query.set('typescript', 'folds', [[
+                [
+                    (class_declaration)
+                    (function_expression)
+                    (function_declaration)
+                    (method_definition)
+                ] @fold
+            ]])
+
+            vim.treesitter.query.set('lua', 'folds', [[
+                [
+                    (function_declaration)
+                    (function_definition)
+                ] @fold
+            ]])
+
+            vim.treesitter.query.set('cpp', 'folds', [[
+                [
+                    (class_specifier)
+                    (function_definition)
+                    (enum_specifier)
+                ] @fold
+            ]])
         end,
     },
     {

@@ -78,11 +78,24 @@ vim.api.nvim_create_autocmd({"VimResized"}, {pattern = '*', command = "wincmd ="
 
 -- Close Neotree on quit
 --
+-- TODO: move to plugins configuration
+--
 -- This is used as a workaroud for the Neotree window being restored by the
 -- persistence plugin. This needs to be defined here instead of in the neotree
 -- plugin setup because of he ordering with the persistence autocmd
 vim.api.nvim_create_autocmd({"VimLeavePre"}, {pattern = '*', command = "Neotree close"})
 
+
+-- Configure Folds
+--
+-- TODO: use treesitter for folding, but customize the folds.scm to
+--       only fold what I want. Specifically classes & functions.
+-- ????
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldcolumn = '3'
 
 -- Configure clipboard
 --
@@ -117,6 +130,7 @@ vim.filetype.add({
         ['.*%.fish%.tmpl'] = 'fish',
         ['.*%.sh%.tmpl'] = 'bash',
         ['.*%.yml%.tmpl'] = 'yaml',
+        ['.*%.toml%.tmpl'] = 'toml',
         ['.*/git/config%.tmpl'] = 'gitconfig',
     },
     filename = {
@@ -228,6 +242,7 @@ vim.keymap.set({'n'}, '<S-Tab>', '<<')
 vim.keymap.set({'v'}, '<Tab>', '>gv')
 vim.keymap.set({'v'}, '<S-Tab>', '<gv')
 
+vim.keymap.set({'n'}, '<S-Left>', 'vh')
 
 -- Change how delete and cut works
 --
@@ -241,3 +256,8 @@ vim.keymap.set({'v'}, 'x',   'd')
 vim.keymap.set({'n'}, 'xx',  'dd')
 vim.keymap.set({'v'}, '<Del>', '"_d')
 vim.keymap.set({'n'}, '<Del>', '"_dl')
+
+vim.keymap.set({'n'}, '<C-c><C-c>', 'yy')
+vim.keymap.set({'n'}, '<C-x><C-x>', 'dd')
+vim.keymap.set({'n'}, '<C-v>',   'p')
+vim.keymap.set({'n'}, '<C-S-v>', 'P')

@@ -4,6 +4,7 @@
 [core]
     askPass =
     editor = nvim
+    ; pager = delta
 
 # Currently we just set the default branch name in this section of the config.
 # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
@@ -48,3 +49,7 @@
     unstage = restore --staged
     undo-commit = reset --soft HEAD~1
 
+[delta]
+    line-numbers = true
+    hunk-header-style = omit
+    ; minus-style = syntax bold ul "#e15351"
