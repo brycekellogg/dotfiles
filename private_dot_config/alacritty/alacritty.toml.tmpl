@@ -15,7 +15,11 @@ TERM = "xterm-256color"
 [window]
 padding = { x = 2, y = 2}
 decorations = "None"
-startup_mode = "Maximized"
+{{ if eq .osid "darwin" }}
+    startup_mode = "Fullscreen"
+{{ else }}
+    startup_mode = "Maximized"
+{{ end }}
 
 
 [scrolling]
