@@ -88,14 +88,8 @@ vim.api.nvim_create_autocmd({"VimLeavePre"}, {pattern = '*', command = "Neotree 
 
 -- Configure Folds
 --
--- TODO: use treesitter for folding, but customize the folds.scm to
---       only fold what I want. Specifically classes & functions.
--- ????
-vim.o.foldenable = true
-vim.o.foldlevel = 99
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.foldcolumn = '3'
+-- Turn it off; I'm actually not a fan of folds it turns out
+vim.o.foldenable = false
 
 -- Configure clipboard
 --
@@ -257,7 +251,3 @@ vim.keymap.set({'n'}, 'xx',  'dd')
 vim.keymap.set({'v'}, '<Del>', '"_d')
 vim.keymap.set({'n'}, '<Del>', '"_dl')
 
-vim.keymap.set({'n'}, '<C-c><C-c>', 'yy')
-vim.keymap.set({'n'}, '<C-x><C-x>', 'dd')
-vim.keymap.set({'n'}, '<C-v>',   'p')
-vim.keymap.set({'n'}, '<C-S-v>', 'P')
