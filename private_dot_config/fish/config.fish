@@ -61,7 +61,7 @@ end
 # be set outside the `is-interactive` block because
 # the async nature of the prompt means that they
 # are evaluated outside of an interactive session.
-set -g tide_left_prompt_items  pwd git character
+set -g tide_left_prompt_items  context pwd git character
 set -g tide_right_prompt_items status cmd_duration jobs virtual_env
 set -g tide_prompt_add_newline_before  false
 set -g tide_character_color green
