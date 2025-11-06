@@ -31,7 +31,7 @@ if status is-interactive
 
     # Use exa as ls if it's installed
     if type -q eza
-        alias ll='eza -l --group-directories-first'
+        alias ll='eza -l --group-directories-first --no-quotes'
         alias ls='eza --group-directories-first'
         alias la='eza -la --group-directories-first'
         alias tree='eza -T'
@@ -51,9 +51,6 @@ if status is-interactive
     # Note: we assume that the windows username is the same
     # as the Linux username for speed pursposes.
     fish_add_path --path /mnt/c/Users/$USER/wsl-bin/
-
-    # Load the direnv hook
-    direnv hook fish | source
 end
 
 
