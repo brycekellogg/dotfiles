@@ -465,6 +465,7 @@ return {
                 "tsx",
                 "make",
                 "toml",
+                "yaml",
             },
             ignore_installed = {"help"},
             highlight = {
@@ -476,31 +477,6 @@ return {
         },
         config = function(_, opts)
             require('nvim-treesitter.configs').setup(opts)
-
-
-            vim.treesitter.query.set('typescript', 'folds', [[
-                [
-                    (class_declaration)
-                    (function_expression)
-                    (function_declaration)
-                    (method_definition)
-                ] @fold
-            ]])
-
-            vim.treesitter.query.set('lua', 'folds', [[
-                [
-                    (function_declaration)
-                    (function_definition)
-                ] @fold
-            ]])
-
-            vim.treesitter.query.set('cpp', 'folds', [[
-                [
-                    (class_specifier)
-                    (function_definition)
-                    (enum_specifier)
-                ] @fold
-            ]])
         end,
     },
     {

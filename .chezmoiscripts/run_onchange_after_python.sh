@@ -17,7 +17,7 @@ fi
 # Section for installing on Fedora
 if [ "$DOTFILES_OSID" == "linux-ubuntu-wsl" ] || [ "$DOTFILES_OSID" == "linux-ubuntu" ]; then
     sudo apt-get install -y python3 python3-pip python3-venv bpython
-    pip3 install neovim
+    pip3 install --break-system-packages neovim
 fi
 
 
