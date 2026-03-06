@@ -18,8 +18,8 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu" ]     || \
     command -v tar
 
     # Neovim version & various helper variables
-    NVIM_VERSION="0.10.2"
-    NVIM_TARFILE="nvim-linux64.tar.gz"
+    NVIM_VERSION="0.11.6"
+    NVIM_TARFILE="nvim-linux-x86_64.tar.gz"
     NVIM_DIR="$(mktemp -d)"
     NVIM_URL="https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/$NVIM_TARFILE"
     NVIM_DEST="$HOME/.local/"
@@ -30,9 +30,9 @@ if [ "$DOTFILES_OSID" == "linux-ubuntu" ]     || \
     mkdir -p $NVIM_DEST/bin/                                 # Create destination directory
     mkdir -p $NVIM_DEST/lib/
     mkdir -p $NVIM_DEST/share/
-    cp -rf $NVIM_DIR/nvim-linux64/bin/*   $NVIM_DEST/bin/    # Copy files to install dir
-    cp -rf $NVIM_DIR/nvim-linux64/lib/*   $NVIM_DEST/lib/
-    cp -rf $NVIM_DIR/nvim-linux64/share/* $NVIM_DEST/share/
+    cp -rf $NVIM_DIR/nvim-linux-x86_64/bin/*   $NVIM_DEST/bin/    # Copy files to install dir
+    cp -rf $NVIM_DIR/nvim-linux-x86_64/lib/*   $NVIM_DEST/lib/
+    cp -rf $NVIM_DIR/nvim-linux-x86_64/share/* $NVIM_DEST/share/
     rm -rf $NVIM_DIR                                         # Cleanup
 fi
 
