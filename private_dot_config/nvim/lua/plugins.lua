@@ -113,6 +113,7 @@ return {
     ----------------
     {
         'neovim/nvim-lspconfig',
+        enabled = false,
         dependencies = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
@@ -158,12 +159,14 @@ return {
     },
     {
         'williamboman/mason.nvim',
+        enabled = false,
         build = ':MasonUpdate', -- :MasonUpdate updates registry contents
         lazy = true,
         opts = {},
     },
     {
         'williamboman/mason-lspconfig.nvim',
+        enabled = false,
         dependencies = {
             'williamboman/mason.nvim',
         },
@@ -466,6 +469,8 @@ return {
                 "make",
                 "toml",
                 "yaml",
+                "html",
+                "svelte",
             },
             ignore_installed = {"help"},
             highlight = {
