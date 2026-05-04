@@ -97,25 +97,10 @@ vim.o.foldenable = false
 -- we only need to set the clipboard register
 vim.o.clipboard = 'unnamedplus'
 
-
--- Bootstrap lasy.nvim plugin manager. This should install
--- it when vim is first run if it's not already installed.
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--branch=stable", -- latest stable release
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
--- Plugins
-require('lazy').setup("plugins")
-
+-- Load & Configure Plugins
+--
+-- This is done using the builtin neovim plugin manager
+require('plugins')
 
 -- Custom Filetypes (see :help vim.filetype.add)
 vim.filetype.add({
